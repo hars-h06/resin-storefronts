@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraResin Studio | Handcrafted Luxury Resin Art, Varmala Preservation & Home Decor</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: '#FAF6F0',
+                        sand: '#F2E9DE',
+                        gold: '#C6923A',
+                        goldDark: '#9E6F21',
+                        amberDeep: '#4A2511',
+                        charcoal: '#1F1A17',
+                        terracotta: '#B84A27'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 28s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4B886;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C6923A;
+        }
+
+        /* Hide scrollbars on horizontal product carousels */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Smooth Fade In */
+        .fade-in {
+            animation: fadeIn 0.35s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased selection:bg-gold selection:text-white flex flex-col min-h-screen">
+
+    <!-- ================= TOP ANNOUNCEMENT MARQUEE (PrabhuPooja Style) ================= -->
+    <div class="bg-amberDeep text-amber-100 py-2 overflow-hidden border-b border-amber-800/60 text-xs sm:text-sm font-medium relative z-40">
+        <div class="animate-marquee space-x-10">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-sparkles text-gold"></i> 🎉 WELCOME OFFER | ₹250 OFF on Your First Resin Art Order (Code: <b>RESIN250</b>)</span>
+            <span class="flex items-center gap-2">🛍️ Extra 10% OFF on All Prepaid Orders</span>
+            <span class="flex items-center gap-2">🎁 FREE Resin Gold-Flake Bookmark with Every Order Above ₹1,499</span>
+            <span class="flex items-center gap-2">⚡ Safe Bubble-Wrapped Pan-India Express Delivery</span>
+            <span class="flex items-center gap-2">✨ 100% Non-Yellowing UV-Resistant Food-Safe Epoxy Resin</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="flex items-center gap-2"><i class="fa-solid fa-sparkles text-gold"></i> 🎉 WELCOME OFFER | ₹250 OFF on Your First Resin Art Order (Code: <b>RESIN250</b>)</span>
+            <span class="flex items-center gap-2">🛍️ Extra 10% OFF on All Prepaid Orders</span>
+            <span class="flex items-center gap-2">🎁 FREE Resin Gold-Flake Bookmark with Every Order Above ₹1,499</span>
+            <span class="flex items-center gap-2">⚡ Safe Bubble-Wrapped Pan-India Express Delivery</span>
+            <span class="flex items-center gap-2">✨ 100% Non-Yellowing UV-Resistant Food-Safe Epoxy Resin</span>
+        </div>
+    </div>
+
+    <!-- ================= STICKY HEADER & NAVIGATION (Digveda + PrabhuPooja Hybrid) ================= -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl text-charcoal hover:bg-sand transition" aria-label="Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+
+                <!-- Brand Logo -->
+                <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amberDeep via-goldDark to-gold flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+                        <i class="fa-solid fa-gem text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-amberDeep block leading-none">AuraResin</span>
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-goldDark font-semibold block mt-0.5">Handcrafted Studio</span>
+                    </div>
+                </a>
+
+                <!-- Center Navigation (Only Home, All Products with Categories Dropdown, Product Details) -->
+                <nav class="hidden lg:flex items-center space-x-2">
+                    <button onclick="navigateTo('home')" id="nav-home" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-amberDeep bg-sand/70">
+                        <i class="fa-solid fa-house text-xs text-goldDark"></i> Home
+                    </button>
+
+                    <!-- All Products with Hover Category Mega Menu -->
+                    <div class="relative group">
+                        <button onclick="navigateTo('all-products', 'All')" id="nav-all-products" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-stone-700 hover:text-amberDeep hover:bg-sand/50 transition flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-xs text-goldDark"></i>
+                            <span>All Products</span>
+                            <span class="bg-terracotta text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">Categories</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200 group-hover:rotate-180"></i>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div class="absolute left-0 mt-1 w-80 bg-white rounded-2xl shadow-2xl border border-stone-200/90 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left z-50 p-3">
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-stone-400 px-3 py-1.5 border-b border-stone-100">
+                                Browse Resin Categories
+                            </div>
+                            <div class="mt-2 space-y-1">
+                                <button onclick="navigateTo('all-products', 'All')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-sand/60 hover:text-amberDeep transition">
+                                    <span class="flex items-center gap-2.5"><i class="fa-solid fa-border-all text-gold w-4"></i> View All Resin Creations</span>
+                                    <span class="text-xs bg-stone-100 px-2 py-0.5 rounded-full text-stone-600">12</span>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'Geode Wall Clocks')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-sand/60 hover:text-amberDeep transition">
+                                    <span class="flex items-center gap-2.5"><i class="fa-regular fa-clock text-gold w-4"></i> Geode & Ocean Wall Clocks</span>
+                                    <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-semibold">Bestseller</span>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'Varmala Preservation')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-sand/60 hover:text-amberDeep transition">
+                                    <span class="flex items-center gap-2.5"><i class="fa-solid fa-heart text-rose-500 w-4"></i> Wedding Varmala Preservation</span>
+                                    <span class="text-[10px] bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full font-semibold">Custom</span>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'Coasters & Trays')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-sand/60 hover:text-amberDeep transition">
+                                    <span class="flex items-center gap-2.5"><i class="fa-solid fa-mug-hot text-gold w-4"></i> Agate Coasters & Vanities</span>
+                                    <span class="text-xs bg-stone-100 px-2 py-0.5 rounded-full text-stone-600">3</span>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'Mantra & Spiritual Frames')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-sand/60 hover:text-amberDeep transition">
+                                    <span class="flex items-center gap-2.5"><i class="fa-solid fa-om text-gold w-4"></i> Resin Mantra & Car Stands</span>
+                                    <span class="text-xs bg-stone-100 px-2 py-0.5 rounded-full text-stone-600">2</span>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'Tables & Lamps')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-sand/60 hover:text-amberDeep transition">
+                                    <span class="flex items-center gap-2.5"><i class="fa-solid fa-lightbulb text-gold w-4"></i> River Tables & Night Lamps</span>
+                                    <span class="text-xs bg-stone-100 px-2 py-0.5 rounded-full text-stone-600">2</span>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'Nameplates & Keychains')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-sand/60 hover:text-amberDeep transition">
+                                    <span class="flex items-center gap-2.5"><i class="fa-solid fa-signature text-gold w-4"></i> Custom Nameplates & Gifts</span>
+                                    <span class="text-xs bg-stone-100 px-2 py-0.5 rounded-full text-stone-600">1</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openProductDetails(currentProductDetail ? currentProductDetail.id : 1)" id="nav-product-details" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-stone-700 hover:text-amberDeep hover:bg-sand/50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs text-goldDark"></i> Product-Details
+                    </button>
+                </nav>
+
+                <!-- Search & Cart Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Quick Search Input -->
+                    <div class="hidden md:flex items-center bg-sand/70 border border-stone-300/70 rounded-full px-3.5 py-1.5 focus-within:border-gold focus-within:bg-white transition">
+                        <i class="fa-solid fa-magnifying-glass text-stone-400 text-xs mr-2"></i>
+                        <input id="headerSearchInput" oninput="handleQuickSearch(this.value)" type="text" placeholder="Search geode clock, varmala..." class="bg-transparent text-xs sm:text-sm focus:outline-none w-44 lg:w-52 text-charcoal placeholder:text-stone-400">
+                    </div>
+
+                    <!-- Cart Trigger -->
+                    <button onclick="toggleCartDrawer(true)" class="relative flex items-center gap-2 bg-amberDeep hover:bg-goldDark text-white px-4 py-2.5 rounded-full text-sm font-semibold shadow-sm transition">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="hidden sm:inline">Cart</span>
+                        <span id="cartCountBadge" class="bg-gold text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Quick Bar (PrabhuPooja Sub-nav bar style) -->
+            <div class="flex items-center gap-2 py-2.5 overflow-x-auto no-scrollbar border-t border-stone-200/60 text-xs font-semibold">
+                <button onclick="navigateTo('all-products', 'All')" class="shrink-0 px-3 py-1 rounded-full bg-amber-100/80 text-amberDeep hover:bg-gold hover:text-white transition flex items-center gap-1.5">
+                    <span>🔥 All Resin Collection</span>
+                </button>
+                <button onclick="navigateTo('all-products', 'Geode Wall Clocks')" class="shrink-0 px-3 py-1 rounded-full bg-stone-100 text-stone-700 hover:bg-gold hover:text-white transition flex items-center gap-1">
+                    <span>🕰️ Geode Clocks</span>
+                    <span class="text-[9px] bg-terracotta text-white px-1.5 rounded-full">HOT</span>
+                </button>
+                <button onclick="navigateTo('all-products', 'Varmala Preservation')" class="shrink-0 px-3 py-1 rounded-full bg-stone-100 text-stone-700 hover:bg-gold hover:text-white transition flex items-center gap-1">
+                    <span>💐 Wedding Varmala Preservation</span>
+                    <span class="text-[9px] bg-rose-600 text-white px-1.5 rounded-full">CUSTOM</span>
+                </button>
+                <button onclick="navigateTo('all-products', 'Coasters & Trays')" class="shrink-0 px-3 py-1 rounded-full bg-stone-100 text-stone-700 hover:bg-gold hover:text-white transition">
+                    🥂 Agate Coasters & Trays
+                </button>
+                <button onclick="navigateTo('all-products', 'Mantra & Spiritual Frames')" class="shrink-0 px-3 py-1 rounded-full bg-stone-100 text-stone-700 hover:bg-gold hover:text-white transition">
+                    🕉️ Resin Mantra Frames
+                </button>
+                <button onclick="navigateTo('all-products', 'Tables & Lamps')" class="shrink-0 px-3 py-1 rounded-full bg-stone-100 text-stone-700 hover:bg-gold hover:text-white transition">
+                    🌊 Ocean River Tables & Lamps
+                </button>
+                <button onclick="navigateTo('all-products', 'Nameplates & Keychains')" class="shrink-0 px-3 py-1 rounded-full bg-stone-100 text-stone-700 hover:bg-gold hover:text-white transition">
+                    🏠 Designer Nameplates
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 pt-3 pb-5 space-y-3">
+            <div class="flex items-center bg-sand/70 border border-stone-300 rounded-xl px-3 py-2">
+                <i class="fa-solid fa-magnifying-glass text-stone-400 text-sm mr-2"></i>
+                <input oninput="handleQuickSearch(this.value)" type="text" placeholder="Search resin products..." class="bg-transparent text-sm focus:outline-none w-full">
+            </div>
+            <div class="grid grid-cols-3 gap-2 pt-1">
+                <button onclick="navigateTo('home'); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl bg-sand text-amberDeep font-bold text-xs text-center">
+                    <i class="fa-solid fa-house block mb-1"></i> Home
+                </button>
+                <button onclick="navigateTo('all-products', 'All'); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl bg-sand text-amberDeep font-bold text-xs text-center">
+                    <i class="fa-solid fa-layer-group block mb-1"></i> All Products
+                </button>
+                <button onclick="openProductDetails(currentProductDetail ? currentProductDetail.id : 1); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl bg-sand text-amberDeep font-bold text-xs text-center">
+                    <i class="fa-solid fa-wand-magic-sparkles block mb-1"></i> Product-Details
+                </button>
+            </div>
+            <div class="pt-2 border-t border-stone-100">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-stone-400 mb-2">Shop Categories</p>
+                <div class="grid grid-cols-2 gap-1.5 text-xs font-medium">
+                    <button onclick="navigateTo('all-products', 'Geode Wall Clocks'); toggleMobileMenu();" class="text-left p-2 rounded-lg hover:bg-sand">🕰️ Geode Wall Clocks</button>
+                    <button onclick="navigateTo('all-products', 'Varmala Preservation'); toggleMobileMenu();" class="text-left p-2 rounded-lg hover:bg-sand">💐 Varmala Preservation</button>
+                    <button onclick="navigateTo('all-products', 'Coasters & Trays'); toggleMobileMenu();" class="text-left p-2 rounded-lg hover:bg-sand">🥂 Coasters & Trays</button>
+                    <button onclick="navigateTo('all-products', 'Mantra & Spiritual Frames'); toggleMobileMenu();" class="text-left p-2 rounded-lg hover:bg-sand">🕉️ Mantra Frames</button>
+                    <button onclick="navigateTo('all-products', 'Tables & Lamps'); toggleMobileMenu();" class="text-left p-2 rounded-lg hover:bg-sand">🌊 Tables & Lamps</button>
+                    <button onclick="navigateTo('all-products', 'Nameplates & Keychains'); toggleMobileMenu();" class="text-left p-2 rounded-lg hover:bg-sand">🏠 Nameplates</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- ========================== VIEW 1: HOME PAGE ============================ -->
+    <!-- ========================================================================= -->
+    <main id="view-home" class="flex-grow fade-in">
+        
+        <!-- 1. HERO CAROUSEL SLIDESHOW (Resin Banner Carousel) -->
+        <section class="relative overflow-hidden bg-charcoal">
+            <div id="heroSlidesContainer" class="relative h-[440px] sm:h-[520px] lg:h-[580px] w-full">
+                
+                <!-- Slide 1: Luxury Geode Wall Art & Clocks -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-100 z-10 flex items-center">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1800&q=85" 
+                         onerror="this.src='https://placehold.co/1800x700/2A1810/FAF6F0?text=Luxury+Geode+Resin+Wall+Art'"
+                         alt="Luxury Geode Resin Art" class="absolute inset-0 w-full h-full object-cover brightness-50 scale-105 transition-transform duration-1000">
+                    <div class="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/60 to-transparent"></div>
+                    
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="max-w-2xl space-y-5 text-white">
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/30 border border-gold text-amber-200 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                                <i class="fa-solid fa-crown text-gold"></i> Signature Hand-Poured Collection
+                            </span>
+                            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                                Handcrafted Geode Resin Clocks & Crystal Art
+                            </h1>
+                            <p class="text-stone-200 text-sm sm:text-base leading-relaxed max-w-xl">
+                                Infused with natural raw quartz crystals, 24K metallic gold leaf pigments, and glass-like UV epoxy resin to elevate your living space.
+                            </p>
+                            <div class="flex flex-wrap gap-3 pt-2">
+                                <button onclick="navigateTo('all-products', 'Geode Wall Clocks')" class="px-7 py-3.5 rounded-full bg-gold hover:bg-goldDark text-white font-bold text-sm shadow-lg shadow-gold/25 transition flex items-center gap-2">
+                                    <span>Shop Geode Clocks</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'All')" class="px-6 py-3.5 rounded-full bg-white/15 hover:bg-white/25 text-white font-semibold text-sm backdrop-blur-md border border-white/30 transition">
+                                    Explore All 12+ Designs
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Wedding Varmala & Flower Preservation -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0 z-0 flex items-center">
+                    <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1800&q=85" 
+                         onerror="this.src='https://placehold.co/1800x700/3D1E24/FAF6F0?text=Wedding+Varmala+Resin+Preservation'"
+                         alt="Wedding Varmala Preservation" class="absolute inset-0 w-full h-full object-cover brightness-50">
+                    <div class="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/60 to-transparent"></div>
+                    
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="max-w-2xl space-y-5 text-white">
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/30 border border-rose-400 text-rose-200 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                                <i class="fa-solid fa-heart text-rose-400"></i> Forever Memories in Crystal Resin
+                            </span>
+                            <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                                Preserve Your Sacred Wedding Varmala Forever
+                            </h2>
+                            <p class="text-stone-200 text-sm sm:text-base leading-relaxed max-w-xl">
+                                Turn your wedding garlands, engagement roses, and sacred petals into timeless 3D crystal-clear resin frames, blocks, and platters.
+                            </p>
+                            <div class="flex flex-wrap gap-3 pt-2">
+                                <button onclick="navigateTo('all-products', 'Varmala Preservation')" class="px-7 py-3.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm shadow-lg transition flex items-center gap-2">
+                                    <span>Book Varmala Preservation</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="openProductDetails(2)" class="px-6 py-3.5 rounded-full bg-white/15 hover:bg-white/25 text-white font-semibold text-sm backdrop-blur-md border border-white/30 transition">
+                                    See How It Works
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Ocean Resin Tables & Agate Serveware -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0 z-0 flex items-center">
+                    <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1800&q=85" 
+                         onerror="this.src='https://placehold.co/1800x700/0F2F3F/FAF6F0?text=Ocean+Resin+Tables+and+Platters'"
+                         alt="Ocean Wave Resin Serveware" class="absolute inset-0 w-full h-full object-cover brightness-50">
+                    <div class="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/60 to-transparent"></div>
+                    
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="max-w-2xl space-y-5 text-white">
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/30 border border-cyan-300 text-cyan-100 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                                <i class="fa-solid fa-water text-cyan-300"></i> Food-Safe & Heat Resistant
+                            </span>
+                            <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                                Ocean Wave Resin Tables & Agate Coaster Sets
+                            </h2>
+                            <p class="text-stone-200 text-sm sm:text-base leading-relaxed max-w-xl">
+                                Hand-laced ocean foam waves poured over natural acacia wood and metallic-edged agate coasters for unforgettable hosting.
+                            </p>
+                            <div class="flex flex-wrap gap-3 pt-2">
+                                <button onclick="navigateTo('all-products', 'Coasters & Trays')" class="px-7 py-3.5 rounded-full bg-gold hover:bg-goldDark text-white font-bold text-sm shadow-lg transition flex items-center gap-2">
+                                    <span>Shop Coasters & Trays</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="navigateTo('all-products', 'Tables & Lamps')" class="px-6 py-3.5 rounded-full bg-white/15 hover:bg-white/25 text-white font-semibold text-sm backdrop-blur-md border border-white/30 transition">
+                                    View River Tables
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Carousel Controls -->
+            <button onclick="changeHeroSlide(-1)" class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/40 hover:bg-gold text-white flex items-center justify-center backdrop-blur-sm transition" aria-label="Previous Slide">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button onclick="changeHeroSlide(1)" class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/40 hover:bg-gold text-white flex items-center justify-center backdrop-blur-sm transition" aria-label="Next Slide">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <!-- Slide Dots -->
+            <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
+                <button onclick="setHeroSlide(0)" class="hero-dot w-8 h-2.5 rounded-full bg-gold transition-all"></button>
+                <button onclick="setHeroSlide(1)" class="hero-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-all"></button>
+                <button onclick="setHeroSlide(2)" class="hero-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-all"></button>
+            </div>
+        </section>
+
+        <!-- 2. TRUST BADGE STRIP (PrabhuPooja 6-Badge Bar) -->
+        <section class="bg-white border-b border-stone-200 py-5 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
+                    <div class="flex items-center justify-center gap-3 p-2 rounded-xl bg-cream/60">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-goldDark flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-amberDeep">UV Resistant</p>
+                            <p class="text-[11px] text-stone-500">Non-Yellowing Gloss</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-3 p-2 rounded-xl bg-cream/60">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-goldDark flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-face-smile-beam"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-amberDeep">15,000+ Homes</p>
+                            <p class="text-[11px] text-stone-500">Happy Collectors</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-3 p-2 rounded-xl bg-cream/60">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-goldDark flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-amberDeep">Free Shipping</p>
+                            <p class="text-[11px] text-stone-500">Orders Above ₹999</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-3 p-2 rounded-xl bg-cream/60">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-goldDark flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-hand-sparkles"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-amberDeep">100% Handmade</p>
+                            <p class="text-[11px] text-stone-500">Real Quartz & Gold</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-3 p-2 rounded-xl bg-cream/60">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-goldDark flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-amberDeep">Secure Payments</p>
+                            <p class="text-[11px] text-stone-500">UPI, Cards & COD</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-3 p-2 rounded-xl bg-cream/60">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-goldDark flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-amberDeep">Damage Safe</p>
+                            <p class="text-[11px] text-stone-500">7-Day Replacement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. NEW ARRIVALS HORIZONTAL CAROUSEL (Digveda & PrabhuPooja Product Strip) -->
+        <section class="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-goldDark block mb-1">Fresh From Our Curing Studio</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep">New Arrivals in Resin Art ✨</h2>
+                </div>
+                <div class="flex items-center gap-2 self-start sm:self-auto">
+                    <button onclick="scrollCarousel('newArrivalsCarousel', -320)" class="w-10 h-10 rounded-full border border-stone-300 bg-white hover:bg-amberDeep hover:text-white transition flex items-center justify-center" aria-label="Scroll Left">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button onclick="scrollCarousel('newArrivalsCarousel', 320)" class="w-10 h-10 rounded-full border border-stone-300 bg-white hover:bg-amberDeep hover:text-white transition flex items-center justify-center" aria-label="Scroll Right">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                    <button onclick="navigateTo('all-products', 'All')" class="ml-2 px-4 py-2 rounded-full bg-sand hover:bg-gold hover:text-white text-amberDeep text-xs font-bold transition">
+                        View All →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Horizontal Scroll Container -->
+            <div id="newArrivalsCarousel" class="flex gap-5 overflow-x-auto no-scrollbar pb-4 scroll-smooth">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </section>
+
+        <!-- 4. TRENDING NOW (#1, #2, #3, #4 Ranked PrabhuPooja Section) -->
+        <section class="py-12 bg-sand/60 border-y border-stone-200/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-terracotta block mb-1">Most Loved By Interior Designers</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep">Trending Now 🔥</h2>
+                    </div>
+                    <button onclick="navigateTo('all-products', 'All')" class="self-start sm:self-auto px-5 py-2.5 rounded-full bg-amberDeep text-white hover:bg-goldDark text-xs font-bold transition">
+                        Shop All Bestsellers →
+                    </button>
+                </div>
+
+                <div id="trendingGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Populated via JS with #1, #2, #3, #4 rank badges -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SHOP BY CATEGORY GRID (6 Resin Art Categories) -->
+        <section class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-bold uppercase tracking-[0.2em] text-goldDark">Curated Resin Collections</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep mt-1">Shop by Category</h2>
+                <p class="text-sm text-stone-600 mt-2">Every piece is individually poured by master resin artisans using natural quartz stones, dried botanicals, and metallic pigments.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Category 1 -->
+                <div onclick="navigateTo('all-products', 'Geode Wall Clocks')" class="group cursor-pointer relative h-72 rounded-3xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=900&q=80" 
+                         onerror="this.src='https://placehold.co/800x600/2A1810/FAF6F0?text=Geode+Wall+Clocks'"
+                         alt="Geode Wall Clocks" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-widest text-amber-300 font-bold">24K Gold & Quartz</span>
+                            <h3 class="font-serif text-2xl font-bold">Geode & Ocean Clocks</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gold transition">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div onclick="navigateTo('all-products', 'Varmala Preservation')" class="group cursor-pointer relative h-72 rounded-3xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=80" 
+                         onerror="this.src='https://placehold.co/800x600/4A1525/FAF6F0?text=Varmala+Preservation'"
+                         alt="Varmala Preservation" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-widest text-rose-300 font-bold">Custom Keepsakes</span>
+                            <h3 class="font-serif text-2xl font-bold">Varmala Preservation</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gold transition">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div onclick="navigateTo('all-products', 'Coasters & Trays')" class="group cursor-pointer relative h-72 rounded-3xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=80" 
+                         onerror="this.src='https://placehold.co/800x600/1F2E3D/FAF6F0?text=Agate+Coasters+and+Trays'"
+                         alt="Coasters & Trays" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-widest text-amber-300 font-bold">Luxury Dining</span>
+                            <h3 class="font-serif text-2xl font-bold">Agate Coasters & Trays</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gold transition">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div onclick="navigateTo('all-products', 'Mantra & Spiritual Frames')" class="group cursor-pointer relative h-72 rounded-3xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=900&q=80" 
+                         onerror="this.src='https://placehold.co/800x600/3B2313/FAF6F0?text=Resin+Mantra+Frames'"
+                         alt="Mantra & Spiritual Frames" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-widest text-amber-300 font-bold">Gold Foil Sacred Art</span>
+                            <h3 class="font-serif text-2xl font-bold">Mantra & Car Frames</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gold transition">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category 5 -->
+                <div onclick="navigateTo('all-products', 'Tables & Lamps')" class="group cursor-pointer relative h-72 rounded-3xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=80" 
+                         onerror="this.src='https://placehold.co/800x600/1A3636/FAF6F0?text=River+Tables+and+Lamps'"
+                         alt="Tables & Lamps" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-widest text-cyan-300 font-bold">Statement Furniture</span>
+                            <h3 class="font-serif text-2xl font-bold">River Tables & Lamps</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gold transition">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category 6 -->
+                <div onclick="navigateTo('all-products', 'Nameplates & Keychains')" class="group cursor-pointer relative h-72 rounded-3xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=80" 
+                         onerror="this.src='https://placehold.co/800x600/2C221E/FAF6F0?text=Custom+Resin+Nameplates'"
+                         alt="Nameplates & Keychains" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-widest text-amber-300 font-bold">Housewarming Gifts</span>
+                            <h3 class="font-serif text-2xl font-bold">Custom Nameplates</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gold transition">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. PROMO BANNERS ("Bring Home Luxury Art" & "Custom Varmala Hampers" - PrabhuPooja Style) -->
+        <section class="py-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Left Banner -->
+                <div class="rounded-3xl bg-gradient-to-br from-amberDeep via-[#5E3016] to-goldDark text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden shadow-lg">
+                    <div class="relative z-10 max-w-md space-y-3">
+                        <span class="px-3 py-1 rounded-full bg-white/15 text-amber-200 text-xs font-bold uppercase tracking-wider">Wedding & Housewarming</span>
+                        <h3 class="font-serif text-3xl sm:text-4xl font-bold">Bespoke Resin Gift Hampers</h3>
+                        <p class="text-amber-100/90 text-sm">For Weddings, Anniversaries, Housewarmings & Corporate Festive Gifting. Custom engraved with names & dates.</p>
+                        <div class="pt-3">
+                            <button onclick="navigateTo('all-products', 'Coasters & Trays')" class="px-6 py-3 rounded-full bg-white text-amberDeep hover:bg-amber-100 font-bold text-xs uppercase tracking-wider transition">
+                                Explore Gift Hampers →
+                            </button>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-gift text-[150px] text-white/10 absolute -bottom-6 -right-4 rotate-12"></i>
+                </div>
+
+                <!-- Right Banner -->
+                <div class="rounded-3xl bg-gradient-to-br from-stone-900 via-stone-800 to-amberDeep text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden shadow-lg">
+                    <div class="relative z-10 max-w-md space-y-3">
+                        <span class="px-3 py-1 rounded-full bg-gold/30 border border-gold/50 text-amber-200 text-xs font-bold uppercase tracking-wider">Flat 20% Studio Sale</span>
+                        <h3 class="font-serif text-3xl sm:text-4xl font-bold">Bring Home Positive Artistic Vibe</h3>
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="text-xs px-3 py-1 rounded-full bg-white/10">✨ Elegance</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-white/10">🌊 Calm Ocean</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-white/10">💎 Raw Quartz</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-white/10">💛 Forever Memories</span>
+                        </div>
+                        <div class="pt-3">
+                            <button onclick="navigateTo('all-products', 'All')" class="px-6 py-3 rounded-full bg-gold hover:bg-goldDark text-white font-bold text-xs uppercase tracking-wider transition">
+                                Shop The Sale →
+                            </button>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-wand-magic-sparkles text-[150px] text-gold/10 absolute -bottom-6 -right-4"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. WATCH & BUY STUDIO SHOWCASE (PrabhuPooja Interactive Studio Cards) -->
+        <section class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-end justify-between mb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-goldDark block mb-1">Live From Our Pouring Table</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep">Watch & Buy Resin Creations</h2>
+                </div>
+                <span class="text-xs text-stone-500 hidden sm:inline"><i class="fa-solid fa-circle-play text-gold mr-1"></i> Click any card to inspect or add to bag</span>
+            </div>
+
+            <div id="watchAndBuyGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </section>
+
+        <!-- 8. WHY CHOOSE AURARESIN? (PrabhuPooja Feature Strip + Digveda Stats Strip) -->
+        <section class="py-14 bg-white border-y border-stone-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-goldDark">Craftsmanship Guarantee</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep mt-1">Why Choose AuraResin Studio?</h2>
+                    <p class="text-sm text-stone-600 mt-2">Trusted by 15,000+ art lovers & brides across India for museum-grade, crystal-clear resin preservation and luxury decor.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+                    <div class="p-5 rounded-2xl bg-cream border border-stone-200/70">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-amberDeep text-gold flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-gem"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-amberDeep">Natural Crystals & Stones</h4>
+                        <p class="text-xs text-stone-500 mt-1">Genuine amethyst, clear quartz & fire glass stones</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-cream border border-stone-200/70">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-amberDeep text-gold flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-sun-plant-wilt"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-amberDeep">UV Non-Yellowing Epoxy</h4>
+                        <p class="text-xs text-stone-500 mt-1">Imported HALS-stabilized crystal clear resin</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-cream border border-stone-200/70">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-amberDeep text-gold flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-amberDeep">Food-Safe & Non-Toxic</h4>
+                        <p class="text-xs text-stone-500 mt-1">Zero VOC, BPA-free & safe for dry serving</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-cream border border-stone-200/70">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-amberDeep text-gold flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-paintbrush"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-amberDeep">100% Bespoke Custom</h4>
+                        <p class="text-xs text-stone-500 mt-1">Choose colors, names, sizes & gold leaf detailing</p>
+                    </div>
+                    <div class="col-span-2 md:col-span-1 p-5 rounded-2xl bg-cream border border-stone-200/70">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-amberDeep text-gold flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-amberDeep">4.9★ Rated Studio</h4>
+                        <p class="text-xs text-stone-500 mt-1">20,000+ custom orders safely delivered pan-India</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. JOIN THE AURARESIN SANCTUARY (PrabhuPooja Style - WITHOUT ANY APP CARD!) -->
+        <section class="py-14 bg-gradient-to-b from-sand/70 to-cream">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-goldDark text-lg">❖</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep mt-1">Join the AuraResin Art Sanctuary</h2>
+                <p class="text-sm text-stone-600 max-w-xl mx-auto mt-2">
+                    Follow our daily resin pouring reels, behind-the-scenes wedding varmala preservation stories, and connect directly with our resin artists on our website & community channels.
+                </p>
+
+                <!-- Strictly 2 Web/Community Cards (Official App card completely removed as requested) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 text-left">
+                    <!-- Card 1: Instagram Studio Reels -->
+                    <div class="bg-white p-6 rounded-3xl border border-stone-200/90 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-rose-600">Instagram Studio</span>
+                                <span class="text-xs font-semibold text-stone-400">@auraresinstudio.in</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-amberDeep mt-0.5">Daily Resin Pouring Reels</h3>
+                            <p class="text-xs text-stone-600 mt-1">Watch satisfying epoxy pours, geode crystal placement & real bride varmala unboxings.</p>
+                            <button onclick="showToast('Opening @auraresinstudio.in on Instagram!')" class="mt-3 px-4 py-1.5 rounded-full bg-sand hover:bg-amberDeep hover:text-white text-amberDeep text-xs font-bold transition">
+                                Follow Studio →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Direct Custom Design Web Concierge -->
+                    <div class="bg-white p-6 rounded-3xl border border-stone-200/90 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Live Web Design Desk</span>
+                                <span class="text-xs font-semibold text-stone-400">Mon–Sat · 10 AM - 7 PM</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-amberDeep mt-0.5">Custom Color & Varmala Consultation</h3>
+                            <p class="text-xs text-stone-600 mt-1">Chat with our senior resin artist to match your living room palette or plan flower pickup.</p>
+                            <button onclick="showToast('Connected to AuraResin Artist Desk: +91 98294 71620')" class="mt-3 px-4 py-1.5 rounded-full bg-sand hover:bg-emerald-700 hover:text-white text-amberDeep text-xs font-bold transition">
+                                Start Custom Inquiry →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. GENUINE RESIN CUSTOMER FAQ ACCORDION -->
+        <section id="faq-section" class="py-14 bg-white border-t border-stone-200">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-goldDark">Everything You Need To Know</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep mt-1">Frequently Asked Questions</h2>
+                    <p class="text-sm text-stone-600 mt-1">Genuine answers to what customers ask before ordering custom resin art & flower preservation.</p>
+                </div>
+
+                <div class="space-y-3.5" id="faqAccordion">
+                    <!-- FAQ 1 -->
+                    <div class="border border-stone-200 rounded-2xl bg-cream/50 overflow-hidden">
+                        <button onclick="toggleFaq(0)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-amberDeep hover:bg-sand/50 transition">
+                            <span>1. How do I send my wedding Varmala / flowers for resin preservation, and will their color stay intact?</span>
+                            <i class="fa-solid fa-plus text-gold faq-icon transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-answer hidden px-6 pb-5 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-200/60 pt-3">
+                            Once you place a Varmala Preservation order on our website, our team shares packing instructions and arranges doorstep courier pickup across India. We use <b>3D Silica Gel Botanical Drying</b> and color-lock treatment before pouring multiple layers of ultra-clear UV resin, keeping the natural petal shapes and deep hues preserved for decades.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="border border-stone-200 rounded-2xl bg-cream/50 overflow-hidden">
+                        <button onclick="toggleFaq(1)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-amberDeep hover:bg-sand/50 transition">
+                            <span>2. Will the clear epoxy resin turn yellow over time?</span>
+                            <i class="fa-solid fa-plus text-gold faq-icon transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-answer hidden px-6 pb-5 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-200/60 pt-3">
+                            No! We use museum-grade, imported epoxy resin formulated with <b>UV blockers and HALS (Hindered Amine Light Stabilizers)</b>. Simply keep your resin artwork away from harsh direct outdoor sunlight, and it will stay crystal clear for years.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="border border-stone-200 rounded-2xl bg-cream/50 overflow-hidden">
+                        <button onclick="toggleFaq(2)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-amberDeep hover:bg-sand/50 transition">
+                            <span>3. Are your resin coasters and serving trays heat-resistant and food-safe?</span>
+                            <i class="fa-solid fa-plus text-gold faq-icon transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-answer hidden px-6 pb-5 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-200/60 pt-3">
+                            Yes! Once fully cured, our tabletop resin is 100% non-toxic, BPA-free, and food-safe for dry snacks, fruits, and desserts. Our coasters withstand warm tea and coffee mugs up to <b>70°C (158°F)</b>. Do not place boiling pots directly from the stove or put resin items inside a microwave or dishwasher.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="border border-stone-200 rounded-2xl bg-cream/50 overflow-hidden">
+                        <button onclick="toggleFaq(3)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-amberDeep hover:bg-sand/50 transition">
+                            <span>4. How long does it take to make and deliver custom resin orders?</span>
+                            <i class="fa-solid fa-plus text-gold faq-icon transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-answer hidden px-6 pb-5 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-200/60 pt-3">
+                            Ready-to-ship coasters, mantra frames, and clocks are dispatched within <b>48 hours</b>. Made-to-order custom geode clocks and nameplates require <b>5–7 days</b> for multi-layer pouring and curing. Wedding Varmala preservation takes <b>3–4 weeks</b> because flowers undergo slow moisture extraction before casting.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="border border-stone-200 rounded-2xl bg-cream/50 overflow-hidden">
+                        <button onclick="toggleFaq(4)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-amberDeep hover:bg-sand/50 transition">
+                            <span>5. Can I customize the color theme, size, or add family names on a product?</span>
+                            <i class="fa-solid fa-plus text-gold faq-icon transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-answer hidden px-6 pb-5 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-200/60 pt-3">
+                            Absolutely! Every piece is handcrafted in our Jaipur studio. On the Product-Details page, you can enter your custom name/engraving text, choose your preferred metallic foil (24K Gold, Rose Gold, or Silver), and even share custom color notes at checkout.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 6 -->
+                    <div class="border border-stone-200 rounded-2xl bg-cream/50 overflow-hidden">
+                        <button onclick="toggleFaq(5)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-amberDeep hover:bg-sand/50 transition">
+                            <span>6. How do I clean my resin wall clock or tray, and what if it gets damaged in transit?</span>
+                            <i class="fa-solid fa-plus text-gold faq-icon transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-answer hidden px-6 pb-5 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-200/60 pt-3">
+                            To clean, simply wipe gently with a soft damp microfiber cloth and mild soap—never use harsh alcohol or abrasive scrubbers. Every order is shipped in 5-ply reinforced boxes with high-density foam. In the rare event of transit damage, share an unboxing video within 48 hours for a <b>100% Free Replacement</b>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- ====================== VIEW 2: ALL PRODUCTS PAGE ======================== -->
+    <!-- ========================================================================= -->
+    <main id="view-all-products" class="hidden flex-grow fade-in py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Breadcrumb & Header -->
+            <div class="bg-gradient-to-r from-amberDeep via-[#5c3018] to-goldDark text-white rounded-3xl p-7 sm:p-10 mb-8 shadow-md relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 text-xs text-amber-200/90 mb-2">
+                        <button onclick="navigateTo('home')" class="hover:underline">Home</button>
+                        <span>/</span>
+                        <span>All Products</span>
+                        <span>/</span>
+                        <span id="activeCategoryBreadcrumb" class="font-bold text-white">All Resin Creations</span>
+                    </div>
+                    <h1 id="catalogTitle" class="font-serif text-3xl sm:text-4xl font-bold">All Handcrafted Resin Products</h1>
+                    <p class="text-xs sm:text-sm text-amber-100/90 mt-1 max-w-2xl">
+                        Explore our complete studio collection of geode wall clocks, wedding varmala keepsakes, agate coasters, spiritual mantra stands, and ocean river tables.
+                    </p>
+                </div>
+                <i class="fa-solid fa-gem text-[130px] text-white/10 absolute -bottom-5 right-6"></i>
+            </div>
+
+            <!-- Filter & Sort Bar -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                <!-- Category Filter Pills -->
+                <div id="categoryPillsContainer" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+                    <!-- Rendered dynamically -->
+                </div>
+
+                <!-- Search & Price Sort -->
+                <div class="flex flex-wrap items-center gap-3 shrink-0">
+                    <span id="productCountLabel" class="text-xs font-semibold text-stone-500">Showing 12 products</span>
+                    <select id="sortSelect" onchange="renderCatalogGrid()" class="bg-cream border border-stone-300 text-charcoal text-xs font-semibold rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-gold">
+                        <option value="featured">Sort by: Featured</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="rating">Customer Rating</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="catalogProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- ===================== VIEW 3: PRODUCT DETAILS PAGE ====================== -->
+    <!-- ========================================================================= -->
+    <main id="view-product-details" class="hidden flex-grow fade-in py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Quick Product Switcher Strip (Allows switching between all 12 products right from Product-Details) -->
+            <div class="mb-6 bg-white rounded-2xl border border-stone-200 p-3.5 shadow-xs">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-goldDark flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Switch Resin Product (12 Creations)
+                    </span>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="cycleProductDetail(-1)" class="px-2.5 py-1 rounded-lg bg-cream hover:bg-amberDeep hover:text-white text-amberDeep text-xs font-bold transition">← Prev</button>
+                        <button onclick="cycleProductDetail(1)" class="px-2.5 py-1 rounded-lg bg-cream hover:bg-amberDeep hover:text-white text-amberDeep text-xs font-bold transition">Next →</button>
+                    </div>
+                </div>
+                <div id="pdSwitcherStrip" class="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+            
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-xs text-stone-500 mb-6">
+                <button onclick="navigateTo('home')" class="hover:text-amberDeep">Home</button>
+                <span>/</span>
+                <button onclick="navigateTo('all-products', 'All')" class="hover:text-amberDeep">All Products</button>
+                <span>/</span>
+                <button id="pdBreadcrumbCategory" onclick="navigateTo('all-products', 'All')" class="hover:text-amberDeep font-medium">Category</button>
+                <span>/</span>
+                <span id="pdBreadcrumbTitle" class="text-amberDeep font-bold truncate max-w-[200px] sm:max-w-xs">Product Name</span>
+            </nav>
+
+            <!-- Product Main Showcase -->
+            <div class="bg-white rounded-3xl border border-stone-200/90 p-5 sm:p-8 lg:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                
+                <!-- Left Column: Gallery (6 Cols) -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="relative rounded-2xl overflow-hidden bg-sand aspect-square border border-stone-200">
+                        <span id="pdBadge" class="absolute top-4 left-4 z-10 bg-terracotta text-white text-xs font-bold px-3 py-1 rounded-full shadow">Bestseller</span>
+                        <img id="pdMainImage" src="" alt="Resin Product" class="w-full h-full object-cover transition duration-500">
+                    </div>
+                    <!-- Thumbnail Strip -->
+                    <div id="pdThumbnails" class="grid grid-cols-4 gap-3">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Right Column: Customization & Purchase Info (6 Cols) -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span id="pdCategoryTag" class="text-xs font-bold uppercase tracking-widest text-goldDark bg-amber-50 px-3 py-1 rounded-full border border-amber-200">Category</span>
+                            <div class="flex items-center gap-1 text-amber-500 text-xs font-bold">
+                                <i class="fa-solid fa-star"></i>
+                                <span id="pdRating">4.9</span>
+                                <span id="pdReviewsCount" class="text-stone-400 font-normal">(142 Verified Reviews)</span>
+                            </div>
+                        </div>
+
+                        <h1 id="pdTitle" class="font-serif text-3xl sm:text-4xl font-bold text-amberDeep leading-tight">
+                            Product Title
+                        </h1>
+
+                        <!-- Price Box -->
+                        <div class="flex items-baseline gap-3 pt-1">
+                            <span id="pdPrice" class="text-3xl font-bold text-amberDeep">₹2,499</span>
+                            <span id="pdOriginalPrice" class="text-lg text-stone-400 line-through">₹3,999</span>
+                            <span id="pdDiscountBadge" class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">Save 38%</span>
+                        </div>
+                        <p class="text-[11px] text-stone-500">Inclusive of all taxes · Free Express Pan-India Shipping & Damage Insurance</p>
+
+                        <p id="pdDescription" class="text-sm text-stone-600 leading-relaxed pt-2 border-t border-stone-100">
+                            Detailed handcrafted description...
+                        </p>
+
+                        <!-- Customization Options (Size / Finish / Custom Engraving) -->
+                        <div class="space-y-4 pt-3 border-t border-stone-200/80">
+                            <!-- Option 1: Size / Format -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-2">Select Size / Edition:</label>
+                                <div id="pdSizeOptions" class="flex flex-wrap gap-2.5">
+                                    <button onclick="selectPdSize(this, 0)" class="pd-size-btn px-4 py-2 rounded-xl border-2 border-amberDeep bg-amberDeep text-white text-xs font-bold transition">Standard Studio Size</button>
+                                    <button onclick="selectPdSize(this, 500)" class="pd-size-btn px-4 py-2 rounded-xl border border-stone-300 bg-cream text-charcoal hover:border-amberDeep text-xs font-semibold transition">Large Statement (+₹500)</button>
+                                    <button onclick="selectPdSize(this, 1200)" class="pd-size-btn px-4 py-2 rounded-xl border border-stone-300 bg-cream text-charcoal hover:border-amberDeep text-xs font-semibold transition">Royal Collector Edition (+₹1,200)</button>
+                                </div>
+                            </div>
+
+                            <!-- Option 2: Metallic Foil Leaf Accent -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-2">Metallic Edge & Flake Finish:</label>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <button onclick="selectPdFoil(this)" class="pd-foil-btn px-3.5 py-2 rounded-xl border-2 border-gold bg-amber-50 text-amberDeep text-xs font-bold flex items-center gap-1.5">
+                                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span> 24K Gold Leaf
+                                    </button>
+                                    <button onclick="selectPdFoil(this)" class="pd-foil-btn px-3.5 py-2 rounded-xl border border-stone-300 bg-white text-charcoal text-xs font-medium flex items-center gap-1.5">
+                                        <span class="w-3 h-3 rounded-full bg-rose-300 inline-block"></span> Rose Gold Foil
+                                    </button>
+                                    <button onclick="selectPdFoil(this)" class="pd-foil-btn px-3.5 py-2 rounded-xl border border-stone-300 bg-white text-charcoal text-xs font-medium flex items-center gap-1.5">
+                                        <span class="w-3 h-3 rounded-full bg-slate-300 inline-block"></span> Antique Silver
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Option 3: Custom Personalization Note -->
+                            <div>
+                                <label for="pdCustomNote" class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1.5">
+                                    Custom Name / Wedding Date / Color Request <span class="text-stone-400 font-normal">(Optional)</span>:
+                                </label>
+                                <input id="pdCustomNote" type="text" placeholder="e.g., 'Rohan & Aanya - 14 Nov 2026' or 'Emerald Green & Gold theme'" 
+                                       class="w-full px-4 py-2.5 rounded-xl bg-cream border border-stone-300 text-xs sm:text-sm focus:outline-none focus:border-gold">
+                            </div>
+                        </div>
+
+                        <!-- Quantity & CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4">
+                            <div class="flex items-center justify-between border border-stone-300 rounded-full px-4 py-2.5 bg-cream sm:w-32">
+                                <button onclick="updatePdQty(-1)" class="w-7 h-7 rounded-full hover:bg-stone-200 text-amberDeep font-bold">−</button>
+                                <span id="pdQtyValue" class="font-bold text-sm">1</span>
+                                <button onclick="updatePdQty(1)" class="w-7 h-7 rounded-full hover:bg-stone-200 text-amberDeep font-bold">+</button>
+                            </div>
+
+                            <button onclick="addCurrentPdToCart(false)" class="flex-1 py-3.5 px-6 rounded-full bg-amberDeep hover:bg-goldDark text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span>Add to Cart</span>
+                            </button>
+
+                            <button onclick="addCurrentPdToCart(true)" class="flex-1 py-3.5 px-6 rounded-full bg-gold hover:bg-goldDark text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-bolt"></i>
+                                <span>Buy It Now</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Studio Highlights & Specs Accordion -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-5 border-t border-stone-200 text-xs">
+                        <div class="p-3 rounded-xl bg-cream flex items-center gap-2.5">
+                            <i class="fa-solid fa-certificate text-gold text-base"></i>
+                            <div>
+                                <p class="font-bold text-amberDeep">UV Protected</p>
+                                <p class="text-[10px] text-stone-500">Anti-Yellowing Coat</p>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-cream flex items-center gap-2.5">
+                            <i class="fa-solid fa-gem text-gold text-base"></i>
+                            <div>
+                                <p class="font-bold text-amberDeep">Real Quartz</p>
+                                <p class="text-[10px] text-stone-500">Natural Crystal Stones</p>
+                            </div>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1 p-3 rounded-xl bg-cream flex items-center gap-2.5">
+                            <i class="fa-solid fa-shield-heart text-gold text-base"></i>
+                            <div>
+                                <p class="font-bold text-amberDeep">Safe Transit</p>
+                                <p class="text-[10px] text-stone-500">Insured Delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Material & Care Details Tabs -->
+            <div class="mt-10 bg-white rounded-3xl border border-stone-200 p-6 sm:p-8">
+                <h3 class="font-serif text-2xl font-bold text-amberDeep mb-4">Artisan Specifications & Care Guide</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-stone-600">
+                    <div class="p-4 rounded-2xl bg-cream/60 border border-stone-200/60">
+                        <h4 class="font-bold text-amberDeep mb-2 flex items-center gap-2"><i class="fa-solid fa-flask text-gold"></i> Materials Used</h4>
+                        <p id="pdSpecsList" class="leading-relaxed">Ultra-clear voc-free epoxy resin, natural raw quartz crystal clusters, imported German metallic pigments, and heavy-duty MDF/Acacia base.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-cream/60 border border-stone-200/60">
+                        <h4 class="font-bold text-amberDeep mb-2 flex items-center gap-2"><i class="fa-solid fa-Hands-bubbles text-gold"></i> Care Instructions</h4>
+                        <p class="leading-relaxed">Wipe gently with a soft damp microfiber cloth. Avoid harsh chemical cleaners, direct outdoor afternoon sunlight, or dishwasher use.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-cream/60 border border-stone-200/60">
+                        <h4 class="font-bold text-amberDeep mb-2 flex items-center gap-2"><i class="fa-solid fa-hand-holding-heart text-gold"></i> Handmade Uniqueness</h4>
+                        <p class="leading-relaxed">Because fluid resin moves organically when poured and cured, no two pieces in the world are 100% identical—making yours a true 1-of-1 artwork.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Resin Creations -->
+            <div class="mt-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-amberDeep">You May Also Love</h2>
+                    <button onclick="navigateTo('all-products', 'All')" class="text-xs font-bold text-goldDark hover:underline">View Full Catalog →</button>
+                </div>
+                <div id="relatedProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- ================ COMPACT TAILORED FOOTER (PrabhuPooja Style) ============ -->
+    <!-- ========================================================================= -->
+    <footer class="bg-charcoal text-stone-300 border-t-4 border-gold mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <!-- Top Brand Centerpiece -->
+            <div class="text-center pb-10 border-b border-stone-800">
+                <div class="inline-flex items-center gap-2.5 mb-2">
+                    <div class="w-8 h-8 rounded-xl bg-gold flex items-center justify-center text-white">
+                        <i class="fa-solid fa-gem text-sm"></i>
+                    </div>
+                    <span class="font-serif text-2xl sm:text-3xl font-bold tracking-[0.2em] text-white uppercase">A U R A   R E S I N</span>
+                </div>
+                <p class="text-[11px] tracking-[0.35em] text-gold uppercase font-semibold">H A N D C R A F T E D · C R Y S T A L   C L E A R · T I M E L E S S</p>
+                <p class="text-xs text-stone-400 max-w-xl mx-auto mt-3">
+                    Hand-poured geode wall art, wedding varmala flower preservation, and luxury agate table decor — crafted with non-yellowing UV epoxy resin in our studio before reaching your home.
+                </p>
+            </div>
+
+            <!-- Compact 4-Column Links & Random Contact Details -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-10 text-xs sm:text-sm">
+                
+                <!-- Col 1: Shop Navigation -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-white mb-3 text-gold">Shop Navigation</h4>
+                    <ul class="space-y-2 text-stone-400">
+                        <li><button onclick="navigateTo('home')" class="hover:text-gold transition">Home Page</button></li>
+                        <li><button onclick="navigateTo('all-products', 'All')" class="hover:text-gold transition">All Resin Products</button></li>
+                        <li><button onclick="openProductDetails(1)" class="hover:text-gold transition">Product-Details Showcase</button></li>
+                        <li><button onclick="navigateTo('all-products', 'Geode Wall Clocks')" class="hover:text-gold transition">Geode Wall Clocks</button></li>
+                        <li><button onclick="navigateTo('all-products', 'Varmala Preservation')" class="hover:text-gold transition">Wedding Varmala Preservation</button></li>
+                        <li><button onclick="navigateTo('all-products', 'Coasters & Trays')" class="hover:text-gold transition">Agate Coasters & Trays</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 2: Customer Care -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-white mb-3 text-gold">Customer Support</h4>
+                    <ul class="space-y-2 text-stone-400">
+                        <li><button onclick="navigateTo('home'); setTimeout(()=>document.getElementById('faq-section').scrollIntoView({behavior:'smooth'}),100)" class="hover:text-gold transition">Resin Care & FAQs</button></li>
+                        <li><button onclick="showPolicyModal('Varmala Shipping Guide', 'Once you place your order, we send a moisture-safe flower packing kit or guide you on sending your garlands via Bluedart/DTDC express to our Jaipur Studio.')" class="hover:text-gold transition">How to Send Varmala Flowers</button></li>
+                        <li><button onclick="showPolicyModal('7-Day Damage Replacement Policy', 'Every resin piece is insured. If your product arrives damaged in transit, share a 360° unboxing video within 48 hours of delivery for a free replacement.')" class="hover:text-gold transition">Return & Replacement Policy</button></li>
+                        <li><button onclick="showPolicyModal('Pan-India Shipping Policy', 'Ready stock ships in 48 hours. Custom poured resin orders ship in 5–7 business days via insured surface/air courier. Free shipping on orders above ₹999.')" class="hover:text-gold transition">Shipping & Curing Timelines</button></li>
+                        <li><button onclick="showPolicyModal('Privacy Policy', 'Your custom wedding photos, names, and contact details are strictly used only for crafting and delivering your resin artwork.')" class="hover:text-gold transition">Privacy & Terms</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Studio Contact (Random Phone, Address & Timings as requested) -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-white mb-3 text-gold">Studio Contact</h4>
+                    <ul class="space-y-2.5 text-stone-400 text-xs">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot text-gold mt-1"></i>
+                            <span>Plot 42, Artisan Craft Enclave, Malviya Nagar Industrial Area, Jaipur, Rajasthan – 302017</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-phone text-gold"></i>
+                            <span>+91 98294 71620</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope text-gold"></i>
+                            <span>care@auraresinstudio.com</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-regular fa-clock text-gold"></i>
+                            <span>Mon – Sat · 10:00 AM to 7:30 PM IST</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-white mb-3 text-gold">Get Studio Offers</h4>
+                    <p class="text-xs text-stone-400 mb-3">Subscribe for ₹250 OFF your first custom resin piece and early access to new geode drops.</p>
+                    <form onsubmit="event.preventDefault(); showToast('Thank you for subscribing! Use code RESIN250 at checkout.'); this.reset();" class="flex items-center bg-stone-800 rounded-full p-1 border border-stone-700 focus-within:border-gold">
+                        <input type="email" required placeholder="Enter your email..." class="bg-transparent text-xs text-white px-3 py-2 focus:outline-none w-full">
+                        <button type="submit" class="w-9 h-9 rounded-full bg-gold hover:bg-goldDark text-white flex items-center justify-center shrink-0 transition" aria-label="Subscribe">
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </form>
+                    <!-- Payment Badges -->
+                    <div class="flex flex-wrap items-center gap-2 mt-4 text-[10px] font-bold text-stone-300">
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">UPI</span>
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">VISA</span>
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">Mastercard</span>
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">RuPay</span>
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">COD</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-6 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-2">
+                <p>© 2026 AuraResin Studio. Handcrafted with love & crystal epoxy in India.</p>
+                <div class="flex items-center gap-4">
+                    <button onclick="navigateTo('home')" class="hover:text-stone-300">Home</button>
+                    <button onclick="navigateTo('all-products', 'All')" class="hover:text-stone-300">All Products</button>
+                    <button onclick="openProductDetails(1)" class="hover:text-stone-300">Product-Details</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================================= -->
+    <!-- ====== REDESIGNED NON-SCROLLING CENTERED CART MODAL (AuraResin Style) === -->
+    <!-- ========================================================================= -->
+    <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/65 backdrop-blur-xs z-50 hidden transition-opacity"></div>
+    
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 pointer-events-none">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-stone-200 overflow-hidden pointer-events-auto fade-in flex flex-col">
+            
+            <!-- Modal Header -->
+            <div class="px-5 py-4 bg-cream border-b border-stone-200 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-amberDeep text-gold flex items-center justify-center shadow-xs">
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-serif text-2xl font-bold text-amberDeep leading-none">Your Resin Bag</h3>
+                            <span id="drawerItemCount" class="text-xs bg-gold text-white font-bold px-2 py-0.5 rounded-full">0</span>
+                        </div>
+                        <p class="text-[11px] text-stone-500 mt-0.5">Handcrafted Studio Order</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="clearAllCartBtn" onclick="clearCartAll()" class="hidden text-[11px] font-bold text-stone-400 hover:text-terracotta px-2.5 py-1 rounded-lg hover:bg-sand/60 transition">
+                        Clear All
+                    </button>
+                    <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-sand/70 hover:bg-amberDeep hover:text-white flex items-center justify-center text-amberDeep transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Free Gift Progress Strip -->
+            <div class="bg-amber-50/90 px-5 py-2 border-b border-amber-200/80 text-xs text-amberDeep flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-gift text-gold"></i>
+                    <span id="cartGiftStatus">Add ₹1,499+ to unlock a <b>FREE Gold-Flake Resin Bookmark</b>!</span>
+                </div>
+            </div>
+
+            <!-- Non-Scrolling Paginated Cart Body -->
+            <div class="px-5 py-3.5 bg-cream/40">
+                <!-- Pager Bar (Appears automatically when > 2 unique items are added so it NEVER scrolls) -->
+                <div id="cartPagerBar" class="hidden items-center justify-between mb-2.5 pb-2 border-b border-stone-200/80 text-xs">
+                    <span id="cartPageText" class="text-[11px] font-bold uppercase tracking-wider text-goldDark">Showing 1–2 of 3 items</span>
+                    <div class="flex items-center gap-1.5">
+                        <button id="cartPrevPageBtn" onclick="changeCartPage(-1)" class="px-2.5 py-1 rounded-lg bg-white border border-stone-300 text-amberDeep hover:bg-amberDeep hover:text-white text-[11px] font-bold transition disabled:opacity-40">
+                            ← Prev
+                        </button>
+                        <button id="cartNextPageBtn" onclick="changeCartPage(1)" class="px-2.5 py-1 rounded-lg bg-white border border-stone-300 text-amberDeep hover:bg-amberDeep hover:text-white text-[11px] font-bold transition disabled:opacity-40">
+                            Next →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fixed Height Container (Max 2 items per page, zero scrollbars) -->
+                <div id="cartItemsContainer" class="space-y-2.5">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Quick Add Extra Strip -->
+            <div id="cartUpsellStrip" class="px-5 py-2.5 bg-sand/50 border-t border-stone-200 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5">
+                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=200&q=80" class="w-9 h-9 rounded-lg object-cover border border-stone-300" alt="Bookmark">
+                    <div>
+                        <p class="text-xs font-bold text-charcoal leading-tight">Add Pressed Rose Gold Bookmark</p>
+                        <p class="text-[11px] text-goldDark font-bold">₹299 <span class="line-through text-stone-400 font-normal">₹499</span></p>
+                    </div>
+                </div>
+                <button onclick="quickAddToCart(11, false)" class="px-3 py-1.5 rounded-xl bg-amberDeep text-white text-xs font-bold hover:bg-goldDark transition shrink-0">
+                    + Add Extra
+                </button>
+            </div>
+
+            <!-- Cart Footer / Checkout -->
+            <div id="cartFooterSection" class="p-5 bg-white border-t border-stone-200 space-y-3">
+                <!-- Discount Code Input -->
+                <div class="flex gap-2">
+                    <input id="couponInput" type="text" placeholder="Discount code (Try RESIN250)" class="flex-grow px-3.5 py-2 rounded-xl bg-cream border border-stone-300 text-xs focus:outline-none focus:border-gold uppercase">
+                    <button onclick="applyCoupon()" class="px-4 py-2 rounded-xl bg-stone-800 hover:bg-charcoal text-white text-xs font-bold transition">Apply</button>
+                </div>
+
+                <div class="bg-cream/70 rounded-2xl p-3 border border-stone-200/80 space-y-1 text-xs">
+                    <div class="flex justify-between text-stone-500">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal" class="font-bold text-charcoal">₹0</span>
+                    </div>
+                    <div id="cartDiscountRow" class="hidden justify-between text-emerald-700 font-semibold">
+                        <span>Studio Coupon (RESIN250)</span>
+                        <span>- ₹250</span>
+                    </div>
+                    <div class="flex justify-between text-stone-500">
+                        <span>Insured Pan-India Shipping</span>
+                        <span class="text-emerald-700 font-semibold">FREE</span>
+                    </div>
+                    <div class="flex justify-between text-sm sm:text-base font-bold text-amberDeep pt-1.5 border-t border-stone-200/80">
+                        <span>Estimated Total</span>
+                        <span id="cartTotal">₹0</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                    <button onclick="toggleCartDrawer(false)" class="py-3 rounded-full border border-stone-300 text-charcoal hover:border-amberDeep font-bold text-xs transition">
+                        Continue Shopping
+                    </button>
+                    <button onclick="handleCheckout()" class="py-3 rounded-full bg-gradient-to-r from-amberDeep to-goldDark hover:opacity-95 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock text-xs"></i>
+                        <span>Secure Checkout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- ======================= MODAL & TOAST NOTIFICATION ====================== -->
+    <!-- ========================================================================= -->
+    <div id="customModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-200 text-center space-y-4 fade-in">
+            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-goldDark flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-gem"></i>
+            </div>
+            <h3 id="modalTitle" class="font-serif text-2xl font-bold text-amberDeep">Information</h3>
+            <p id="modalBody" class="text-xs sm:text-sm text-stone-600 leading-relaxed"></p>
+            <button onclick="closePolicyModal()" class="w-full py-3 rounded-full bg-amberDeep text-white font-bold text-xs uppercase tracking-wider hover:bg-goldDark transition">
+                Got It
+            </button>
+        </div>
+    </div>
+
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 bg-charcoal text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-gold/40 flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-gold text-lg"></i>
+        <span id="toastMessage" class="text-xs sm:text-sm font-medium">Added to your resin bag!</span>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- ========================== APPLICATION LOGIC ============================ -->
+    <!-- ========================================================================= -->
+    <script>
+        // 1. COMPLETE RESIN ART PRODUCT CATALOG (12 Curated Handcrafted Items)
+        const resinProducts = [
+            {
+                id: 1,
+                title: "Royal Emerald & 24K Gold Geode Resin Wall Clock",
+                category: "Geode Wall Clocks",
+                price: 2499,
+                originalPrice: 3999,
+                rating: 4.9,
+                reviews: 184,
+                badge: "Bestseller",
+                trendingRank: 1,
+                isNew: true,
+                image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Hand-poured on an 18-inch heavy MDF base with natural raw clear quartz crystals, deep emerald mica pigments, and floating 24K gold leaf veins. Fitted with a silent sweep quartz clock movement.",
+                specs: "18-inch diameter · Silent sweep mechanism · Genuine raw quartz stones · UV-resistant epoxy coat"
+            },
+            {
+                id: 2,
+                title: "3D Wedding Varmala & Rose Garland Preservation Frame",
+                category: "Varmala Preservation",
+                price: 3899,
+                originalPrice: 5499,
+                rating: 5.0,
+                reviews: 246,
+                badge: "Bridal Favorite",
+                trendingRank: 2,
+                isNew: true,
+                image: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Preserve your sacred wedding varmala petals, couple photo, and wedding invitation inside a 2-inch deep crystal-clear UV stabilized resin frame with metallic gold border detailing.",
+                specs: "12x16 inch deep casting · Silica gel 3D flower drying · Custom name & marriage date inclusion · Doorstep flower pickup"
+            },
+            {
+                id: 3,
+                title: "Rose Quartz & Gold Leaf Agate Resin Coasters (Set of 6)",
+                category: "Coasters & Trays",
+                price: 899,
+                originalPrice: 1499,
+                rating: 4.8,
+                reviews: 162,
+                badge: "Top Gifting",
+                trendingRank: 3,
+                isNew: true,
+                image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Set of 6 luxury agate-edged resin tea & coffee coasters in blush rose quartz tones with hand-gilded electroplated gold rims. Heat resistant up to 70°C and water-proof.",
+                specs: "Set of 6 coasters (4.5 inch each) · Heat resistant to 70°C · Anti-slip silicone bumpers underneath"
+            },
+            {
+                id: 4,
+                title: "24K Gold Foil 'Om & Gayatri Mantra' Resin Desktop & Car Stand",
+                category: "Mantra & Spiritual Frames",
+                price: 699,
+                originalPrice: 1199,
+                rating: 4.9,
+                reviews: 310,
+                badge: "Auspicious Gift",
+                trendingRank: 4,
+                isNew: true,
+                image: "https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Handcrafted crystal resin arch stand featuring sacred gold-engraved Om & Gayatri Mantra suspended over real crushed pyrite and gold flakes. Ideal for car dashboards and work desks.",
+                specs: "4.5 x 3.5 inch arch with acrylic gold stand · Includes double-sided dashboard grip pad"
+            },
+            {
+                id: 5,
+                title: "Maldives Ocean Wave Resin & Acacia Wood Serving Platter",
+                category: "Coasters & Trays",
+                price: 1599,
+                originalPrice: 2499,
+                rating: 4.8,
+                reviews: 94,
+                badge: "Food Safe",
+                trendingRank: null,
+                isNew: true,
+                image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Seasoned natural Indian acacia wood cheese and snack board hand-laced with 3 layers of realistic turquoise ocean waves and seafoam cells using food-safe epoxy resin.",
+                specs: "15 x 8 inch acacia paddle board · 100% BPA-free food-safe resin · Leather hanging loop"
+            },
+            {
+                id: 6,
+                title: "Amethyst Crystal Geode Resin Vanity & Perfume Organizer Tray",
+                category: "Coasters & Trays",
+                price: 1899,
+                originalPrice: 2899,
+                rating: 4.9,
+                reviews: 128,
+                badge: "Luxury Decor",
+                trendingRank: null,
+                isNew: true,
+                image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Statement rectangular resin tray bordered with genuine raw amethyst points and solid brass handles. Perfect for organizing perfumes, skincare, or festive gifting.",
+                specs: "13 x 8 inch tray · Solid brass electroplated handles · Real amethyst crystal edges"
+            },
+            {
+                id: 7,
+                title: "Custom Family Nameplate in Black Marble & Gold Resin",
+                category: "Nameplates & Keychains",
+                price: 2199,
+                originalPrice: 3499,
+                rating: 4.9,
+                reviews: 117,
+                badge: "Custom Engraved",
+                trendingRank: null,
+                isNew: false,
+                image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Weather-proof entrance nameplate crafted with obsidian black marble-effect resin, crushed golden fire-glass border, and raised 3D gold mirror acrylic family names and flat numbers.",
+                specs: "16 x 8 inch weather-resistant base · Includes stainless steel wall studs & screws"
+            },
+            {
+                id: 8,
+                title: "Turquoise Ocean River & Olive Wood Coffee Table Top",
+                category: "Tables & Lamps",
+                price: 6499,
+                originalPrice: 8999,
+                rating: 5.0,
+                reviews: 64,
+                badge: "Statement Piece",
+                trendingRank: null,
+                isNew: false,
+                image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Hand-cast 20-inch round side table featuring live-edge seasoned teak wood joined by a glowing turquoise epoxy river and black hairpin metal legs.",
+                specs: "20-inch diameter x 18-inch height · Powder-coated black iron legs included · Scratch-resistant polyurethane top coat"
+            },
+            {
+                id: 9,
+                title: "Botanical Pressed Flower Resin Night Lamp with Warm LED Base",
+                category: "Tables & Lamps",
+                price: 1299,
+                originalPrice: 1999,
+                rating: 4.8,
+                reviews: 153,
+                badge: "Warm Glow",
+                trendingRank: null,
+                isNew: false,
+                image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Real pressed baby's breath, ferns, and rose petals suspended inside a crystal clear resin sphere resting on a warm USB wooden LED light stand.",
+                specs: "5-inch crystal sphere + Beechwood USB warm LED base · Touch dimmer switch"
+            },
+            {
+                id: 10,
+                title: "Wedding Varmala Hexagon Block & Ring Holder Platter Combo",
+                category: "Varmala Preservation",
+                price: 4499,
+                originalPrice: 6499,
+                rating: 4.9,
+                reviews: 89,
+                badge: "Bridal Combo",
+                trendingRank: null,
+                isNew: false,
+                image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Complete bridal preservation combo! Includes a 3D deep hexagon varmala block along with matching engagement ring platter and 2 floral resin coasters made from your wedding flowers.",
+                specs: "8-inch deep hexagon block + 10-inch ring platter + 2 coasters · Complete flower pickup service"
+            },
+            {
+                id: 11,
+                title: "Pressed Rose & 24K Gold Foil Resin Bookmark Set (Pack of 3)",
+                category: "Mantra & Spiritual Frames",
+                price: 299,
+                originalPrice: 499,
+                rating: 4.7,
+                reviews: 412,
+                badge: "Reader's Pick",
+                trendingRank: null,
+                isNew: false,
+                image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Flexible, shatterproof clear resin bookmarks embedded with real dried botanicals, gold leaf flakes, and silk tassels.",
+                specs: "Pack of 3 bookmarks · Silk tassels included · Gift-ready kraft sleeve"
+            },
+            {
+                id: 12,
+                title: "Sapphire Blue & Silver Quartz Geode Resin Wall Clock",
+                category: "Geode Wall Clocks",
+                price: 2699,
+                originalPrice: 4299,
+                rating: 4.9,
+                reviews: 108,
+                badge: "New Edition",
+                trendingRank: null,
+                isNew: true,
+                image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=85",
+                gallery: [
+                    "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=85",
+                    "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=900&q=85"
+                ],
+                description: "Deep midnight sapphire blue resin waves meeting sparkling silver fire-glass and raw quartz crystal clusters on an 18-inch circular wall clock.",
+                specs: "18-inch circular MDF · Silent quartz clock mechanism · Ready wall-hanging metal hook"
+            }
+        ];
+
+        const categoriesList = [
+            "All",
+            "Geode Wall Clocks",
+            "Varmala Preservation",
+            "Coasters & Trays",
+            "Mantra & Spiritual Frames",
+            "Tables & Lamps",
+            "Nameplates & Keychains"
+        ];
+
+        // 2. APPLICATION STATE
+        let currentView = 'home';
+        let activeCategory = 'All';
+        let searchQuery = '';
+        let currentProductDetail = resinProducts[0];
+        let pdSelectedExtraPrice = 0;
+        let pdSelectedSizeLabel = 'Standard Studio Size';
+        let pdSelectedFoilLabel = '24K Gold Leaf';
+        let pdQuantity = 1;
+        let cart = [
+            {
+                productId: 1,
+                title: resinProducts[0].title,
+                price: resinProducts[0].price,
+                image: resinProducts[0].image,
+                variant: "Standard Studio Size · 24K Gold Leaf",
+                qty: 1
+            }
+        ];
+        let cartPage = 0;
+        const CART_PAGE_SIZE = 2;
+        let couponApplied = false;
+        let currentHeroSlide = 0;
+        let heroInterval = null;
+
+        // 3. PRODUCT CARD HTML GENERATOR
+        function createProductCardHTML(product, rankBadge = null) {
+            const discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+            return `
+                <div class="group bg-white rounded-3xl border border-stone-200/90 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative">
+                    <div>
+                        <!-- Image Box -->
+                        <div onclick="openProductDetails(${product.id})" class="relative h-64 w-full bg-sand overflow-hidden cursor-pointer">
+                            ${rankBadge ? `<span class="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-amberDeep text-gold font-serif font-bold text-base flex items-center justify-center shadow-md border border-gold">#${rankBadge}</span>` : 
+                              `<span class="absolute top-3 left-3 z-10 bg-amberDeep/90 text-amber-100 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full backdrop-blur-xs">${product.badge}</span>`
+                            }
+                            <span class="absolute top-3 right-3 z-10 bg-terracotta text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-${discountPercent}%</span>
+                            <img src="${product.image}" 
+                                 onerror="this.src='https://placehold.co/600x600/3A2314/FAF6F0?text=Resin+Art'"
+                                 alt="${product.title}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            <div class="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="px-4 py-2 rounded-full bg-white/95 text-amberDeep font-bold text-xs shadow">View Details</span>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-4 sm:p-5">
+                            <div class="flex items-center justify-between text-[11px] text-stone-400 mb-1">
+                                <span onclick="navigateTo('all-products', '${product.category}')" class="font-semibold text-goldDark truncate cursor-pointer hover:underline">${product.category}</span>
+                                <span class="flex items-center gap-1 text-amber-500 font-bold"><i class="fa-solid fa-star text-[10px]"></i> ${product.rating}</span>
+                            </div>
+                            <h3 onclick="openProductDetails(${product.id})" class="font-serif text-lg sm:text-xl font-bold text-charcoal group-hover:text-goldDark transition line-clamp-2 cursor-pointer leading-snug">
+                                ${product.title}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <!-- Price & Add Button -->
+                    <div class="px-4 sm:px-5 pb-4 sm:pb-5 pt-2 flex items-center justify-between border-t border-stone-100">
+                        <div>
+                            <span class="text-lg font-bold text-amberDeep">₹${product.price.toLocaleString('en-IN')}</span>
+                            <span class="text-xs text-stone-400 line-through ml-1">₹${product.originalPrice.toLocaleString('en-IN')}</span>
+                        </div>
+                        <button onclick="quickAddToCart(${product.id}, true)" class="px-4 py-2 rounded-full bg-sand hover:bg-amberDeep text-amberDeep hover:text-white font-bold text-xs transition flex items-center gap-1.5 shadow-2xs">
+                            <span>Add</span>
+                            <i class="fa-solid fa-plus text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 4. INITIALIZE HOMEPAGE SECTIONS
+        function renderHomeSections() {
+            // New Arrivals Carousel
+            const newArrivalsEl = document.getElementById('newArrivalsCarousel');
+            const newItems = resinProducts.filter(p => p.isNew);
+            newArrivalsEl.innerHTML = newItems.map(product => `
+                <div class="min-w-[270px] sm:min-w-[295px] max-w-[295px] shrink-0">
+                    ${createProductCardHTML(product)}
+                </div>
+            `).join('');
+
+            // Trending Now (#1 - #4)
+            const trendingEl = document.getElementById('trendingGrid');
+            const trendingItems = resinProducts.filter(p => p.trendingRank).sort((a,b) => a.trendingRank - b.trendingRank);
+            trendingEl.innerHTML = trendingItems.map(p => createProductCardHTML(p, p.trendingRank)).join('');
+
+            // Watch & Buy Interactive Showcase
+            const watchEl = document.getElementById('watchAndBuyGrid');
+            const watchItems = [resinProducts[0], resinProducts[1], resinProducts[4], resinProducts[3]];
+            watchEl.innerHTML = watchItems.map(p => `
+                <div class="group relative rounded-3xl overflow-hidden h-96 shadow-md border border-stone-200 bg-charcoal">
+                    <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover brightness-75 group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    
+                    <!-- Studio Live Badge -->
+                    <div class="absolute top-3.5 left-3.5 flex items-center gap-1.5 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full border border-white/20">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                        <span>STUDIO POUR</span>
+                    </div>
+
+                    <button onclick="openProductDetails(${p.id})" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/25 hover:bg-gold text-white backdrop-blur-md flex items-center justify-center transition transform group-hover:scale-110" aria-label="Inspect Product">
+                        <i class="fa-solid fa-play ml-0.5"></i>
+                    </button>
+
+                    <!-- Bottom Product Card Overlay -->
+                    <div class="absolute bottom-3.5 left-3.5 right-3.5 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl flex items-center justify-between gap-2">
+                        <div onclick="openProductDetails(${p.id})" class="cursor-pointer overflow-hidden">
+                            <p class="text-xs font-bold text-amberDeep truncate">${p.title}</p>
+                            <p class="text-xs font-bold text-goldDark mt-0.5">₹${p.price.toLocaleString('en-IN')} <span class="text-[10px] text-stone-400 line-through font-normal">₹${p.originalPrice.toLocaleString('en-IN')}</span></p>
+                        </div>
+                        <button onclick="quickAddToCart(${p.id}, true)" class="px-3 py-2 rounded-xl bg-amberDeep hover:bg-goldDark text-white text-xs font-bold shrink-0 transition">
+                            Add +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 5. RENDER ALL PRODUCTS CATALOG & CATEGORY PILLS
+        function renderCategoryPills() {
+            const container = document.getElementById('categoryPillsContainer');
+            container.innerHTML = categoriesList.map(cat => {
+                const isActive = activeCategory === cat;
+                return `
+                    <button onclick="filterByCategory('${cat}')" 
+                            class="shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition ${isActive ? 'bg-amberDeep text-white shadow-xs' : 'bg-cream text-stone-700 hover:bg-sand'}">
+                        ${cat === 'All' ? 'All Resin Products (12)' : cat}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function filterByCategory(category) {
+            activeCategory = category;
+            document.getElementById('activeCategoryBreadcrumb').textContent = category === 'All' ? 'All Resin Creations' : category;
+            document.getElementById('catalogTitle').textContent = category === 'All' ? 'All Handcrafted Resin Products' : category;
+            renderCategoryPills();
+            renderCatalogGrid();
+        }
+
+        function renderCatalogGrid() {
+            const grid = document.getElementById('catalogProductsGrid');
+            const sortVal = document.getElementById('sortSelect').value;
+
+            let filtered = resinProducts.filter(p => {
+                const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+                const matchesSearch = !searchQuery || 
+                                      p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      p.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (sortVal === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+            if (sortVal === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+            if (sortVal === 'rating') filtered.sort((a,b) => b.rating - a.rating);
+
+            document.getElementById('productCountLabel').textContent = `Showing ${filtered.length} product${filtered.length === 1 ? '' : 's'}`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl p-12 text-center border border-stone-200 space-y-3">
+                        <i class="fa-solid fa-magnifying-glass text-3xl text-gold"></i>
+                        <h3 class="font-serif text-2xl font-bold text-amberDeep">No matching resin pieces found</h3>
+                        <p class="text-xs text-stone-500">Try clearing your search filter or switching to All Resin Products.</p>
+                        <button onclick="searchQuery=''; document.getElementById('headerSearchInput').value=''; filterByCategory('All');" class="px-5 py-2.5 rounded-full bg-amberDeep text-white text-xs font-bold">
+                            Reset Filters
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+        }
+
+        // 6. PRODUCT DETAILS PAGE LOGIC + SWITCHER BAR
+        function renderPdSwitcherStrip() {
+            const strip = document.getElementById('pdSwitcherStrip');
+            if (!strip) return;
+            strip.innerHTML = resinProducts.map(p => {
+                const isSelected = currentProductDetail && currentProductDetail.id === p.id;
+                return `
+                    <button onclick="openProductDetails(${p.id})" class="flex items-center gap-2 p-1.5 pr-3 rounded-xl border transition shrink-0 text-left ${isSelected ? 'bg-amberDeep text-white border-amberDeep shadow-xs' : 'bg-cream border-stone-200 text-charcoal hover:border-gold'}">
+                        <img src="${p.image}" alt="${p.title}" class="w-9 h-9 rounded-lg object-cover shrink-0">
+                        <div class="max-w-[130px]">
+                            <p class="text-[11px] font-bold truncate">${p.title}</p>
+                            <p class="text-[10px] ${isSelected ? 'text-amber-200' : 'text-goldDark'} font-semibold">₹${p.price.toLocaleString('en-IN')}</p>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function cycleProductDetail(step) {
+            const idx = resinProducts.findIndex(p => p.id === (currentProductDetail ? currentProductDetail.id : 1));
+            const nextIdx = (idx + step + resinProducts.length) % resinProducts.length;
+            openProductDetails(resinProducts[nextIdx].id);
+        }
+
+        function openProductDetails(productId) {
+            const product = resinProducts.find(p => p.id === productId) || resinProducts[0];
+            currentProductDetail = product;
+            pdSelectedExtraPrice = 0;
+            pdSelectedSizeLabel = 'Standard Studio Size';
+            pdSelectedFoilLabel = '24K Gold Leaf';
+            pdQuantity = 1;
+
+            renderPdSwitcherStrip();
+
+            // Populate fields
+            document.getElementById('pdBreadcrumbCategory').textContent = product.category;
+            document.getElementById('pdBreadcrumbCategory').onclick = () => navigateTo('all-products', product.category);
+            document.getElementById('pdBreadcrumbTitle').textContent = product.title;
+            document.getElementById('pdBadge').textContent = product.badge;
+            document.getElementById('pdCategoryTag').textContent = product.category;
+            document.getElementById('pdRating').textContent = product.rating;
+            document.getElementById('pdReviewsCount').textContent = `(${product.reviews} Verified Reviews)`;
+            document.getElementById('pdTitle').textContent = product.title;
+            document.getElementById('pdDescription').textContent = product.description;
+            document.getElementById('pdSpecsList').textContent = product.specs;
+            document.getElementById('pdQtyValue').textContent = '1';
+            document.getElementById('pdCustomNote').value = '';
+
+            // Main Image & Thumbnails
+            const mainImg = document.getElementById('pdMainImage');
+            mainImg.src = product.image;
+
+            const thumbsContainer = document.getElementById('pdThumbnails');
+            const galleryList = product.gallery && product.gallery.length ? product.gallery : [product.image];
+            thumbsContainer.innerHTML = galleryList.map((imgUrl, idx) => `
+                <button onclick="switchPdMainImage('${imgUrl}', this)" class="pd-thumb rounded-xl overflow-hidden border-2 ${idx === 0 ? 'border-amberDeep' : 'border-transparent'} aspect-square bg-sand">
+                    <img src="${imgUrl}" alt="Thumbnail" class="w-full h-full object-cover">
+                </button>
+            `).join('');
+
+            // Reset size buttons visual state
+            const sizeBtns = document.querySelectorAll('.pd-size-btn');
+            sizeBtns.forEach((btn, i) => {
+                if (i === 0) {
+                    btn.className = "pd-size-btn px-4 py-2 rounded-xl border-2 border-amberDeep bg-amberDeep text-white text-xs font-bold transition";
+                } else {
+                    btn.className = "pd-size-btn px-4 py-2 rounded-xl border border-stone-300 bg-cream text-charcoal hover:border-amberDeep text-xs font-semibold transition";
+                }
+            });
+
+            updatePdDisplayedPrice();
+
+            // Populate Related Products
+            const related = resinProducts.filter(p => p.id !== product.id).slice(0, 4);
+            document.getElementById('relatedProductsGrid').innerHTML = related.map(p => createProductCardHTML(p)).join('');
+
+            navigateTo('product-details');
+        }
+
+        function switchPdMainImage(imgUrl, btnEl) {
+            document.getElementById('pdMainImage').src = imgUrl;
+            document.querySelectorAll('.pd-thumb').forEach(b => b.classList.replace('border-amberDeep', 'border-transparent'));
+            btnEl.classList.replace('border-transparent', 'border-amberDeep');
+        }
+
+        function selectPdSize(btnEl, extraCost) {
+            pdSelectedExtraPrice = extraCost;
+            pdSelectedSizeLabel = btnEl.textContent.split(' (+')[0];
+            document.querySelectorAll('.pd-size-btn').forEach(b => {
+                b.className = "pd-size-btn px-4 py-2 rounded-xl border border-stone-300 bg-cream text-charcoal hover:border-amberDeep text-xs font-semibold transition";
+            });
+            btnEl.className = "pd-size-btn px-4 py-2 rounded-xl border-2 border-amberDeep bg-amberDeep text-white text-xs font-bold transition";
+            updatePdDisplayedPrice();
+        }
+
+        function selectPdFoil(btnEl) {
+            pdSelectedFoilLabel = btnEl.textContent.trim();
+            document.querySelectorAll('.pd-foil-btn').forEach(b => {
+                b.className = "pd-foil-btn px-3.5 py-2 rounded-xl border border-stone-300 bg-white text-charcoal text-xs font-medium flex items-center gap-1.5";
+            });
+            btnEl.className = "pd-foil-btn px-3.5 py-2 rounded-xl border-2 border-gold bg-amber-50 text-amberDeep text-xs font-bold flex items-center gap-1.5";
+        }
+
+        function updatePdQty(delta) {
+            pdQuantity = Math.max(1, pdQuantity + delta);
+            document.getElementById('pdQtyValue').textContent = pdQuantity;
+            updatePdDisplayedPrice();
+        }
+
+        function updatePdDisplayedPrice() {
+            const unitPrice = currentProductDetail.price + pdSelectedExtraPrice;
+            const unitOrig = currentProductDetail.originalPrice + pdSelectedExtraPrice;
+            const disc = Math.round(((unitOrig - unitPrice) / unitOrig) * 100);
+            document.getElementById('pdPrice').textContent = `₹${unitPrice.toLocaleString('en-IN')}`;
+            document.getElementById('pdOriginalPrice').textContent = `₹${unitOrig.toLocaleString('en-IN')}`;
+            document.getElementById('pdDiscountBadge').textContent = `Save ${disc}%`;
+        }
+
+        function addCurrentPdToCart(openDrawerImmediately) {
+            const customNote = document.getElementById('pdCustomNote').value.trim();
+            const unitPrice = currentProductDetail.price + pdSelectedExtraPrice;
+            const variantText = `${pdSelectedSizeLabel} · ${pdSelectedFoilLabel}${customNote ? ` · Note: "${customNote}"` : ''}`;
+
+            const existingIdx = cart.findIndex(item => item.productId === currentProductDetail.id && item.variant === variantText);
+            if (existingIdx > -1) {
+                cart[existingIdx].qty += pdQuantity;
+                cartPage = Math.floor(existingIdx / CART_PAGE_SIZE);
+            } else {
+                cart.unshift({
+                    productId: currentProductDetail.id,
+                    title: currentProductDetail.title,
+                    price: unitPrice,
+                    image: currentProductDetail.image,
+                    variant: variantText,
+                    qty: pdQuantity
+                });
+                cartPage = 0;
+            }
+
+            renderCart();
+            if (openDrawerImmediately) {
+                toggleCartDrawer(true);
+            } else {
+                showToast(`Added ${pdQuantity}x "${currentProductDetail.title}" to bag!`);
+            }
+        }
+
+        // 7. NAVIGATION ROUTER (Strictly Home, AllProduct, Product-Details)
+        function navigateTo(view, categoryFilter = null) {
+            currentView = view;
+            const homeEl = document.getElementById('view-home');
+            const allProdEl = document.getElementById('view-all-products');
+            const pdEl = document.getElementById('view-product-details');
+
+            homeEl.classList.add('hidden');
+            allProdEl.classList.add('hidden');
+            pdEl.classList.add('hidden');
+
+            // Update Nav Tab Active Styling
+            const navHome = document.getElementById('nav-home');
+            const navAll = document.getElementById('nav-all-products');
+            const navPd = document.getElementById('nav-product-details');
+
+            [navHome, navAll, navPd].forEach(btn => {
+                if (btn) btn.className = "px-4 py-2.5 rounded-xl text-sm font-semibold text-stone-700 hover:text-amberDeep hover:bg-sand/50 transition flex items-center gap-2";
+            });
+
+            if (view === 'home') {
+                homeEl.classList.remove('hidden');
+                if (navHome) navHome.className = "px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-amberDeep bg-sand/70";
+            } else if (view === 'all-products') {
+                if (categoryFilter) activeCategory = categoryFilter;
+                filterByCategory(activeCategory);
+                allProdEl.classList.remove('hidden');
+                if (navAll) navAll.className = "px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-amberDeep bg-sand/70";
+            } else if (view === 'product-details') {
+                pdEl.classList.remove('hidden');
+                if (navPd) navPd.className = "px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-amberDeep bg-sand/70";
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleQuickSearch(query) {
+            searchQuery = query.trim();
+            if (currentView !== 'all-products' && searchQuery.length > 1) {
+                navigateTo('all-products', 'All');
+            } else if (currentView === 'all-products') {
+                renderCatalogGrid();
+            }
+        }
+
+        // 8. NON-SCROLLING PAGINATED CART MODAL LOGIC
+        function quickAddToCart(productId, openModal = false) {
+            const product = resinProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const defaultVariant = "Standard Studio Size · 24K Gold Leaf";
+            const existingIdx = cart.findIndex(item => item.productId === product.id && item.variant === defaultVariant);
+            if (existingIdx > -1) {
+                cart[existingIdx].qty += 1;
+                cartPage = Math.floor(existingIdx / CART_PAGE_SIZE);
+            } else {
+                cart.unshift({
+                    productId: product.id,
+                    title: product.title,
+                    price: product.price,
+                    image: product.image,
+                    variant: defaultVariant,
+                    qty: 1
+                });
+                cartPage = 0;
+            }
+            renderCart();
+            if (openModal) {
+                toggleCartDrawer(true);
+            } else {
+                showToast(`Added "${product.title}" to your bag!`);
+            }
+        }
+
+        function changeCartPage(delta) {
+            const maxPage = Math.max(0, Math.ceil(cart.length / CART_PAGE_SIZE) - 1);
+            cartPage = Math.max(0, Math.min(maxPage, cartPage + delta));
+            renderCart();
+        }
+
+        function updateCartItemQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            const maxPage = Math.max(0, Math.ceil(cart.length / CART_PAGE_SIZE) - 1);
+            if (cartPage > maxPage) cartPage = maxPage;
+            renderCart();
+        }
+
+        function removeCartItemAt(index) {
+            cart.splice(index, 1);
+            const maxPage = Math.max(0, Math.ceil(cart.length / CART_PAGE_SIZE) - 1);
+            if (cartPage > maxPage) cartPage = maxPage;
+            renderCart();
+            showToast('Removed item from bag');
+        }
+
+        function clearCartAll() {
+            cart = [];
+            cartPage = 0;
+            couponApplied = false;
+            renderCart();
+            showToast('Cleared your resin bag');
+        }
+
+        function renderCart() {
+            const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cartCountBadge').textContent = totalItems;
+            document.getElementById('drawerItemCount').textContent = totalItems;
+
+            const clearBtn = document.getElementById('clearAllCartBtn');
+            if (clearBtn) clearBtn.classList.toggle('hidden', cart.length === 0);
+
+            const pagerBar = document.getElementById('cartPagerBar');
+            const upsellStrip = document.getElementById('cartUpsellStrip');
+            const footerSec = document.getElementById('cartFooterSection');
+            const container = document.getElementById('cartItemsContainer');
+            const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            // Free Gift Status
+            const giftEl = document.getElementById('cartGiftStatus');
+            if (subtotal >= 1499) {
+                giftEl.innerHTML = `🎉 <b>Unlocked!</b> FREE Gold-Flake Resin Bookmark included with your order!`;
+            } else {
+                const diff = 1499 - subtotal;
+                giftEl.innerHTML = `Add <b>₹${diff.toLocaleString('en-IN')}</b> more to unlock a <b>FREE Gold-Flake Resin Bookmark</b>!`;
+            }
+
+            if (cart.length === 0) {
+                if (pagerBar) {
+                    pagerBar.classList.add('hidden');
+                    pagerBar.classList.remove('flex');
+                }
+                if (upsellStrip) upsellStrip.classList.add('hidden');
+                if (footerSec) footerSec.classList.add('hidden');
+
+                container.innerHTML = `
+                    <div class="text-center py-8 space-y-3">
+                        <div class="w-14 h-14 rounded-full bg-sand text-goldDark flex items-center justify-center mx-auto text-2xl">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <h4 class="font-serif text-2xl font-bold text-amberDeep">Your resin bag is empty</h4>
+                        <p class="text-xs text-stone-500 max-w-xs mx-auto">Explore our handcrafted geode clocks, agate coasters, and varmala preservation frames.</p>
+                        <div class="pt-2">
+                            <button onclick="toggleCartDrawer(false); navigateTo('all-products', 'All')" class="px-6 py-2.5 rounded-full bg-amberDeep text-white text-xs font-bold hover:bg-goldDark transition">
+                                Browse Resin Art
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                if (upsellStrip) upsellStrip.classList.remove('hidden');
+                if (footerSec) footerSec.classList.remove('hidden');
+
+                const totalPages = Math.ceil(cart.length / CART_PAGE_SIZE);
+                if (cartPage >= totalPages) cartPage = Math.max(0, totalPages - 1);
+
+                const start = cartPage * CART_PAGE_SIZE;
+                const end = Math.min(cart.length, start + CART_PAGE_SIZE);
+                const pageItems = cart.slice(start, end);
+
+                if (cart.length > CART_PAGE_SIZE) {
+                    pagerBar.classList.remove('hidden');
+                    pagerBar.classList.add('flex');
+                    document.getElementById('cartPageText').textContent = `Showing ${start + 1}–${end} of ${cart.length} products`;
+                    document.getElementById('cartPrevPageBtn').disabled = cartPage === 0;
+                    document.getElementById('cartNextPageBtn').disabled = cartPage >= totalPages - 1;
+                } else {
+                    pagerBar.classList.add('hidden');
+                    pagerBar.classList.remove('flex');
+                }
+
+                container.innerHTML = pageItems.map((item, localIdx) => {
+                    const realIdx = start + localIdx;
+                    return `
+                        <div class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-stone-200/90 shadow-2xs">
+                            <img onclick="toggleCartDrawer(false); openProductDetails(${item.productId})" src="${item.image}" alt="${item.title}" class="w-16 h-16 rounded-xl object-cover shrink-0 border border-stone-200 cursor-pointer">
+                            <div class="flex-grow min-w-0">
+                                <div class="flex items-start justify-between gap-2">
+                                    <h4 onclick="toggleCartDrawer(false); openProductDetails(${item.productId})" class="text-xs font-bold text-amberDeep truncate cursor-pointer hover:underline">${item.title}</h4>
+                                    <button onclick="removeCartItemAt(${realIdx})" class="text-stone-400 hover:text-terracotta text-xs shrink-0" title="Remove">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                </div>
+                                <p class="text-[11px] text-stone-500 mt-0.5 truncate">${item.variant}</p>
+                                <div class="flex items-center justify-between mt-2">
+                                    <span class="text-xs font-bold text-goldDark">₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+                                    <div class="flex items-center gap-2 bg-cream border border-stone-300 rounded-full px-2.5 py-0.5 text-xs">
+                                        <button onclick="updateCartItemQty(${realIdx}, -1)" class="font-bold text-stone-600 hover:text-amberDeep">−</button>
+                                        <span class="font-bold text-[11px] min-w-[14px] text-center">${item.qty}</span>
+                                        <button onclick="updateCartItemQty(${realIdx}, 1)" class="font-bold text-stone-600 hover:text-amberDeep">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            const discountAmt = (couponApplied && subtotal >= 500) ? 250 : 0;
+            const discountRow = document.getElementById('cartDiscountRow');
+            if (discountAmt > 0) {
+                discountRow.classList.remove('hidden');
+                discountRow.classList.add('flex');
+            } else {
+                discountRow.classList.add('hidden');
+                discountRow.classList.remove('flex');
+            }
+            document.getElementById('cartSubtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('cartTotal').textContent = `₹${Math.max(0, subtotal - discountAmt).toLocaleString('en-IN')}`;
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('couponInput').value.trim().toUpperCase();
+            if (code === 'RESIN250') {
+                couponApplied = true;
+                renderCart();
+                showToast('Coupon RESIN250 applied! ₹250 OFF');
+            } else {
+                showToast('Invalid code. Try RESIN250 for ₹250 OFF!');
+            }
+        }
+
+        function handleCheckout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty! Add a resin piece first.');
+                return;
+            }
+            toggleCartDrawer(false);
+            showPolicyModal(
+                'Order Request Confirmed! ✨',
+                'Thank you for shopping at AuraResin Studio! Your custom resin order has been assigned to our Jaipur artisan desk. Our design coordinator will reach out on WhatsApp (+91 98294 71620) to confirm your color palette / varmala pickup details.'
+            );
+            cart = [];
+            cartPage = 0;
+            couponApplied = false;
+            renderCart();
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cartDrawer');
+            const backdrop = document.getElementById('cartDrawerBackdrop');
+            document.body.style.overflow = open ? 'hidden' : '';
+            if (open) {
+                backdrop.classList.remove('hidden');
+                drawer.classList.remove('hidden');
+                drawer.classList.add('flex');
+            } else {
+                backdrop.classList.add('hidden');
+                drawer.classList.add('hidden');
+                drawer.classList.remove('flex');
+            }
+        }
+
+        // 9. CAROUSEL, FAQ & UI HELPERS
+        function setHeroSlide(index) {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.hero-dot');
+            currentHeroSlide = (index + slides.length) % slides.length;
+
+            slides.forEach((slide, i) => {
+                if (i === currentHeroSlide) {
+                    slide.classList.replace('opacity-0', 'opacity-100');
+                    slide.classList.replace('z-0', 'z-10');
+                } else {
+                    slide.classList.replace('opacity-100', 'opacity-0');
+                    slide.classList.replace('z-10', 'z-0');
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                if (i === currentHeroSlide) {
+                    dot.className = "hero-dot w-8 h-2.5 rounded-full bg-gold transition-all";
+                } else {
+                    dot.className = "hero-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-all";
+                }
+            });
+        }
+
+        function changeHeroSlide(step) {
+            setHeroSlide(currentHeroSlide + step);
+            resetHeroInterval();
+        }
+
+        function resetHeroInterval() {
+            if (heroInterval) clearInterval(heroInterval);
+            heroInterval = setInterval(() => {
+                setHeroSlide(currentHeroSlide + 1);
+            }, 5500);
+        }
+
+        function scrollCarousel(id, offset) {
+            const el = document.getElementById(id);
+            if (el) el.scrollBy({ left: offset, behavior: 'smooth' });
+        }
+
+        function toggleFaq(index) {
+            const answers = document.querySelectorAll('.faq-answer');
+            const icons = document.querySelectorAll('.faq-icon');
+            const isHidden = answers[index].classList.contains('hidden');
+
+            answers.forEach(a => a.classList.add('hidden'));
+            icons.forEach(ic => ic.classList.replace('fa-minus', 'fa-plus'));
+
+            if (isHidden) {
+                answers[index].classList.remove('hidden');
+                icons[index].classList.replace('fa-plus', 'fa-minus');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function showPolicyModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').textContent = body;
+            const modal = document.getElementById('customModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePolicyModal() {
+            const modal = document.getElementById('customModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3200);
+        }
+
+        // Initialize on Window Load
+        window.onload = function() {
+            renderHomeSections();
+            renderCategoryPills();
+            renderCatalogGrid();
+            renderCart();
+            resetHeroInterval();
+        };
+    </script>
+</body>
+</html>

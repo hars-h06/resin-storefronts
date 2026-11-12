@@ -1,0 +1,2974 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Resinora — Art That Captures Moments, Crafted in Resin</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Clean Modern Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        ivory: '#FAF7F2',
+                        alabaster: '#F3EDE3',
+                        oat: '#E8DFD1',
+                        espresso: '#231F1C',
+                        taupe: '#756C63',
+                        bronze: '#9A744C',
+                        bronzeDark: '#7C5B38',
+                        terracotta: '#A8573C',
+                        sage: '#5E7460'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Announcement Ticker */
+        @keyframes ticker {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-ticker {
+            display: flex;
+            width: max-content;
+            animation: ticker 34s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* Hide scrollbars on carousels */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Custom subtle scrollbar */
+        ::-webkit-scrollbar { width: 7px; height: 7px; }
+        ::-webkit-scrollbar-track { background: #FAF7F2; }
+        ::-webkit-scrollbar-thumb { background: #D5C7B4; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9A744C; }
+
+        /* Smooth View Transition */
+        .view-animate {
+            animation: viewFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes viewFade {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Image Zoom Lens Container */
+        .zoom-container {
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+        .zoom-container img {
+            transition: transform 0.3s ease-out;
+        }
+        .zoom-container.zoomed {
+            cursor: zoom-out;
+        }
+        .zoom-container.zoomed img {
+            transform: scale(2);
+        }
+    </style>
+</head>
+<body class="bg-ivory text-espresso font-sans antialiased selection:bg-bronze selection:text-white min-h-screen flex flex-col">
+
+    <!-- ================= SLIM ANNOUNCEMENT BAR ================= -->
+    <div class="bg-espresso text-[#F3E9DA] py-2 overflow-hidden text-xs tracking-wider border-b border-white/10 relative z-40">
+        <div class="animate-ticker space-x-12">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-sparkles text-bronze"></i> Handcrafted with Love &nbsp;|&nbsp; Free Shipping on Orders Above ₹999 &nbsp;|&nbsp; Custom Orders Available</span>
+            <span class="flex items-center gap-2">✦ Small-Batch Poured Studio Resin Art &nbsp;|&nbsp; Thoughtful Gift-Ready Packaging Across India</span>
+            <span class="flex items-center gap-2"><i class="fa-solid fa-sparkles text-bronze"></i> Handcrafted with Love &nbsp;|&nbsp; Free Shipping on Orders Above ₹999 &nbsp;|&nbsp; Custom Orders Available</span>
+            <span class="flex items-center gap-2">✦ Small-Batch Poured Studio Resin Art &nbsp;|&nbsp; Thoughtful Gift-Ready Packaging Across India</span>
+        </div>
+    </div>
+
+    <!-- ================= STICKY HEADER & MEGA MENU ================= -->
+    <header class="sticky top-0 z-30 bg-ivory/95 backdrop-blur-md border-b border-oat transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Mobile Hamburger -->
+                <button onclick="toggleMobileNav(true)" class="lg:hidden p-2 -ml-2 text-espresso hover:text-bronze transition" aria-label="Open Menu">
+                    <i class="fa-solid fa-bars-staggered text-xl"></i>
+                </button>
+
+                <!-- Brand Logo -->
+                <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-2.5 group">
+                    <span class="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-espresso">
+                        Resin<span class="italic font-normal text-bronze">ora</span>
+                    </span>
+                </a>
+
+                <!-- Main Navigation (Strictly Home, All Products + Mega Menu, Product Details) -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <button onclick="navigateTo('home')" id="nav-home" class="text-sm font-medium text-espresso hover:text-bronze transition py-7 border-b-2 border-bronze">
+                        Home
+                    </button>
+
+                    <!-- All Products with Visual Mega Menu -->
+                    <div class="relative group">
+                        <button onclick="navigateTo('shop', { category: 'All' })" id="nav-shop" class="text-sm font-medium text-taupe hover:text-espresso transition py-7 border-b-2 border-transparent flex items-center gap-1.5">
+                            <span>All Products</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200 group-hover:rotate-180"></i>
+                        </button>
+
+                        <!-- Full Mega Menu Dropdown -->
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full w-[880px] bg-ivory rounded-b-3xl shadow-2xl border border-oat p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="flex items-center justify-between pb-3 mb-4 border-b border-oat">
+                                <span class="text-[11px] font-semibold uppercase tracking-[0.2em] text-taupe">Explore Studio Categories</span>
+                                <button onclick="navigateTo('shop', { category: 'All' })" class="text-xs font-semibold text-bronze hover:underline">
+                                    View All 18 Creations →
+                                </button>
+                            </div>
+                            <div id="megaMenuGrid" class="grid grid-cols-6 gap-4">
+                                <!-- Populated via JS with category thumbnail + title -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openProductDetails(currentProductId || 1)" id="nav-product" class="text-sm font-medium text-taupe hover:text-espresso transition py-7 border-b-2 border-transparent">
+                        Product Details
+                    </button>
+                </nav>
+
+                <!-- Right Icons: Search, Wishlist, Account, Bag -->
+                <div class="flex items-center space-x-1 sm:space-x-2">
+                    <!-- Search Toggle -->
+                    <button onclick="toggleSearchBar()" class="w-10 h-10 rounded-full hover:bg-alabaster flex items-center justify-center text-espresso transition" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass text-base"></i>
+                    </button>
+
+                    <!-- Wishlist Filter Shortcut -->
+                    <button onclick="openWishlistModal()" class="w-10 h-10 rounded-full hover:bg-alabaster flex items-center justify-center text-espresso transition relative" aria-label="Wishlist">
+                        <i class="fa-regular fa-heart text-base"></i>
+                        <span id="wishlistCountBadge" class="hidden absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-terracotta text-white text-[10px] font-bold items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Account Modal -->
+                    <button onclick="openAccountModal()" class="w-10 h-10 rounded-full hover:bg-alabaster flex items-center justify-center text-espresso transition" aria-label="Account">
+                        <i class="fa-regular fa-user text-base"></i>
+                    </button>
+
+                    <!-- Shopping Bag Drawer Trigger -->
+                    <button onclick="toggleCartDrawer(true)" class="flex items-center gap-2 pl-3 pr-4 py-2 rounded-full bg-espresso text-ivory hover:bg-bronze transition text-xs font-medium">
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
+                        <span class="hidden sm:inline">Bag</span>
+                        <span id="cartCountBadge" class="bg-bronze text-white text-[11px] font-bold px-1.5 py-0.2 rounded-full">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expandable Search Bar -->
+        <div id="searchBarPanel" class="hidden border-t border-oat bg-alabaster/80 py-3.5 px-4">
+            <div class="max-w-3xl mx-auto flex items-center gap-3">
+                <div class="relative flex-grow">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-taupe text-sm"></i>
+                    <input id="globalSearchInput" type="text" oninput="handleSearchInput(this.value)" onkeydown="if(event.key==='Enter') executeSearch()"
+                           placeholder="Search ocean wave trays, marble coasters, pressed flower bookmarks, clocks..."
+                           class="w-full pl-11 pr-4 py-2.5 rounded-full bg-white border border-oat text-sm text-espresso focus:outline-none focus:border-bronze">
+                </div>
+                <button onclick="executeSearch()" class="px-5 py-2.5 rounded-full bg-espresso text-white text-xs font-semibold hover:bg-bronze transition">
+                    Search
+                </button>
+                <button onclick="toggleSearchBar()" class="p-2 text-taupe hover:text-espresso" aria-label="Close Search">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- ========================== PAGE 1: HOMEPAGE ============================= -->
+    <!-- ========================================================================= -->
+    <main id="page-home" class="flex-grow view-animate">
+
+        <!-- SECTION 1: HERO BANNER (Editorial Asymmetric Layout) -->
+        <section class="relative overflow-hidden py-10 sm:py-16 lg:py-20 border-b border-oat bg-gradient-to-b from-alabaster/60 to-ivory">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                    
+                    <!-- Editorial Copy (Left 6 Cols) -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-alabaster border border-oat text-bronzeDark text-xs font-semibold uppercase tracking-[0.18em]">
+                            <span>Small-Batch Studio Resin Art</span>
+                        </div>
+                        <h1 class="font-serif text-4xl sm:text-6xl lg:text-[64px] font-semibold text-espresso leading-[1.06] tracking-tight">
+                            Art That Captures Moments, <span class="italic font-normal text-bronze">Crafted in Resin.</span>
+                        </h1>
+                        <p class="text-taupe text-base sm:text-lg leading-relaxed max-w-xl">
+                            Discover handcrafted resin creations designed to add a little magic to your everyday spaces — from ocean-laced serving trays and geode coasters to botanical keepsakes.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <button onclick="navigateTo('shop', { category: 'All' })" class="px-8 py-4 rounded-full bg-espresso text-ivory hover:bg-bronze transition text-sm font-medium tracking-wide shadow-sm">
+                                Shop Collection
+                            </button>
+                            <button onclick="navigateTo('shop', { filterTag: 'bestseller' })" class="px-8 py-4 rounded-full bg-transparent border border-espresso text-espresso hover:bg-espresso hover:text-ivory transition text-sm font-medium tracking-wide">
+                                Explore Best Sellers
+                            </button>
+                        </div>
+                        <!-- Subtle Studio Metrics -->
+                        <div class="pt-6 grid grid-cols-3 gap-4 border-t border-oat max-w-md">
+                            <div>
+                                <span class="font-serif text-2xl sm:text-3xl font-semibold text-espresso">100%</span>
+                                <p class="text-xs text-taupe">Hand-Poured</p>
+                            </div>
+                            <div>
+                                <span class="font-serif text-2xl sm:text-3xl font-semibold text-espresso">18+</span>
+                                <p class="text-xs text-taupe">Signature Designs</p>
+                            </div>
+                            <div>
+                                <span class="font-serif text-2xl sm:text-3xl font-semibold text-espresso">4.8★</span>
+                                <p class="text-xs text-taupe">Customer Rated</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Editorial Collage (Right 6 Cols) -->
+                    <div class="lg:col-span-6 grid grid-cols-12 gap-4 items-center">
+                        <!-- Tall Arch Feature Image -->
+                        <div onclick="openProductDetails(1)" class="col-span-7 cursor-pointer group relative overflow-hidden rounded-t-[180px] rounded-b-2xl border border-oat shadow-md aspect-[3/4] bg-alabaster">
+                            <img id="heroImg1" src="" alt="Ocean Wave Resin Serving Tray" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <span class="text-[10px] uppercase tracking-widest text-oat block">Signature Tray</span>
+                                <p class="font-serif text-xl font-medium">Ocean Wave Serving Tray</p>
+                            </div>
+                        </div>
+                        <!-- Stacked Secondary Images -->
+                        <div class="col-span-5 space-y-4">
+                            <div onclick="openProductDetails(5)" class="cursor-pointer group relative overflow-hidden rounded-2xl border border-oat shadow-sm aspect-square bg-alabaster">
+                                <img id="heroImg2" src="" alt="Gold and White Marble Coasters" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                                <span class="absolute bottom-3 left-3 text-white font-serif text-base">Marble Coasters</span>
+                            </div>
+                            <div onclick="openProductDetails(9)" class="cursor-pointer group relative overflow-hidden rounded-2xl border border-oat shadow-sm aspect-[4/5] bg-alabaster">
+                                <img id="heroImg3" src="" alt="Botanical Pressed Flower Pendant" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                                <span class="absolute bottom-3 left-3 text-white font-serif text-base">Botanical Jewellery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: TRUST & BENEFITS BAR -->
+        <section class="bg-white border-b border-oat py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-full bg-alabaster text-bronze flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs sm:text-sm font-semibold text-espresso">Handmade with Care</h3>
+                            <p class="text-[11px] text-taupe">Poured in small batches</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-full bg-alabaster text-bronze flex items-center justify-center shrink-0">
+                            <i class="fa-regular fa-gem"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs sm:text-sm font-semibold text-espresso">Premium Quality Materials</h3>
+                            <p class="text-[11px] text-taupe">High-gloss artist grade resin</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-full bg-alabaster text-bronze flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs sm:text-sm font-semibold text-espresso">Customization Available</h3>
+                            <p class="text-[11px] text-taupe">Colours, names & keepsakes</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-full bg-alabaster text-bronze flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs sm:text-sm font-semibold text-espresso">Secure Payments</h3>
+                            <p class="text-[11px] text-taupe">UPI, Cards, Netbanking & COD</p>
+                        </div>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1 flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-full bg-alabaster text-bronze flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs sm:text-sm font-semibold text-espresso">Carefully Packed</h3>
+                            <p class="text-[11px] text-taupe">Cushioned gift-ready boxes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: NEW ARRIVALS (Horizontal Carousel) -->
+        <section class="py-14 sm:py-18 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-[0.2em] text-bronze block mb-1">Fresh From The Studio</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso">New Arrivals</h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="scrollCarousel('newArrivalsTrack', -340)" class="w-10 h-10 rounded-full border border-oat bg-white hover:bg-espresso hover:text-white transition flex items-center justify-center" aria-label="Previous">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button onclick="scrollCarousel('newArrivalsTrack', 340)" class="w-10 h-10 rounded-full border border-oat bg-white hover:bg-espresso hover:text-white transition flex items-center justify-center" aria-label="Next">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                    <button onclick="navigateTo('shop', { filterTag: 'new' })" class="ml-2 text-xs font-semibold text-bronze hover:text-espresso transition px-3 py-2">
+                        View All →
+                    </button>
+                </div>
+            </div>
+
+            <div id="newArrivalsTrack" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-2">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+
+        <!-- SECTION 4: SHOP BY CATEGORY (8-Category Editorial Grid) -->
+        <section class="py-14 bg-alabaster/70 border-y border-oat">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-xs font-semibold uppercase tracking-[0.2em] text-bronze">Curated Craftsmanship</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso mt-1">Shop by Category</h2>
+                    <p class="text-sm text-taupe mt-1">Explore our range of functional table decor, wearable botanical jewellery, and personalized keepsakes.</p>
+                </div>
+
+                <div id="homeCategoryGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+                    <!-- Populated via JS for the 8 core categories -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TRENDING / BEST SELLERS CAROUSEL -->
+        <section class="py-14 sm:py-18 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta block mb-1">Most Loved Creations</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso">Trending Best Sellers</h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="scrollCarousel('bestSellersTrack', -340)" class="w-10 h-10 rounded-full border border-oat bg-white hover:bg-espresso hover:text-white transition flex items-center justify-center" aria-label="Previous">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button onclick="scrollCarousel('bestSellersTrack', 340)" class="w-10 h-10 rounded-full border border-oat bg-white hover:bg-espresso hover:text-white transition flex items-center justify-center" aria-label="Next">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                    <button onclick="navigateTo('shop', { filterTag: 'bestseller' })" class="ml-2 text-xs font-semibold text-bronze hover:text-espresso transition px-3 py-2">
+                        Shop Best Sellers →
+                    </button>
+                </div>
+            </div>
+
+            <div id="bestSellersTrack" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-2">
+                <!-- Populated via JS with #1 - #6 ranking -->
+            </div>
+        </section>
+
+        <!-- SECTION 6: PROMOTIONAL BANNER ("Made Just for You.") -->
+        <section class="py-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl bg-espresso text-ivory overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center shadow-lg">
+                <div class="lg:col-span-7 p-8 sm:p-12 lg:p-16 space-y-5">
+                    <span class="inline-block text-xs uppercase tracking-[0.22em] text-bronze font-semibold">Bespoke Studio Keepsakes</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-semibold leading-tight text-white">
+                        Made Just for You.
+                    </h2>
+                    <p class="text-oat/85 text-sm sm:text-base max-w-lg leading-relaxed">
+                        Turn your favourite memories into beautiful handcrafted keepsakes. From custom calligraphed resin nameplates and monogram keychains to preserved wedding flower frames.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="navigateTo('shop', { category: 'Personalized Gifts' })" class="px-7 py-3.5 rounded-full bg-ivory text-espresso hover:bg-bronze hover:text-white font-medium text-xs sm:text-sm tracking-wide transition">
+                            Explore Personalized Gifts
+                        </button>
+                        <button onclick="navigateTo('shop', { category: 'Custom Resin Art' })" class="px-6 py-3.5 rounded-full border border-oat/40 text-ivory hover:border-ivory text-xs sm:text-sm font-medium transition">
+                            View Custom Resin Art
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 h-72 sm:h-80 lg:h-full relative bg-alabaster">
+                    <img id="promoBannerImg" src="" alt="Personalized Resin Gifts" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: FEATURED EDITORIAL COLLECTION -->
+        <section class="py-14 sm:py-18 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-bronze">Editorial Spotlight</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso mt-1">The Coastal & Botanical Series</h2>
+                <p class="text-sm text-taupe mt-1">Organic fluid ocean cells paired with delicate hand-dried meadow florals.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                <!-- Large Editorial Feature Card (5 Cols) -->
+                <div onclick="openProductDetails(15)" class="lg:col-span-5 group cursor-pointer relative rounded-3xl overflow-hidden border border-oat min-h-[420px] flex flex-col justify-end p-7 sm:p-9 bg-espresso">
+                    <img id="editorialFeatureImg" src="" alt="Featured Ocean Wall Art" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                    <div class="relative z-10 text-white space-y-2">
+                        <span class="text-[11px] uppercase tracking-[0.2em] text-oat font-semibold">Collector's Edition</span>
+                        <h3 class="font-serif text-3xl sm:text-4xl font-semibold">Pacific Tide Resin Wall Art</h3>
+                        <p class="text-xs sm:text-sm text-oat/90">Multi-layered epoxy waves poured over textured birchwood panel.</p>
+                        <span class="inline-flex items-center gap-2 text-xs font-semibold text-white pt-2 group-hover:text-bronze transition">
+                            <span>Discover Piece · ₹3,499</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 4 Accompanying Product Cards (7 Cols) -->
+                <div id="editorialProductGrid" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: WHY CHOOSE US? -->
+        <section class="py-14 bg-white border-y border-oat">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-xs font-semibold uppercase tracking-[0.2em] text-bronze">The Resinora Difference</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso mt-1">Why Choose Us?</h2>
+                    <p class="text-sm text-taupe mt-1">Thoughtfully crafted in our studio with uncompromised materials and finish.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="p-6 rounded-2xl bg-ivory border border-oat/80 space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-alabaster text-bronze flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-hands"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-espresso">Handmade Creations</h3>
+                        <p class="text-xs sm:text-sm text-taupe leading-relaxed">Every tray, coaster, and keepsake is mixed, poured, cured, and polished by hand in small studio batches.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-ivory border border-oat/80 space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-alabaster text-bronze flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-fingerprint"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-espresso">Unique Designs</h3>
+                        <p class="text-xs sm:text-sm text-taupe leading-relaxed">Because fluid resin pigments move organically while curing, no two pieces ever share the exact same swirl.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-ivory border border-oat/80 space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-alabaster text-bronze flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-flask"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-espresso">Premium Resin Materials</h3>
+                        <p class="text-xs sm:text-sm text-taupe leading-relaxed">Crafted using high-clarity epoxy resin, natural dried botanicals, mineral mica pigments, and metallic foils.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-ivory border border-oat/80 space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-alabaster text-bronze flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-espresso">Customization Options</h3>
+                        <p class="text-xs sm:text-sm text-taupe leading-relaxed">Personalize select trays, keychains, bookmarks, and nameplates with custom names, initials, or colour palettes.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-ivory border border-oat/80 space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-alabaster text-bronze flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-espresso">Thoughtful Packaging</h3>
+                        <p class="text-xs sm:text-sm text-taupe leading-relaxed">Each order is wrapped in protective foam and nestled in aesthetic craft boxes ready for gifting.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-ivory border border-oat/80 space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-alabaster text-bronze flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-espresso">Attention to Detail</h3>
+                        <p class="text-xs sm:text-sm text-taupe leading-relaxed">Edges are carefully sanded smooth, gilded by hand, and inspected before dispatch.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: CUSTOMER TESTIMONIALS -->
+        <section class="py-14 sm:py-18 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-bronze">Verified Collectors</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso mt-1">Customer Testimonials</h2>
+                <p class="text-sm text-taupe mt-1">Honest words from homes across India.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-oat flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="text-bronze text-xs">★★★★★</div>
+                        <p class="text-sm text-espresso leading-relaxed">“The Ocean Wave Serving Tray looks even better in natural light. The brass handles feel solid and the packaging was very secure.”</p>
+                    </div>
+                    <div class="pt-3 border-t border-oat/60 flex items-center justify-between text-xs">
+                        <span class="font-semibold text-espresso">Ananya Sharma</span>
+                        <span class="text-taupe">Bengaluru</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-oat flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="text-bronze text-xs">★★★★★</div>
+                        <p class="text-sm text-espresso leading-relaxed">“Ordered the Gold & White Marble Coasters for our coffee table. Subtle, classy, and the cork backing keeps the glass table scratch-free.”</p>
+                    </div>
+                    <div class="pt-3 border-t border-oat/60 flex items-center justify-between text-xs">
+                        <span class="font-semibold text-espresso">Rohan Mehta</span>
+                        <span class="text-taupe">Mumbai</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-oat flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="text-bronze text-xs">★★★★☆</div>
+                        <p class="text-sm text-espresso leading-relaxed">“Got a custom nameplate and two floral bookmarks. Took about 6 days to ship since it was made to order, and the finish is lovely.”</p>
+                    </div>
+                    <div class="pt-3 border-t border-oat/60 flex items-center justify-between text-xs">
+                        <span class="font-semibold text-espresso">Meera Kulkarni</span>
+                        <span class="text-taupe">Pune</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-oat flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="text-bronze text-xs">★★★★★</div>
+                        <p class="text-sm text-espresso leading-relaxed">“The pressed flower pendant and initial keychain made such a thoughtful birthday gift for my sister. Delicate and neatly packed.”</p>
+                    </div>
+                    <div class="pt-3 border-t border-oat/60 flex items-center justify-between text-xs">
+                        <span class="font-semibold text-espresso">Priya Nair</span>
+                        <span class="text-taupe">Kochi</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: FREQUENTLY ASKED QUESTIONS (All 10 Required Questions) -->
+        <section id="faq-section" class="py-14 bg-white border-t border-oat">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-semibold uppercase tracking-[0.2em] text-bronze">Helpful Information</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso mt-1">Frequently Asked Questions</h2>
+                    <p class="text-sm text-taupe mt-1">Clear, practical answers to common questions about our handmade resin pieces.</p>
+                </div>
+
+                <div id="faqContainer" class="divide-y divide-oat border-y border-oat">
+                    <!-- Populated via JS with the exact 10 genuine resin questions -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- ======================= PAGE 2: ALL PRODUCTS PAGE ======================= -->
+    <!-- ========================================================================= -->
+    <main id="page-shop" class="hidden flex-grow view-animate py-8 sm:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Breadcrumb & Page Heading -->
+            <div class="mb-6">
+                <nav class="text-xs text-taupe mb-2 flex items-center gap-2">
+                    <button onclick="navigateTo('home')" class="hover:text-espresso">Home</button>
+                    <span>/</span>
+                    <span class="text-espresso font-medium" id="shopBreadcrumb">All Products</span>
+                </nav>
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h1 id="shopHeading" class="font-serif text-4xl sm:text-5xl font-semibold text-espresso">Explore Our Collection</h1>
+                        <p class="text-sm text-taupe mt-1">Hand-poured resin trays, coasters, wall clocks, botanical jewellery, and personalized keepsakes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horizontal Category Navigation Bar -->
+            <div id="shopCategoryChips" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-6 border-b border-oat">
+                <!-- Populated via JS -->
+            </div>
+
+            <!-- Shop Layout: Left Sidebar Filter (Desktop) + Right Product Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+                <!-- Desktop Sidebar Filters (3 Cols) -->
+                <aside class="hidden lg:block lg:col-span-3 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl border border-oat space-y-6 sticky top-28">
+                        <div class="flex items-center justify-between border-b border-oat pb-3">
+                            <h3 class="font-serif text-xl font-semibold text-espresso">Filters</h3>
+                            <button onclick="resetShopFilters()" class="text-xs text-bronze hover:underline font-medium">Reset All</button>
+                        </div>
+
+                        <!-- Category Radio List -->
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-espresso mb-3">Categories</h4>
+                            <div id="desktopCategoryFilterList" class="space-y-2 text-xs text-taupe max-h-60 overflow-y-auto pr-1">
+                                <!-- Populated via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Price Range Slider -->
+                        <div class="pt-4 border-t border-oat">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-espresso">Max Price</h4>
+                                <span id="desktopPriceLabel" class="text-xs font-semibold text-bronze">Up to ₹4,000</span>
+                            </div>
+                            <input id="desktopPriceRange" type="range" min="200" max="4000" step="100" value="4000"
+                                   oninput="updatePriceFilter(this.value)"
+                                   class="w-full accent-bronze cursor-pointer">
+                            <div class="flex justify-between text-[11px] text-taupe mt-1">
+                                <span>₹199</span>
+                                <span>₹4,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Product Type -->
+                        <div class="pt-4 border-t border-oat">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-espresso mb-2.5">Product Type</h4>
+                            <select id="desktopProductTypeSelect" onchange="updateProductTypeFilter(this.value)"
+                                    class="w-full px-3 py-2 rounded-xl bg-ivory border border-oat text-xs text-espresso focus:outline-none focus:border-bronze">
+                                <option value="All">All Product Types</option>
+                                <option value="Tableware & Serveware">Tableware & Serveware</option>
+                                <option value="Wall & Home Decor">Wall & Home Decor</option>
+                                <option value="Wearables & Accessories">Wearables & Accessories</option>
+                                <option value="Custom & Gifting">Custom & Gifting</option>
+                            </select>
+                        </div>
+
+                        <!-- Availability & Highlights -->
+                        <div class="pt-4 border-t border-oat space-y-2.5">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-espresso mb-2">Collection & Stock</h4>
+                            <label class="flex items-center gap-2.5 text-xs text-espresso cursor-pointer">
+                                <input id="desktopInStockCheck" type="checkbox" onchange="toggleStockFilter(this.checked)" class="accent-bronze rounded">
+                                <span>In Stock Only</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 text-xs text-espresso cursor-pointer">
+                                <input id="desktopBestSellerCheck" type="checkbox" onchange="toggleTagFilter('bestseller', this.checked)" class="accent-bronze rounded">
+                                <span>Best Sellers Only</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 text-xs text-espresso cursor-pointer">
+                                <input id="desktopNewArrivalCheck" type="checkbox" onchange="toggleTagFilter('new', this.checked)" class="accent-bronze rounded">
+                                <span>New Arrivals Only</span>
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Column: Toolbar + Product Grid (9 Cols) -->
+                <div class="lg:col-span-9">
+                    <!-- Top Toolbar -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-6 bg-white px-4 py-3 rounded-2xl border border-oat">
+                        <div class="flex items-center gap-3">
+                            <button onclick="toggleMobileFilterDrawer(true)" class="lg:hidden px-3.5 py-2 rounded-xl bg-alabaster text-espresso text-xs font-semibold flex items-center gap-2">
+                                <i class="fa-solid fa-sliders"></i> Filters
+                            </button>
+                            <span id="shopResultCount" class="text-xs text-taupe font-medium">Showing 18 products</span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <label for="shopSortSelect" class="text-xs text-taupe hidden sm:inline">Sort by:</label>
+                            <select id="shopSortSelect" onchange="updateSortOrder(this.value)"
+                                    class="bg-ivory border border-oat rounded-xl px-3.5 py-2 text-xs font-medium text-espresso focus:outline-none focus:border-bronze">
+                                <option value="featured">Featured</option>
+                                <option value="bestselling">Best Selling</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Active Filter Pills -->
+                    <div id="activeFilterBadges" class="flex flex-wrap gap-2 mb-4 empty:hidden"></div>
+
+                    <!-- Product Grid -->
+                    <div id="shopProductGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- Load More Pagination -->
+                    <div id="loadMoreWrapper" class="text-center mt-10">
+                        <button onclick="loadMoreProducts()" class="px-8 py-3.5 rounded-full border border-espresso text-espresso hover:bg-espresso hover:text-white text-xs font-semibold tracking-wider uppercase transition">
+                            Load More Creations
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- ===================== PAGE 3: PRODUCT DETAILS PAGE ====================== -->
+    <!-- ========================================================================= -->
+    <main id="page-product" class="hidden flex-grow view-animate py-8 sm:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Interactive Product Switcher Strip (Allows switching between all 18 products anytime) -->
+            <div class="mb-6 bg-white rounded-2xl border border-oat p-3 sm:p-4 shadow-2xs">
+                <div class="flex items-center justify-between mb-2.5 px-1">
+                    <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-bronze flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Quick Switch Product (18 Creations)
+                    </span>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="cycleProductDetails(-1)" class="px-2.5 py-1 rounded-lg border border-oat hover:bg-espresso hover:text-white text-xs font-medium transition">
+                            ← Prev
+                        </button>
+                        <button onclick="cycleProductDetails(1)" class="px-2.5 py-1 rounded-lg border border-oat hover:bg-espresso hover:text-white text-xs font-medium transition">
+                            Next →
+                        </button>
+                    </div>
+                </div>
+                <div id="pdQuickSwitcherBar" class="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1">
+                    <!-- Populated via JS with all 18 product mini-cards -->
+                </div>
+            </div>
+
+            <!-- Breadcrumb -->
+            <nav class="text-xs text-taupe mb-6 flex flex-wrap items-center gap-2">
+                <button onclick="navigateTo('home')" class="hover:text-espresso">Home</button>
+                <span>/</span>
+                <button onclick="navigateTo('shop', { category: 'All' })" class="hover:text-espresso">All Products</button>
+                <span>/</span>
+                <button id="pdBreadcrumbCategory" onclick="navigateTo('shop')" class="hover:text-espresso">Category</button>
+                <span>/</span>
+                <span id="pdBreadcrumbName" class="text-espresso font-medium">Product</span>
+            </nav>
+
+            <!-- Main Product Showcase (Left Gallery + Right Purchase Box) -->
+            <div class="bg-white rounded-3xl border border-oat p-5 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
+                <!-- LEFT SIDE: Image Gallery with Hover/Click Zoom & Multi-Angle Thumbnails (6 Cols) -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div id="pdZoomBox" onclick="toggleImageZoom(event)" onmousemove="moveImageZoom(event)" onmouseleave="resetImageZoom()"
+                         class="zoom-container relative rounded-2xl overflow-hidden bg-alabaster border border-oat aspect-square">
+                        <span id="pdBadge" class="absolute top-4 left-4 z-10 bg-espresso text-ivory text-[11px] font-semibold px-3 py-1 rounded-full">Best Seller</span>
+                        <span class="absolute bottom-3 right-3 z-10 bg-white/85 backdrop-blur-sm text-espresso text-[11px] px-2.5 py-1 rounded-full pointer-events-none flex items-center gap-1">
+                            <i class="fa-solid fa-magnifying-glass-plus text-[10px]"></i> Click to zoom
+                        </span>
+                        <img id="pdMainImage" src="" alt="Resin Product" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- 4 Angle Thumbnails -->
+                    <div id="pdThumbnailsRow" class="grid grid-cols-4 gap-3">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE: Product Details & Purchase Controls (6 Cols) -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span id="pdCategoryLabel" class="text-xs font-semibold uppercase tracking-[0.18em] text-bronze">Category</span>
+                            <span id="pdStockBadge" class="text-xs font-semibold text-sage flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-sage inline-block"></span> In Stock
+                            </span>
+                        </div>
+
+                        <h1 id="pdTitle" class="font-serif text-3xl sm:text-4xl font-semibold text-espresso leading-tight">
+                            Product Title
+                        </h1>
+
+                        <!-- Rating & Reviews -->
+                        <div class="flex items-center gap-2 text-xs">
+                            <span class="text-bronze tracking-wider">★★★★★</span>
+                            <span id="pdRatingText" class="font-semibold text-espresso">4.9</span>
+                            <span id="pdReviewCountText" class="text-taupe">(84 Customer Reviews)</span>
+                        </div>
+
+                        <!-- Price Row -->
+                        <div class="flex items-baseline gap-3 pt-1">
+                            <span id="pdCurrentPrice" class="text-2xl sm:text-3xl font-bold text-espresso">₹2,499</span>
+                            <span id="pdOriginalPrice" class="text-base text-taupe line-through">₹2,999</span>
+                            <span id="pdDiscountTag" class="text-xs font-semibold text-terracotta bg-terracotta/10 px-2.5 py-0.5 rounded-full">17% OFF</span>
+                        </div>
+                        <p class="text-[11px] text-taupe">Inclusive of all taxes · Free shipping on orders above ₹999</p>
+
+                        <!-- Short Description -->
+                        <p id="pdShortDesc" class="text-sm text-taupe leading-relaxed pt-2 border-t border-oat">
+                            Short description...
+                        </p>
+
+                        <!-- Colour / Design Variations -->
+                        <div class="pt-3 border-t border-oat space-y-3">
+                            <div>
+                                <div class="flex items-center justify-between text-xs mb-2">
+                                    <span class="font-semibold text-espresso uppercase tracking-wider">Palette / Finish Variation:</span>
+                                    <span id="pdSelectedVariantLabel" class="text-taupe">Studio Original</span>
+                                </div>
+                                <div id="pdVariantButtons" class="flex flex-wrap gap-2.5">
+                                    <!-- Populated via JS -->
+                                </div>
+                            </div>
+
+                            <!-- Personalization Input (Shown where applicable or optional gift note) -->
+                            <div id="pdPersonalizationBox" class="pt-2">
+                                <label for="pdCustomInput" class="block text-xs font-semibold uppercase tracking-wider text-espresso mb-1.5">
+                                    Personalization / Custom Engraving Note <span class="text-taupe font-normal">(Optional)</span>
+                                </label>
+                                <input id="pdCustomInput" type="text" maxlength="45"
+                                       placeholder="Enter name, initials, date, or colour preference..."
+                                       class="w-full px-4 py-2.5 rounded-xl bg-ivory border border-oat text-xs sm:text-sm text-espresso focus:outline-none focus:border-bronze">
+                            </div>
+                        </div>
+
+                        <!-- Quantity & Action Buttons -->
+                        <div class="pt-4 space-y-3">
+                            <div class="flex flex-wrap sm:flex-nowrap items-stretch gap-3">
+                                <!-- Quantity Selector -->
+                                <div class="flex items-center justify-between border border-oat rounded-full px-4 py-2.5 bg-ivory w-32 shrink-0">
+                                    <button onclick="changePdQty(-1)" class="w-7 h-7 rounded-full hover:bg-alabaster text-espresso font-bold" aria-label="Decrease">−</button>
+                                    <span id="pdQtyDisplay" class="text-sm font-semibold text-espresso">1</span>
+                                    <button onclick="changePdQty(1)" class="w-7 h-7 rounded-full hover:bg-alabaster text-espresso font-bold" aria-label="Increase">+</button>
+                                </div>
+
+                                <!-- Add to Cart -->
+                                <button id="pdAddToCartBtn" onclick="handlePdAddToCart(false)" class="flex-1 py-3.5 px-6 rounded-full bg-espresso text-ivory hover:bg-bronze transition text-xs sm:text-sm font-semibold tracking-wide flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-bag-shopping"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+
+                                <!-- Wishlist Button -->
+                                <button id="pdWishlistBtn" onclick="toggleWishlistFromPd()" class="w-12 rounded-full border border-oat hover:border-espresso flex items-center justify-center text-espresso transition shrink-0" aria-label="Add to Wishlist">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Buy Now Button -->
+                            <button id="pdBuyNowBtn" onclick="handlePdAddToCart(true)" class="w-full py-3.5 px-6 rounded-full border border-espresso text-espresso hover:bg-espresso hover:text-ivory transition text-xs sm:text-sm font-semibold tracking-wide">
+                                Buy It Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Delivery & Studio Dispatch Box -->
+                    <div class="bg-ivory rounded-2xl p-4 border border-oat space-y-2.5 text-xs">
+                        <div class="flex items-center gap-2.5 text-espresso">
+                            <i class="fa-solid fa-truck-fast text-bronze"></i>
+                            <span><b>Estimated Delivery:</b> Dispatched in 1–3 working days (5–7 days for custom orders).</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 text-espresso">
+                            <i class="fa-solid fa-box text-bronze"></i>
+                            <span><b>Careful Packaging:</b> Multi-layer foam-cushioned box.</span>
+                        </div>
+                        <div class="pt-2 border-t border-oat flex items-center gap-2">
+                            <input id="pincodeInput" type="text" maxlength="6" placeholder="Enter 6-digit Pincode"
+                                   class="px-3 py-1.5 rounded-lg bg-white border border-oat text-xs focus:outline-none focus:border-bronze w-44">
+                            <button onclick="checkPincode()" class="px-3.5 py-1.5 rounded-lg bg-alabaster hover:bg-espresso hover:text-white text-espresso font-semibold text-xs transition">
+                                Check
+                            </button>
+                            <span id="pincodeResult" class="text-[11px] text-sage font-medium"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Below Main Product Information: Tabs / Structured Details -->
+            <div class="mt-10 bg-white rounded-3xl border border-oat overflow-hidden">
+                <!-- Tab Headers -->
+                <div class="flex overflow-x-auto no-scrollbar border-b border-oat bg-alabaster/50">
+                    <button onclick="switchPdTab('desc')" id="pdTab-desc" class="px-6 py-4 text-xs sm:text-sm font-semibold text-espresso border-b-2 border-bronze whitespace-nowrap">
+                        Product Description
+                    </button>
+                    <button onclick="switchPdTab('specs')" id="pdTab-specs" class="px-6 py-4 text-xs sm:text-sm font-medium text-taupe hover:text-espresso border-b-2 border-transparent whitespace-nowrap">
+                        Specifications
+                    </button>
+                    <button onclick="switchPdTab('care')" id="pdTab-care" class="px-6 py-4 text-xs sm:text-sm font-medium text-taupe hover:text-espresso border-b-2 border-transparent whitespace-nowrap">
+                        Care Instructions
+                    </button>
+                    <button onclick="switchPdTab('shipping')" id="pdTab-shipping" class="px-6 py-4 text-xs sm:text-sm font-medium text-taupe hover:text-espresso border-b-2 border-transparent whitespace-nowrap">
+                        Shipping & Returns
+                    </button>
+                    <button onclick="switchPdTab('reviews')" id="pdTab-reviews" class="px-6 py-4 text-xs sm:text-sm font-medium text-taupe hover:text-espresso border-b-2 border-transparent whitespace-nowrap">
+                        Customer Reviews
+                    </button>
+                </div>
+
+                <!-- Tab Content Panels -->
+                <div class="p-6 sm:p-8 text-sm text-taupe leading-relaxed">
+                    <div id="pdPanel-desc" class="space-y-3 max-w-3xl">
+                        <p id="pdFullDescription" class="text-espresso"></p>
+                        <p>Each piece at Resinora is individually hand-poured in small batches. Subtle variations in wave lacing, pigment movement, and botanical placement are natural hallmarks of genuine handmade resin art.</p>
+                    </div>
+
+                    <div id="pdPanel-specs" class="hidden max-w-2xl">
+                        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                            <tbody id="pdSpecsTable" class="divide-y divide-oat">
+                                <!-- Populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="pdPanel-care" class="hidden space-y-2 max-w-3xl">
+                        <ul class="list-disc pl-5 space-y-1.5 text-espresso">
+                            <li>Wipe gently with a soft, damp microfiber cloth and mild soap if needed.</li>
+                            <li>Do not use abrasive scrubbers, harsh solvents, or alcohol-based sprays on the glossy resin surface.</li>
+                            <li>Keep away from prolonged direct outdoor sunlight to preserve clarity.</li>
+                            <li>Resin surfaces handle warm cups comfortably, but avoid placing boiling cookware directly from the stove. Not dishwasher or microwave safe.</li>
+                        </ul>
+                    </div>
+
+                    <div id="pdPanel-shipping" class="hidden space-y-2 max-w-3xl text-espresso">
+                        <p><b>Dispatch & Delivery:</b> Ready-to-ship creations leave our studio in 1–3 working days. Personalized or made-to-order pieces require 5–7 working days for pouring and full curing before dispatch. Delivery takes 4–7 working days across India.</p>
+                        <p><b>Returns & Exchanges:</b> Standard non-customized items are eligible for replacement within 7 days if damaged in transit (please keep a short unboxing video). Customized pieces made with specific names or colours cannot be returned unless they arrive damaged.</p>
+                    </div>
+
+                    <div id="pdPanel-reviews" class="hidden space-y-4 max-w-3xl">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-4 rounded-2xl bg-ivory border border-oat">
+                                <div class="text-bronze text-xs mb-1">★★★★★</div>
+                                <p class="text-xs text-espresso">“Beautiful glossy finish and very neatly packed. Looks lovely on our console table.”</p>
+                                <span class="block text-[11px] text-taupe mt-2">— Aditi V., Verified Buyer</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-ivory border border-oat">
+                                <div class="text-bronze text-xs mb-1">★★★★★</div>
+                                <p class="text-xs text-espresso">“Gifted this to a friend for her housewarming. She loved the natural handcrafted look.”</p>
+                                <span class="block text-[11px] text-taupe mt-2">— Karan S., Verified Buyer</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-ivory border border-oat">
+                                <div class="text-bronze text-xs mb-1">★★★★☆</div>
+                                <p class="text-xs text-espresso">“Slightly different swirl pattern from the display photo as expected with handmade items, very pretty!”</p>
+                                <span class="block text-[11px] text-taupe mt-2">— Neha R., Verified Buyer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="mt-14">
+                <div class="flex items-end justify-between mb-6">
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-bronze">Complete The Look</span>
+                        <h2 class="font-serif text-3xl font-semibold text-espresso">Related Creations</h2>
+                    </div>
+                    <button onclick="navigateTo('shop', { category: 'All' })" class="text-xs font-semibold text-bronze hover:underline">View All →</button>
+                </div>
+                <div id="relatedProductsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- ======================= SECTION 11: COMPACT FOOTER ====================== -->
+    <!-- ========================================================================= -->
+    <footer class="bg-espresso text-oat/80 border-t border-oat/20 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-white/10 text-xs sm:text-sm">
+
+                <!-- Col 1: Brand Info (4 Cols) -->
+                <div class="lg:col-span-4 space-y-3">
+                    <a href="javascript:void(0)" onclick="navigateTo('home')" class="font-serif text-3xl font-semibold text-white tracking-tight inline-block">
+                        Resin<span class="italic font-normal text-bronze">ora</span>
+                    </a>
+                    <p class="text-xs text-oat/70 leading-relaxed max-w-sm">
+                        Handcrafted resin trays, coasters, clocks, botanical jewellery, and personalized keepsakes — poured in small studio batches to bring quiet elegance to everyday spaces.
+                    </p>
+                    <div class="flex items-center gap-3 pt-1">
+                        <button onclick="showToast('Demo Social Link: @resinora.studio')" class="w-8 h-8 rounded-full border border-white/15 hover:border-bronze hover:text-bronze flex items-center justify-center transition" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram text-xs"></i>
+                        </button>
+                        <button onclick="showToast('Demo Social Link: Pinterest Board')" class="w-8 h-8 rounded-full border border-white/15 hover:border-bronze hover:text-bronze flex items-center justify-center transition" aria-label="Pinterest">
+                            <i class="fa-brands fa-pinterest-p text-xs"></i>
+                        </button>
+                        <button onclick="showToast('Demo Social Link: Facebook Page')" class="w-8 h-8 rounded-full border border-white/15 hover:border-bronze hover:text-bronze flex items-center justify-center transition" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links (2 Cols) -->
+                <div class="lg:col-span-2 space-y-2.5">
+                    <h4 class="text-xs font-semibold uppercase tracking-[0.18em] text-white">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-oat/75">
+                        <li><button onclick="navigateTo('home')" class="hover:text-white transition">Home</button></li>
+                        <li><button onclick="navigateTo('shop', { category: 'All' })" class="hover:text-white transition">All Products</button></li>
+                        <li><button onclick="navigateTo('shop', { filterTag: 'new' })" class="hover:text-white transition">New Arrivals</button></li>
+                        <li><button onclick="navigateTo('shop', { filterTag: 'bestseller' })" class="hover:text-white transition">Best Sellers</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Customer Support (3 Cols) -->
+                <div class="lg:col-span-3 space-y-2.5">
+                    <h4 class="text-xs font-semibold uppercase tracking-[0.18em] text-white">Customer Support</h4>
+                    <ul class="space-y-2 text-xs text-oat/75">
+                        <li><button onclick="openInfoModal('Shipping Policy', 'Ready-to-ship resin pieces are dispatched within 1–3 working days. Custom and personalized orders take 5–7 working days to pour and cure. Delivery across India takes 4–7 business days. Free shipping on orders above ₹999.')" class="hover:text-white transition">Shipping Policy</button></li>
+                        <li><button onclick="openInfoModal('Return & Refund Policy', 'Standard non-personalized products can be replaced within 7 days if they arrive damaged in transit (an unboxing video is required). Customized pieces made to your specifications are non-returnable unless damaged on arrival.')" class="hover:text-white transition">Return & Refund Policy</button></li>
+                        <li><button onclick="openInfoModal('Privacy Policy', 'We respect your privacy. Contact details and customization notes shared with Resinora are used strictly to craft and deliver your order.')" class="hover:text-white transition">Privacy Policy</button></li>
+                        <li><button onclick="openInfoModal('Terms & Conditions', 'Every Resinora piece is handmade. Minor variations in pigment swirls, floral shapes, and gold flake placement are natural characteristics of handcrafted resin art.')" class="hover:text-white transition">Terms & Conditions</button></li>
+                        <li><button onclick="openInfoModal('Contact Us (Demo Details)', 'For custom orders, bulk gifting, or order support, reach our demo studio desk at +91 98114 72058 or hello@resinora.example (Mon–Sat, 10:00 AM – 6:30 PM IST).')" class="hover:text-white transition">Contact Us</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Fictional Demo Contact Details (3 Cols) -->
+                <div class="lg:col-span-3 space-y-2.5">
+                    <h4 class="text-xs font-semibold uppercase tracking-[0.18em] text-white">Contact Details <span class="text-[10px] text-bronze font-normal">(Demo)</span></h4>
+                    <ul class="space-y-2 text-xs text-oat/75">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-bronze mt-1"></i>
+                            <span>Studio 18, Craft Enclave, Baner Road, Pune, Maharashtra – 411045 (Demo Address)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-bronze"></i>
+                            <span>+91 98114 72058 (Demo Line)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-bronze"></i>
+                            <span>hello@resinora.example</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-regular fa-clock text-bronze"></i>
+                            <span>Mon – Sat · 10:00 AM – 6:30 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Payment Icons -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-oat/60">
+                <p>© 2026 Resinora Studio. All contact details shown are fictional demo placeholders.</p>
+                <div class="flex flex-wrap items-center gap-2 text-[11px] font-medium text-oat/80">
+                    <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">UPI</span>
+                    <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">Visa</span>
+                    <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">Mastercard</span>
+                    <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">RuPay</span>
+                    <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">COD</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================================= -->
+    <!-- ================ DRAWERS & MODALS (Cart, Mobile Nav, QuickView) ========= -->
+    <!-- ========================================================================= -->
+
+    <!-- Shared Backdrop -->
+    <div id="globalBackdrop" onclick="closeAllDrawers()" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden transition-opacity"></div>
+
+    <!-- 1. SHOPPING BAG DRAWER -->
+    <aside id="cartDrawer" class="fixed top-0 right-0 h-dvh w-full max-w-md bg-ivory z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col overflow-hidden">
+        <!-- Header -->
+        <div class="px-6 py-4 bg-white border-b border-oat flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-bag-shopping text-bronze text-lg"></i>
+                <h3 class="font-serif text-2xl font-semibold text-espresso">Your Shopping Bag</h3>
+                <span id="drawerCountLabel" class="text-xs bg-alabaster text-bronzeDark font-semibold px-2.5 py-0.5 rounded-full">0</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="clearFullCart()" id="clearCartBtn" class="text-[11px] text-taupe hover:text-terracotta underline mr-1 hidden">Clear All</button>
+                <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full hover:bg-alabaster flex items-center justify-center text-taupe" aria-label="Close Cart">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Free Shipping Progress -->
+        <div class="px-6 py-3 bg-alabaster/90 border-b border-oat text-xs shrink-0">
+            <div class="flex items-center justify-between mb-1.5">
+                <p id="freeShipText" class="text-espresso">Add ₹999 for complimentary shipping</p>
+                <i class="fa-solid fa-truck-fast text-bronze"></i>
+            </div>
+            <div class="w-full h-1.5 bg-oat rounded-full overflow-hidden">
+                <div id="freeShipBar" class="h-full bg-bronze transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Cart Items (Cleanly bounded scroll area) -->
+        <div id="cartItemsList" class="flex-1 min-h-0 overflow-y-auto px-5 py-4 space-y-3">
+            <!-- Populated via JS -->
+        </div>
+
+        <!-- Cart Footer (Pinned at bottom, never pushes page) -->
+        <div id="cartFooter" class="p-5 bg-white border-t border-oat space-y-3.5 shrink-0 shadow-[0_-8px_25px_rgba(0,0,0,0.04)]">
+            <!-- Promo Code Input -->
+            <div class="flex gap-2">
+                <input id="cartPromoInput" type="text" placeholder="Promo code (Try RESIN10)" class="flex-1 px-3.5 py-2 rounded-xl bg-ivory border border-oat text-xs focus:outline-none focus:border-bronze uppercase">
+                <button onclick="applyPromoCode()" class="px-4 py-2 rounded-xl bg-alabaster hover:bg-espresso hover:text-white text-espresso text-xs font-semibold transition">
+                    Apply
+                </button>
+            </div>
+
+            <div class="space-y-1 text-xs">
+                <div class="flex justify-between text-taupe">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotalAmount" class="font-semibold text-espresso">₹0</span>
+                </div>
+                <div id="cartDiscountRow" class="hidden justify-between text-sage font-medium">
+                    <span>Studio Discount (10%)</span>
+                    <span id="cartDiscountAmount">−₹0</span>
+                </div>
+                <div class="flex justify-between text-taupe">
+                    <span>Insured Studio Shipping</span>
+                    <span id="cartShippingAmount">Calculated at checkout</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-espresso pt-2 border-t border-oat">
+                    <span>Total Payable</span>
+                    <span id="cartTotalAmount">₹0</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5">
+                <button onclick="toggleCartDrawer(false); navigateTo('shop', { category: 'All' })" class="py-3 rounded-full border border-oat hover:border-espresso text-espresso transition text-xs font-semibold">
+                    Continue Shopping
+                </button>
+                <button onclick="proceedToCheckout()" class="py-3 rounded-full bg-espresso text-ivory hover:bg-bronze transition text-xs font-semibold tracking-wide">
+                    Checkout Now →
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 2. MOBILE NAVIGATION DRAWER -->
+    <aside id="mobileNavDrawer" class="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-ivory z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="px-5 py-4 bg-white border-b border-oat flex items-center justify-between">
+            <span class="font-serif text-2xl font-semibold text-espresso">Resin<span class="italic font-normal text-bronze">ora</span></span>
+            <button onclick="toggleMobileNav(false)" class="w-8 h-8 rounded-full hover:bg-alabaster flex items-center justify-center text-taupe">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow space-y-4 text-sm">
+            <div class="space-y-1 border-b border-oat pb-3">
+                <button onclick="navigateTo('home'); toggleMobileNav(false);" class="w-full text-left px-3 py-2.5 rounded-xl font-semibold text-espresso hover:bg-alabaster">Home</button>
+                <button onclick="navigateTo('shop', { category: 'All' }); toggleMobileNav(false);" class="w-full text-left px-3 py-2.5 rounded-xl font-semibold text-espresso hover:bg-alabaster">All Products (18)</button>
+                <button onclick="openProductDetails(currentProductId || 1); toggleMobileNav(false);" class="w-full text-left px-3 py-2.5 rounded-xl font-semibold text-espresso hover:bg-alabaster">Product Details</button>
+            </div>
+            <div>
+                <p class="px-3 text-[11px] font-bold uppercase tracking-widest text-taupe mb-2">Shop By Category</p>
+                <div id="mobileCategoryLinks" class="space-y-1 text-xs"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 3. MOBILE FILTER DRAWER (For All Products Page) -->
+    <aside id="mobileFilterDrawer" class="fixed top-0 left-0 h-full w-80 max-w-[88vw] bg-ivory z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="px-5 py-4 bg-white border-b border-oat flex items-center justify-between">
+            <h3 class="font-serif text-2xl font-semibold text-espresso">Filter Products</h3>
+            <button onclick="toggleMobileFilterDrawer(false)" class="w-8 h-8 rounded-full hover:bg-alabaster flex items-center justify-center text-taupe">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-5 overflow-y-auto flex-grow space-y-6">
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-espresso mb-2.5">Category</h4>
+                <div id="mobileFilterCategoryList" class="space-y-2 text-xs text-taupe"></div>
+            </div>
+            <div class="pt-4 border-t border-oat">
+                <div class="flex justify-between text-xs mb-2">
+                    <span class="font-bold uppercase tracking-wider text-espresso">Max Price</span>
+                    <span id="mobilePriceLabel" class="font-semibold text-bronze">Up to ₹4,000</span>
+                </div>
+                <input id="mobilePriceRange" type="range" min="200" max="4000" step="100" value="4000" oninput="updatePriceFilter(this.value)" class="w-full accent-bronze">
+            </div>
+            <div class="pt-4 border-t border-oat space-y-2.5 text-xs">
+                <label class="flex items-center gap-2"><input id="mobileInStockCheck" type="checkbox" onchange="toggleStockFilter(this.checked)" class="accent-bronze"> In Stock Only</label>
+                <label class="flex items-center gap-2"><input id="mobileBestSellerCheck" type="checkbox" onchange="toggleTagFilter('bestseller', this.checked)" class="accent-bronze"> Best Sellers</label>
+                <label class="flex items-center gap-2"><input id="mobileNewArrivalCheck" type="checkbox" onchange="toggleTagFilter('new', this.checked)" class="accent-bronze"> New Arrivals</label>
+            </div>
+        </div>
+        <div class="p-4 bg-white border-t border-oat flex gap-2">
+            <button onclick="resetShopFilters(); toggleMobileFilterDrawer(false);" class="flex-1 py-2.5 rounded-full border border-oat text-xs font-semibold">Reset</button>
+            <button onclick="toggleMobileFilterDrawer(false)" class="flex-1 py-2.5 rounded-full bg-espresso text-white text-xs font-semibold">Apply</button>
+        </div>
+    </aside>
+
+    <!-- 4. QUICK VIEW MODAL -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 pointer-events-none">
+        <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl border border-oat pointer-events-auto grid grid-cols-1 md:grid-cols-2 relative view-animate">
+            <button onclick="closeAllDrawers()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-espresso hover:text-white flex items-center justify-center text-espresso shadow" aria-label="Close Quick View">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="bg-alabaster aspect-square">
+                <img id="qvImage" src="" alt="Quick View Product" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col justify-between space-y-4">
+                <div class="space-y-3">
+                    <span id="qvCategory" class="text-[11px] font-semibold uppercase tracking-[0.2em] text-bronze block">Category</span>
+                    <h3 id="qvTitle" class="font-serif text-2xl sm:text-3xl font-semibold text-espresso leading-snug">Product Name</h3>
+                    <div class="flex items-baseline gap-2.5">
+                        <span id="qvPrice" class="text-xl font-bold text-espresso">₹1,499</span>
+                        <span id="qvOrigPrice" class="text-sm text-taupe line-through">₹1,899</span>
+                    </div>
+                    <p id="qvDesc" class="text-xs sm:text-sm text-taupe leading-relaxed"></p>
+                </div>
+                <div class="space-y-2.5 pt-3 border-t border-oat">
+                    <button id="qvAddBtn" class="w-full py-3 rounded-full bg-espresso text-ivory hover:bg-bronze transition text-xs font-semibold tracking-wide">
+                        Add to Shopping Bag
+                    </button>
+                    <button id="qvDetailsBtn" class="w-full py-2.5 rounded-full border border-oat hover:border-espresso text-espresso transition text-xs font-semibold">
+                        View Full Product Details →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. GENERIC INFO / POLICY / ACCOUNT / WISHLIST MODAL -->
+    <div id="infoModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 pointer-events-none">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-oat pointer-events-auto space-y-4 view-animate">
+            <div class="flex items-center justify-between border-b border-oat pb-3">
+                <h3 id="infoModalTitle" class="font-serif text-2xl font-semibold text-espresso">Information</h3>
+                <button onclick="closeAllDrawers()" class="w-8 h-8 rounded-full hover:bg-alabaster flex items-center justify-center text-taupe">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="infoModalBody" class="text-xs sm:text-sm text-taupe leading-relaxed max-h-[60vh] overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastBar" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-espresso text-ivory px-5 py-3 rounded-full shadow-xl border border-white/15 text-xs sm:text-sm font-medium flex items-center gap-2.5 opacity-0 translate-y-10 pointer-events-none transition-all duration-300">
+        <i class="fa-solid fa-check text-bronze"></i>
+        <span id="toastText">Added to bag</span>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- =================== APPLICATION DATA & LOGIC SCRIPT ===================== -->
+    <!-- ========================================================================= -->
+    <script>
+        /* --------------------------------------------------------------------------
+           1. REAL CURATED PHOTOGRAPHY FOR ALL 18 RESIN PRODUCTS
+              High-resolution Unsplash photographs of fluid ocean resin art, marble
+              agate coasters, pressed dried flower keepsakes, clocks, and trays.
+        -------------------------------------------------------------------------- */
+        const REAL_RESIN_PHOTOS = {
+            1: [
+                "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85"
+            ],
+            2: [
+                "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85"
+            ],
+            3: [
+                "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85"
+            ],
+            4: [
+                "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=85"
+            ],
+            5: [
+                "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?auto=format&fit=crop&w=900&q=85"
+            ],
+            6: [
+                "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=900&q=85"
+            ],
+            7: [
+                "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85"
+            ],
+            8: [
+                "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85"
+            ],
+            9: [
+                "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85"
+            ],
+            10: [
+                "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=85"
+            ],
+            11: [
+                "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85"
+            ],
+            12: [
+                "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=85"
+            ],
+            13: [
+                "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=85"
+            ],
+            14: [
+                "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85"
+            ],
+            15: [
+                "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85"
+            ],
+            16: [
+                "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85"
+            ],
+            17: [
+                "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85"
+            ],
+            18: [
+                "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85",
+                "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=900&q=85"
+            ]
+        };
+
+        /* --------------------------------------------------------------------------
+           2. CATALOG DATABASE (18 Unique Handcrafted Resin Products across all categories)
+        -------------------------------------------------------------------------- */
+        const CATEGORIES = [
+            { name: "Resin Trays", type: "Tableware & Serveware", 대표Id: 1 },
+            { name: "Resin Coasters", type: "Tableware & Serveware", 대표Id: 5 },
+            { name: "Resin Clocks", type: "Wall & Home Decor", 대표Id: 7 },
+            { name: "Resin Jewellery", type: "Wearables & Accessories", 대표Id: 9 },
+            { name: "Resin Keychains", type: "Wearables & Accessories", 대표Id: 11 },
+            { name: "Resin Bookmarks", type: "Wearables & Accessories", 대표Id: 13 },
+            { name: "Resin Home Decor", type: "Wall & Home Decor", 대표Id: 15 },
+            { name: "Personalized Gifts", type: "Custom & Gifting", 대표Id: 17 },
+            { name: "Custom Resin Art", type: "Custom & Gifting", 대표Id: 18 }
+        ];
+
+        const PRODUCTS = [
+            {
+                id: 1,
+                name: "Aegean Ocean Wave Resin Serving Tray",
+                category: "Resin Trays",
+                productType: "Tableware & Serveware",
+                price: 2499,
+                originalPrice: 2999,
+                rating: 4.9,
+                reviews: 124,
+                inStock: true,
+                isNew: true,
+                isBestSeller: true,
+                rank: 1,
+                allowPersonalization: false,
+                shortDesc: "Hand-poured rectangular serving tray featuring layered turquoise ocean waves, delicate seafoam lacing, and brushed brass handles.",
+                specs: {
+                    "Material": "Artist-grade epoxy resin, seasoned birch base, brushed brass handles",
+                    "Dimensions": "14 × 9 × 1.2 inches",
+                    "Finish": "High-gloss multi-layer ocean wave pour with gilded edges",
+                    "Care": "Wipe with a soft damp cloth; suitable for dry snacks & beverage serving"
+                },
+                visual: { shape: 'tray', pattern: 'ocean', c1: '#0B556C', c2: '#62B6CB', c3: '#F4F1EA', accent: '#C69C53' }
+            },
+            {
+                id: 2,
+                name: "Blush Rose Quartz & Gold Geode Vanity Tray",
+                category: "Resin Trays",
+                productType: "Tableware & Serveware",
+                price: 2199,
+                originalPrice: 2699,
+                rating: 4.8,
+                reviews: 92,
+                inStock: true,
+                isNew: false,
+                isBestSeller: true,
+                rank: 4,
+                allowPersonalization: false,
+                shortDesc: "Soft blush quartz pigments swirled with champagne gold veining and hand-gilded rims, designed for perfumes, jewellery, or festive hosting.",
+                specs: {
+                    "Material": "Epoxy resin, mineral mica pigments, metallic gold leaf edge",
+                    "Dimensions": "13 × 8.5 inches",
+                    "Finish": "Glass-like cured finish with felt base pads",
+                    "Care": "Clean gently with a microfiber cloth"
+                },
+                visual: { shape: 'tray', pattern: 'geode', c1: '#BA7A84', c2: '#EBCFD4', c3: '#FAF6F2', accent: '#C89D54' }
+            },
+            {
+                id: 3,
+                name: "Champagne Agate Oval Trinket & Candle Platter",
+                category: "Resin Trays",
+                productType: "Tableware & Serveware",
+                price: 1699,
+                originalPrice: 1999,
+                rating: 4.7,
+                reviews: 61,
+                inStock: true,
+                isNew: true,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: false,
+                shortDesc: "Minimalist oval resin platter in warm travertine and champagne tones, ideal for styling pillar candles, diffusers, and bedside essentials.",
+                specs: {
+                    "Material": "Pigmented epoxy resin with antique gold rim",
+                    "Dimensions": "11 × 7 inches oval",
+                    "Finish": "Smooth high-gloss surface",
+                    "Care": "Keep away from open candle flames; wipe clean with damp cloth"
+                },
+                visual: { shape: 'ovaltray', pattern: 'marble', c1: '#A88B6E', c2: '#E5D8C8', c3: '#FAF7F2', accent: '#B88B4A' }
+            },
+            {
+                id: 4,
+                name: "Coastal Tide Ocean Resin Coasters (Set of 4)",
+                category: "Resin Coasters",
+                productType: "Tableware & Serveware",
+                price: 899,
+                originalPrice: 1149,
+                rating: 4.9,
+                reviews: 148,
+                inStock: true,
+                isNew: false,
+                isBestSeller: true,
+                rank: 2,
+                allowPersonalization: false,
+                shortDesc: "Set of four organic agate-shaped coasters hand-laced with deep ocean blues, sandy pearl shores, and electroplated gold edges.",
+                specs: {
+                    "Material": "Epoxy resin with non-slip natural cork backing",
+                    "Dimensions": "4.2 inches diameter each (Set of 4)",
+                    "Finish": "Water-resistant high-gloss top coat",
+                    "Care": "Wipe spills promptly; suitable for everyday tea and coffee mugs"
+                },
+                visual: { shape: 'coaster', pattern: 'ocean', c1: '#145369', c2: '#7FC8D8', c3: '#F2E8D8', accent: '#C89D54' }
+            },
+            {
+                id: 5,
+                name: "Alabaster White & 24K Gold Leaf Marble Coasters (Set of 4)",
+                category: "Resin Coasters",
+                productType: "Tableware & Serveware",
+                price: 949,
+                originalPrice: 1199,
+                rating: 4.9,
+                reviews: 176,
+                inStock: true,
+                isNew: true,
+                isBestSeller: true,
+                rank: 3,
+                allowPersonalization: false,
+                shortDesc: "Timeless warm ivory and alabaster resin coasters accented with floating gold leaf flakes and hand-painted metallic edges.",
+                specs: {
+                    "Material": "Epoxy resin, metallic gold foil, protective cork bottom",
+                    "Dimensions": "4.2 inches diameter each (Set of 4)",
+                    "Finish": "Polished stone-like resin finish",
+                    "Care": "Wipe with a soft damp cloth; do not place in dishwasher"
+                },
+                visual: { shape: 'coaster', pattern: 'marble', c1: '#D8CFC2', c2: '#F5EFE6', c3: '#FFFFFF', accent: '#C59B4E' }
+            },
+            {
+                id: 6,
+                name: "Pressed Meadow Wildflower Botanical Coasters (Set of 4)",
+                category: "Resin Coasters",
+                productType: "Tableware & Serveware",
+                price: 999,
+                originalPrice: 1299,
+                rating: 4.8,
+                reviews: 83,
+                inStock: true,
+                isNew: true,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: false,
+                shortDesc: "Real dried Queen Anne's lace, pressed rose petals, and fern leaves suspended in crystal-clear resin with delicate gold rims.",
+                specs: {
+                    "Material": "Clear epoxy resin, real dried botanicals, gold leaf border",
+                    "Dimensions": "4 inches round (Set of 4)",
+                    "Finish": "Crystal-clear botanical encapsulation",
+                    "Care": "Keep out of harsh direct sunlight; wipe gently with damp cloth"
+                },
+                visual: { shape: 'coaster', pattern: 'floral', c1: '#D88C9A', c2: '#E8C5B0', c3: '#FCF9F4', accent: '#C89D54' }
+            },
+            {
+                id: 7,
+                name: "Emerald & Brass Geode Resin Wall Clock (12 Inch)",
+                category: "Resin Clocks",
+                productType: "Wall & Home Decor",
+                price: 2299,
+                originalPrice: 2799,
+                rating: 4.9,
+                reviews: 109,
+                inStock: true,
+                isNew: false,
+                isBestSeller: true,
+                rank: 5,
+                allowPersonalization: false,
+                shortDesc: "Statement 12-inch wall clock poured with forest emerald and sage pigments, crystalline geode rings, and a silent sweep quartz movement.",
+                specs: {
+                    "Material": "Epoxy resin on 12mm MDF board, brass-tone aluminum hands",
+                    "Dimensions": "12 inches diameter",
+                    "Movement": "Silent non-ticking sweep quartz mechanism (1 AA battery)",
+                    "Hanging": "Pre-installed heavy-duty rear metal hook"
+                },
+                visual: { shape: 'clock', pattern: 'geode', c1: '#1E4D43', c2: '#7FA99B', c3: '#F4EFE6', accent: '#C89D54' }
+            },
+            {
+                id: 8,
+                name: "Warm Sand & Ivory Minimalist Resin Wall Clock",
+                category: "Resin Clocks",
+                productType: "Wall & Home Decor",
+                price: 1899,
+                originalPrice: 2299,
+                rating: 4.7,
+                reviews: 54,
+                inStock: true,
+                isNew: true,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: false,
+                shortDesc: "Designed for serene neutral interiors, blending warm beige, travertine sand, and subtle gold veining across a 12-inch dial.",
+                specs: {
+                    "Material": "Epoxy resin on primed wood base, silent sweep clock hands",
+                    "Dimensions": "12 inches diameter",
+                    "Finish": "High-gloss marble resin dial",
+                    "Care": "Dust gently with a dry microfiber cloth"
+                },
+                visual: { shape: 'clock', pattern: 'marble', c1: '#8C7056', c2: '#DFD2C0', c3: '#FAF7F2', accent: '#B88946' }
+            },
+            {
+                id: 9,
+                name: "Botanical Pressed Daisy & Gold Flake Resin Pendant",
+                category: "Resin Jewellery",
+                productType: "Wearables & Accessories",
+                price: 499,
+                originalPrice: 649,
+                rating: 4.9,
+                reviews: 138,
+                inStock: true,
+                isNew: false,
+                isBestSeller: true,
+                rank: 6,
+                allowPersonalization: false,
+                shortDesc: "Delicate teardrop bezel pendant encasing miniature hand-dried blossoms and 24K gold leaf flakes on an 18-inch tarnish-resistant chain.",
+                specs: {
+                    "Material": "Jewellery-grade UV resin, dried flowers, gold-plated brass chain",
+                    "Dimensions": "Pendant: 2.8 × 1.8 cm · Chain: 18 inches",
+                    "Weight": "Featherlight (approx. 6 grams)",
+                    "Care": "Avoid direct perfume sprays and water immersion"
+                },
+                visual: { shape: 'pendant', pattern: 'floral', c1: '#D98A96', c2: '#F2D59B', c3: '#FFFDF9', accent: '#C89D54' }
+            },
+            {
+                id: 10,
+                name: "Midnight Sapphire & Gold Leaf Resin Drop Earrings",
+                category: "Resin Jewellery",
+                productType: "Wearables & Accessories",
+                price: 449,
+                originalPrice: 599,
+                rating: 4.8,
+                reviews: 67,
+                inStock: true,
+                isNew: true,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: false,
+                shortDesc: "Hand-cast circular resin statement studs in deep midnight navy and floating gold leaf with hypoallergenic stainless steel posts.",
+                specs: {
+                    "Material": "Epoxy resin, metallic foil, hypoallergenic surgical steel posts",
+                    "Dimensions": "3.2 cm length",
+                    "Finish": "High-shine domed resin coat",
+                    "Care": "Store in the provided soft cotton pouch"
+                },
+                visual: { shape: 'earring', pattern: 'geode', c1: '#1E2D42', c2: '#637C96', c3: '#F5EFE6', accent: '#D1A658' }
+            },
+            {
+                id: 11,
+                name: "Custom Monogram Initial Letter Resin Keychain",
+                category: "Resin Keychains",
+                productType: "Wearables & Accessories",
+                price: 249,
+                originalPrice: 349,
+                rating: 4.9,
+                reviews: 215,
+                inStock: true,
+                isNew: false,
+                isBestSeller: true,
+                rank: null,
+                allowPersonalization: true,
+                shortDesc: "Personalized initial keychain poured with dried rose petals, crushed gold foil, and fitted with a sturdy lobster clasp keyring.",
+                specs: {
+                    "Material": "Shatter-resistant epoxy resin, brass-tone keyring & tassel",
+                    "Dimensions": "4.5 cm letter height",
+                    "Customization": "Enter any letter (A–Z) and preferred colour in the note box",
+                    "Dispatch": "Ships in 2–4 working days"
+                },
+                visual: { shape: 'keychain', pattern: 'floral', c1: '#C87D87', c2: '#F0D6B8', c3: '#FFFDF9', accent: '#C89D54', label: 'A' }
+            },
+            {
+                id: 12,
+                name: "Ocean Lagoon & Sand Pearl Resin Keychain Charm",
+                category: "Resin Keychains",
+                productType: "Wearables & Accessories",
+                price: 229,
+                originalPrice: 299,
+                rating: 4.7,
+                reviews: 78,
+                inStock: true,
+                isNew: false,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: true,
+                shortDesc: "Pocket-sized ocean wave resin charm with realistic seafoam lacing and optional custom name vinyl lettering.",
+                specs: {
+                    "Material": "Epoxy resin, ocean mica pigments, gold-tone hardware",
+                    "Dimensions": "5 × 3.5 cm",
+                    "Customization": "Optional short name or initial",
+                    "Care": "Wipe clean with a soft cloth"
+                },
+                visual: { shape: 'keychain', pattern: 'ocean', c1: '#0E5A6F', c2: '#7EC4D4', c3: '#F4E9D8', accent: '#C89D54', label: 'S' }
+            },
+            {
+                id: 13,
+                name: "Pressed Botanical & Rose Gold Flake Resin Bookmark",
+                category: "Resin Bookmarks",
+                productType: "Wearables & Accessories",
+                price: 299,
+                originalPrice: 399,
+                rating: 4.9,
+                reviews: 194,
+                inStock: true,
+                isNew: true,
+                isBestSeller: true,
+                rank: null,
+                allowPersonalization: true,
+                shortDesc: "Slim, flexible crystal-clear resin bookmark embedded with real pressed flowers, gold leaf flecks, and a silky woven tassel.",
+                specs: {
+                    "Material": "Flexible clear epoxy resin, real dried flowers, silk tassel",
+                    "Dimensions": "14 × 3.2 cm (thickness: 2mm)",
+                    "Customization": "Optional custom name vinyl in gold script",
+                    "Packaging": "Comes in a gift-ready kraft sleeve"
+                },
+                visual: { shape: 'bookmark', pattern: 'floral', c1: '#D68996', c2: '#92B089', c3: '#FCF9F3', accent: '#C89D54' }
+            },
+            {
+                id: 14,
+                name: "Celestial Teal & Gold Foil Resin Page Marker",
+                category: "Resin Bookmarks",
+                productType: "Wearables & Accessories",
+                price: 279,
+                originalPrice: 349,
+                rating: 4.8,
+                reviews: 63,
+                inStock: true,
+                isNew: false,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: true,
+                shortDesc: "Swirling deep teal ink and shimmering metallic gold leaf suspended in a smooth page marker with a matching cream tassel.",
+                specs: {
+                    "Material": "Epoxy resin, alcohol inks, metallic foil, silk tassel",
+                    "Dimensions": "14 × 3.2 cm",
+                    "Customization": "Optional custom name or short quote",
+                    "Care": "Do not bend sharply; store flat inside book pages"
+                },
+                visual: { shape: 'bookmark', pattern: 'marble', c1: '#184E59', c2: '#7BB2BD', c3: '#F7F3EB', accent: '#C89D54' }
+            },
+            {
+                id: 15,
+                name: "Pacific Tide Multi-Layer Ocean Resin Wall Art Panel",
+                category: "Resin Home Decor",
+                productType: "Wall & Home Decor",
+                price: 3499,
+                originalPrice: 4299,
+                rating: 5.0,
+                reviews: 47,
+                inStock: true,
+                isNew: true,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: false,
+                shortDesc: "Three individually poured layers of translucent ocean waves breaking over a textured sandy shore on a framed birchwood art panel.",
+                specs: {
+                    "Material": "Epoxy resin, natural quartz sand texture, birchwood cradle board",
+                    "Dimensions": "16 × 16 inches",
+                    "Hanging": "Ready to hang with rear D-rings",
+                    "Care": "For indoor display away from direct harsh sunlight"
+                },
+                visual: { shape: 'wallart', pattern: 'ocean', c1: '#0A4658', c2: '#5BB0C4', c3: '#EFE6D5', accent: '#C89D54' }
+            },
+            {
+                id: 16,
+                name: "Warm Terracotta & Earth Geode Textured Wall Art",
+                category: "Resin Home Decor",
+                productType: "Wall & Home Decor",
+                price: 2999,
+                originalPrice: 3599,
+                rating: 4.8,
+                reviews: 39,
+                inStock: false,
+                isNew: false,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: false,
+                shortDesc: "Earthy terracotta, warm bronze, and raw sandstone geode rings crafted to complement contemporary warm-minimalist living rooms.",
+                specs: {
+                    "Material": "Epoxy resin, crushed quartz crystals, mineral pigments on wood panel",
+                    "Dimensions": "14 × 14 inches",
+                    "Status": "Currently Sold Out (Small-batch restock soon)",
+                    "Care": "Dust with a soft dry brush or microfiber cloth"
+                },
+                visual: { shape: 'wallart', pattern: 'geode', c1: '#9C523B', c2: '#DFB69C', c3: '#FAF5EE', accent: '#C89D54' }
+            },
+            {
+                id: 17,
+                name: "Bespoke Ivory & Gold Marble Resin House Nameplate",
+                category: "Personalized Gifts",
+                productType: "Custom & Gifting",
+                price: 1899,
+                originalPrice: 2399,
+                rating: 4.9,
+                reviews: 112,
+                inStock: true,
+                isNew: false,
+                isBestSeller: true,
+                rank: null,
+                allowPersonalization: true,
+                shortDesc: "Custom entrance nameplate poured in warm ivory marble and gold veining, complete with raised laser-cut acrylic family names and mounting studs.",
+                specs: {
+                    "Material": "Epoxy resin on weather-sealed 10mm base, 3D acrylic lettering",
+                    "Dimensions": "15 × 7 inches",
+                    "Included": "2 brass-finish wall mounting studs & screws",
+                    "Placement": "Recommended for covered entrances and apartment doors"
+                },
+                visual: { shape: 'nameplate', pattern: 'marble', c1: '#9B7E5E', c2: '#EAE0D0', c3: '#FFFFFF', accent: '#C89D54', label: 'The Verma Home' }
+            },
+            {
+                id: 18,
+                name: "Preserved Floral Hexagon Keepsake & Memory Block",
+                category: "Custom Resin Art",
+                productType: "Custom & Gifting",
+                price: 2799,
+                originalPrice: 3299,
+                rating: 4.9,
+                reviews: 74,
+                inStock: true,
+                isNew: true,
+                isBestSeller: false,
+                rank: null,
+                allowPersonalization: true,
+                shortDesc: "Deep-cast hexagonal resin block designed to preserve special bouquet flowers, anniversary petals, and custom gold-foiled dates.",
+                specs: {
+                    "Material": "Deep-pour crystal-clear epoxy resin, silica-dried botanicals",
+                    "Dimensions": "7 × 7 × 1.8 inches hexagon",
+                    "Customization": "Add couple names, date, or custom floral colour palette",
+                    "Timeline": "Made to order in 5–7 working days"
+                },
+                visual: { shape: 'hexagon', pattern: 'floral', c1: '#C97B86', c2: '#E8CBAF', c3: '#FCF9F4', accent: '#C89D54' }
+            }
+        ];
+
+        // Assign real high-resolution resin photography & multi-angle gallery images
+        PRODUCTS.forEach(p => {
+            const photos = REAL_RESIN_PHOTOS[p.id] || REAL_RESIN_PHOTOS[1];
+            p.image = photos[0];
+            p.gallery = photos;
+        });
+
+        // 10 Genuine Resin Customer FAQs (Strictly matching Master Prompt)
+        const FAQ_LIST = [
+            {
+                q: "1. What is resin art?",
+                a: "Resin art is a handcrafted craft where two-part artist-grade epoxy resin is mixed with natural mineral pigments, metallic foils, or dried flowers and poured into moulds or wooden panels. As it cures, it forms a durable, glass-like glossy finish with organic flowing patterns."
+            },
+            {
+                q: "2. Are all resin products handmade?",
+                a: "Yes. Every piece at Resinora is individually mixed, hand-poured, cured, sanded, and polished in our studio in small batches. Because the liquid pigments move naturally, no two pieces are ever 100% identical."
+            },
+            {
+                q: "3. Can I customize the colour, design or size?",
+                a: "Yes, we offer customization on our Personalized Gifts, Custom Resin Art, Keychains, Bookmarks, and select Trays. You can enter your preferred colours, initials, or names on the Product Details page before adding to your bag."
+            },
+            {
+                q: "4. How long does it take to make a customized order?",
+                a: "Customized and made-to-order resin pieces take 5–7 working days to craft, as epoxy resin requires multiple layered pours and 72 hours of curing time before polishing and dispatch."
+            },
+            {
+                q: "5. Are resin coasters waterproof?",
+                a: "Yes, fully cured resin coasters are water-resistant and easily handle cold beverage condensation and everyday spills. Simply wipe them dry with a soft cloth after use rather than soaking them underwater."
+            },
+            {
+                q: "6. How should I clean and maintain resin products?",
+                a: "Wipe gently with a soft, damp microfiber cloth and mild liquid soap if needed. Avoid abrasive scrubbing pads, harsh chemical cleaners, acetone, or prolonged exposure to direct outdoor sunlight."
+            },
+            {
+                q: "7. Are resin products heat-resistant?",
+                a: "Our cured tabletop resin comfortably handles warm tea and coffee mugs up to approximately 55°C–60°C. However, do not place boiling cookware directly from the stove onto resin surfaces, and never place resin items in a dishwasher or microwave."
+            },
+            {
+                q: "8. Can I return or exchange a customized product?",
+                a: "Because personalized items are poured specifically with your chosen names, initials, or colours, they cannot be returned or exchanged unless they arrive damaged in transit. Please record a brief unboxing video upon delivery for hassle-free replacement."
+            },
+            {
+                q: "9. How long does delivery take?",
+                a: "Ready-to-ship creations are dispatched within 1–3 working days, and standard courier delivery across India takes 4–7 working days."
+            },
+            {
+                q: "10. How can I place a bulk or personalized order?",
+                a: "For wedding favours, festive hampers, or corporate gifting of 10+ pieces, you can reach our studio desk via the Contact Us details in the footer to receive a custom catalogue and timeline."
+            }
+        ];
+
+        /* --------------------------------------------------------------------------
+           3. STATE MANAGEMENT
+        -------------------------------------------------------------------------- */
+        let currentPage = 'home';
+        let currentProductId = 1;
+        let pdSelectedVariant = 'Studio Original';
+        let pdSelectedQty = 1;
+
+        let shopState = {
+            category: 'All',
+            maxPrice: 4000,
+            productType: 'All',
+            inStockOnly: false,
+            bestsellerOnly: false,
+            newOnly: false,
+            searchQuery: '',
+            sortBy: 'featured',
+            visibleCount: 9
+        };
+
+        let cart = [
+            {
+                productId: 1,
+                variant: 'Studio Original',
+                customNote: '',
+                qty: 1
+            }
+        ];
+
+        let wishlist = new Set([5, 9]);
+        let promoDiscountApplied = false;
+
+        /* --------------------------------------------------------------------------
+           4. REUSABLE PRODUCT CARD COMPONENT
+        -------------------------------------------------------------------------- */
+        function renderProductCard(product, showRank = false) {
+            const discount = product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+            const isWished = wishlist.has(product.id);
+
+            let badgeHTML = '';
+            if (!product.inStock) {
+                badgeHTML = `<span class="px-2.5 py-1 rounded-full bg-taupe text-white text-[10px] font-semibold uppercase tracking-wider">Sold Out</span>`;
+            } else if (showRank && product.rank) {
+                badgeHTML = `<span class="px-2.5 py-1 rounded-full bg-espresso text-ivory text-[10px] font-semibold uppercase tracking-wider">#${product.rank} Best Seller</span>`;
+            } else if (product.isBestSeller) {
+                badgeHTML = `<span class="px-2.5 py-1 rounded-full bg-espresso text-ivory text-[10px] font-semibold uppercase tracking-wider">Best Seller</span>`;
+            } else if (product.isNew) {
+                badgeHTML = `<span class="px-2.5 py-1 rounded-full bg-sage text-white text-[10px] font-semibold uppercase tracking-wider">New</span>`;
+            } else if (discount > 0) {
+                badgeHTML = `<span class="px-2.5 py-1 rounded-full bg-terracotta text-white text-[10px] font-semibold uppercase tracking-wider">Sale</span>`;
+            }
+
+            return `
+                <div class="group bg-white rounded-2xl border border-oat overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col justify-between">
+                    <div>
+                        <!-- Image Container -->
+                        <div class="relative aspect-square bg-alabaster overflow-hidden">
+                            <img onclick="openProductDetails(${product.id})" src="${product.image}" alt="${product.name}"
+                                 onerror="this.src='https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80'"
+                                 class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition duration-700">
+                            
+                            <!-- Top Left Badges -->
+                            <div class="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none">
+                                ${badgeHTML}
+                            </div>
+
+                            <!-- Top Right Wishlist Heart -->
+                            <button onclick="toggleWishlist(${product.id}, event)"
+                                    class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-espresso flex items-center justify-center shadow-xs transition"
+                                    aria-label="Wishlist">
+                                <i class="${isWished ? 'fa-solid text-terracotta' : 'fa-regular text-espresso'} fa-heart text-sm"></i>
+                            </button>
+
+                            <!-- Hover Quick Actions Bar (Quick Add opens Cart Drawer immediately, Eye opens Quick View Modal) -->
+                            <div class="absolute inset-x-3 bottom-3 flex gap-2 opacity-95 lg:opacity-0 lg:translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-200">
+                                <button onclick="event.stopPropagation(); quickAddToCart(${product.id}, true)"
+                                        class="flex-1 py-2.5 px-3 rounded-full ${product.inStock ? 'bg-espresso text-ivory hover:bg-bronze' : 'bg-oat text-taupe cursor-not-allowed'} text-xs font-semibold shadow transition flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-bag-shopping text-[11px]"></i>
+                                    <span>${product.inStock ? 'Add to Bag' : 'Sold Out'}</span>
+                                </button>
+                                <button onclick="event.stopPropagation(); openQuickView(${product.id})"
+                                        class="px-3 h-9 rounded-full bg-white/95 hover:bg-espresso hover:text-white text-espresso flex items-center justify-center gap-1 shadow transition shrink-0 text-[11px] font-semibold"
+                                        title="Quick View">
+                                    <i class="fa-regular fa-eye text-xs"></i>
+                                    <span class="hidden sm:inline">Preview</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card Details -->
+                        <div class="p-4">
+                            <div class="flex items-center justify-between text-[11px] text-taupe mb-1">
+                                <button onclick="event.stopPropagation(); navigateTo('shop', { category: '${product.category}' })" class="hover:text-bronze hover:underline text-left">${product.category}</button>
+                                <span class="text-bronze font-semibold">★ ${product.rating}</span>
+                            </div>
+                            <h3 onclick="openProductDetails(${product.id})"
+                                class="font-serif text-xl font-semibold text-espresso group-hover:text-bronze transition cursor-pointer line-clamp-1">
+                                ${product.name}
+                            </h3>
+                            <div class="flex items-center justify-between mt-2">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-base font-bold text-espresso">₹${product.price.toLocaleString('en-IN')}</span>
+                                    ${product.originalPrice ? `<span class="text-xs text-taupe line-through">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                                    ${discount > 0 ? `<span class="text-[11px] font-semibold text-terracotta">${discount}% OFF</span>` : ''}
+                                </div>
+                                <button onclick="openProductDetails(${product.id})" class="text-[11px] font-semibold text-bronze hover:text-espresso transition">
+                                    Details →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* --------------------------------------------------------------------------
+           5. INITIALIZE HEADER MEGA MENU & HOMEPAGE
+        -------------------------------------------------------------------------- */
+        function initHeaderAndHome() {
+            // Hero Images
+            document.getElementById('heroImg1').src = PRODUCTS[0].image;
+            document.getElementById('heroImg2').src = PRODUCTS[4].image;
+            document.getElementById('heroImg3').src = PRODUCTS[8].image;
+            document.getElementById('promoBannerImg').src = PRODUCTS[16].image;
+            document.getElementById('editorialFeatureImg').src = PRODUCTS[14].image;
+
+            // Mega Menu (11 links: New Arrivals, Best Sellers + 9 Categories)
+            const megaItems = [
+                { label: "New Arrivals", action: "navigateTo('shop', { filterTag: 'new' })", img: PRODUCTS[2].image },
+                { label: "Best Sellers", action: "navigateTo('shop', { filterTag: 'bestseller' })", img: PRODUCTS[0].image },
+                ...CATEGORIES.map(c => {
+                    const rep = PRODUCTS.find(p => p.id === c.대표Id) || PRODUCTS[0];
+                    return {
+                        label: c.name,
+                        action: `navigateTo('shop', { category: '${c.name}' })`,
+                        img: rep.image
+                    };
+                })
+            ];
+
+            document.getElementById('megaMenuGrid').innerHTML = megaItems.slice(0, 11).map(item => `
+                <button onclick="${item.action}" class="group text-left space-y-1.5 p-1.5 rounded-xl hover:bg-alabaster transition">
+                    <div class="aspect-square rounded-xl overflow-hidden border border-oat bg-alabaster">
+                        <img src="${item.img}" alt="${item.label}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <span class="block text-xs font-medium text-espresso group-hover:text-bronze truncate">${item.label}</span>
+                </button>
+            `).join('');
+
+            // Mobile Drawer Category Links
+            document.getElementById('mobileCategoryLinks').innerHTML = [
+                `<button onclick="navigateTo('shop', { filterTag: 'new' }); toggleMobileNav(false);" class="w-full text-left px-3 py-2 rounded-lg text-bronze font-semibold hover:bg-alabaster">✦ New Arrivals</button>`,
+                `<button onclick="navigateTo('shop', { filterTag: 'bestseller' }); toggleMobileNav(false);" class="w-full text-left px-3 py-2 rounded-lg text-bronze font-semibold hover:bg-alabaster">★ Best Sellers</button>`,
+                ...CATEGORIES.map(c => `
+                    <button onclick="navigateTo('shop', { category: '${c.name}' }); toggleMobileNav(false);" class="w-full text-left px-3 py-2 rounded-lg text-espresso hover:bg-alabaster">${c.name}</button>
+                `)
+            ].join('');
+
+            // Render Homepage Carousels & Grids
+            renderHomeDynamicSections();
+
+            // Render 10 FAQs
+            document.getElementById('faqContainer').innerHTML = FAQ_LIST.map((item, idx) => `
+                <div class="py-4">
+                    <button onclick="toggleFaqItem(${idx})" class="w-full flex items-center justify-between text-left gap-4 py-1">
+                        <span class="font-serif text-lg sm:text-xl font-semibold text-espresso">${item.q}</span>
+                        <i id="faqIcon-${idx}" class="fa-solid ${idx === 0 ? 'fa-minus' : 'fa-plus'} text-xs text-bronze shrink-0 transition-transform"></i>
+                    </button>
+                    <div id="faqAnswer-${idx}" class="${idx === 0 ? '' : 'hidden'} pt-2.5 text-xs sm:text-sm text-taupe leading-relaxed">
+                        ${item.a}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderHomeDynamicSections() {
+            // Section 3: New Arrivals Carousel (6 items)
+            const newProducts = PRODUCTS.filter(p => p.isNew).slice(0, 6);
+            document.getElementById('newArrivalsTrack').innerHTML = newProducts.map(p => `
+                <div class="min-w-[260px] sm:min-w-[285px] max-w-[285px] shrink-0">
+                    ${renderProductCard(p)}
+                </div>
+            `).join('');
+
+            // Section 4: Shop by Category (8 Categories as specified in Master Prompt)
+            const homeCats = CATEGORIES.slice(0, 8);
+            document.getElementById('homeCategoryGrid').innerHTML = homeCats.map(c => {
+                const rep = PRODUCTS.find(p => p.id === c.대표Id);
+                const count = PRODUCTS.filter(p => p.category === c.name).length;
+                return `
+                    <div onclick="navigateTo('shop', { category: '${c.name}' })"
+                         class="group cursor-pointer relative rounded-2xl overflow-hidden border border-oat aspect-[4/5] bg-alabaster shadow-2xs">
+                        <img src="${rep.image}" alt="${c.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest text-oat/90 block">${count} Creations</span>
+                                <h3 class="font-serif text-xl sm:text-2xl font-semibold">${c.name.replace('Resin ', '')}</h3>
+                            </div>
+                            <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-xs flex items-center justify-center group-hover:bg-bronze transition">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 5: Trending / Best Sellers Carousel
+            const bestSellers = PRODUCTS.filter(p => p.isBestSeller).sort((a, b) => (a.rank || 99) - (b.rank || 99));
+            document.getElementById('bestSellersTrack').innerHTML = bestSellers.map(p => `
+                <div class="min-w-[260px] sm:min-w-[285px] max-w-[285px] shrink-0">
+                    ${renderProductCard(p, true)}
+                </div>
+            `).join('');
+
+            // Section 7: Editorial 4 Accompanying Cards
+            const editorialIds = [1, 4, 6, 13];
+            const editorialItems = editorialIds.map(id => PRODUCTS.find(p => p.id === id));
+            document.getElementById('editorialProductGrid').innerHTML = editorialItems.map(p => renderProductCard(p)).join('');
+        }
+
+        function toggleFaqItem(idx) {
+            const ans = document.getElementById(`faqAnswer-${idx}`);
+            const icon = document.getElementById(`faqIcon-${idx}`);
+            const isHidden = ans.classList.contains('hidden');
+            if (isHidden) {
+                ans.classList.remove('hidden');
+                icon.classList.replace('fa-plus', 'fa-minus');
+            } else {
+                ans.classList.add('hidden');
+                icon.classList.replace('fa-minus', 'fa-plus');
+            }
+        }
+
+        /* --------------------------------------------------------------------------
+           6. ALL PRODUCTS PAGE (FILTERS, SORTING, PAGINATION)
+        -------------------------------------------------------------------------- */
+        function renderShopPage() {
+            // Update Heading & Breadcrumb
+            let title = "Explore Our Collection";
+            if (shopState.category !== 'All') title = shopState.category;
+            else if (shopState.bestsellerOnly) title = "Best Selling Creations";
+            else if (shopState.newOnly) title = "New Studio Arrivals";
+
+            document.getElementById('shopHeading').textContent = title;
+            document.getElementById('shopBreadcrumb').textContent = title;
+
+            // Top Category Chips
+            const allCats = ['All', ...CATEGORIES.map(c => c.name)];
+            document.getElementById('shopCategoryChips').innerHTML = allCats.map(cat => {
+                const active = shopState.category === cat && !shopState.bestsellerOnly && !shopState.newOnly;
+                return `
+                    <button onclick="selectCategoryFilter('${cat}')"
+                            class="px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition ${active ? 'bg-espresso text-ivory' : 'bg-white border border-oat text-espresso hover:border-bronze'}">
+                        ${cat === 'All' ? 'All Products (18)' : cat}
+                    </button>
+                `;
+            }).join('');
+
+            // Sidebar & Mobile Category Radio Lists
+            const catListHTML = allCats.map(cat => {
+                const count = cat === 'All' ? PRODUCTS.length : PRODUCTS.filter(p => p.category === cat).length;
+                const checked = shopState.category === cat ? 'checked' : '';
+                return `
+                    <label class="flex items-center justify-between cursor-pointer py-0.5 hover:text-espresso">
+                        <span class="flex items-center gap-2">
+                            <input type="radio" name="catFilter" value="${cat}" ${checked} onchange="selectCategoryFilter('${cat}')" class="accent-bronze">
+                            <span class="${shopState.category === cat ? 'font-semibold text-espresso' : ''}">${cat}</span>
+                        </span>
+                        <span class="text-[11px] text-taupe">(${count})</span>
+                    </label>
+                `;
+            }).join('');
+
+            document.getElementById('desktopCategoryFilterList').innerHTML = catListHTML;
+            document.getElementById('mobileFilterCategoryList').innerHTML = catListHTML;
+
+            // Sync Checkboxes & Sliders
+            document.getElementById('desktopPriceRange').value = shopState.maxPrice;
+            document.getElementById('mobilePriceRange').value = shopState.maxPrice;
+            document.getElementById('desktopPriceLabel').textContent = `Up to ₹${shopState.maxPrice.toLocaleString('en-IN')}`;
+            document.getElementById('mobilePriceLabel').textContent = `Up to ₹${shopState.maxPrice.toLocaleString('en-IN')}`;
+            document.getElementById('desktopProductTypeSelect').value = shopState.productType;
+            document.getElementById('desktopInStockCheck').checked = shopState.inStockOnly;
+            document.getElementById('mobileInStockCheck').checked = shopState.inStockOnly;
+            document.getElementById('desktopBestSellerCheck').checked = shopState.bestsellerOnly;
+            document.getElementById('mobileBestSellerCheck').checked = shopState.bestsellerOnly;
+            document.getElementById('desktopNewArrivalCheck').checked = shopState.newOnly;
+            document.getElementById('mobileNewArrivalCheck').checked = shopState.newOnly;
+            document.getElementById('shopSortSelect').value = shopState.sortBy;
+
+            // Filter Products
+            let filtered = PRODUCTS.filter(p => {
+                if (shopState.category !== 'All' && p.category !== shopState.category) return false;
+                if (p.price > shopState.maxPrice) return false;
+                if (shopState.productType !== 'All' && p.productType !== shopState.productType) return false;
+                if (shopState.inStockOnly && !p.inStock) return false;
+                if (shopState.bestsellerOnly && !p.isBestSeller) return false;
+                if (shopState.newOnly && !p.isNew) return false;
+                if (shopState.searchQuery) {
+                    const q = shopState.searchQuery.toLowerCase();
+                    const match = p.name.toLowerCase().includes(q) ||
+                                  p.category.toLowerCase().includes(q) ||
+                                  p.shortDesc.toLowerCase().includes(q);
+                    if (!match) return false;
+                }
+                return true;
+            });
+
+            // Sort Products
+            if (shopState.sortBy === 'bestselling') {
+                filtered.sort((a, b) => (b.isBestSeller - a.isBestSeller) || (b.reviews - a.reviews));
+            } else if (shopState.sortBy === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (shopState.sortBy === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (shopState.sortBy === 'newest') {
+                filtered.sort((a, b) => (b.isNew - a.isNew) || (b.id - a.id));
+            }
+
+            // Active Filter Badges
+            const badges = [];
+            if (shopState.category !== 'All') badges.push({ label: shopState.category, clear: () => selectCategoryFilter('All') });
+            if (shopState.productType !== 'All') badges.push({ label: shopState.productType, clear: () => updateProductTypeFilter('All') });
+            if (shopState.maxPrice < 4000) badges.push({ label: `Under ₹${shopState.maxPrice}`, clear: () => updatePriceFilter(4000) });
+            if (shopState.inStockOnly) badges.push({ label: 'In Stock', clear: () => toggleStockFilter(false) });
+            if (shopState.bestsellerOnly) badges.push({ label: 'Best Sellers', clear: () => toggleTagFilter('bestseller', false) });
+            if (shopState.newOnly) badges.push({ label: 'New Arrivals', clear: () => toggleTagFilter('new', false) });
+            if (shopState.searchQuery) badges.push({ label: `Search: “${shopState.searchQuery}”`, clear: () => { shopState.searchQuery = ''; document.getElementById('globalSearchInput').value = ''; renderShopPage(); } });
+
+            const badgesEl = document.getElementById('activeFilterBadges');
+            badgesEl.innerHTML = badges.map((b, i) => `
+                <button onclick="clearBadgeFilter(${i})" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-alabaster border border-oat text-xs text-espresso hover:border-bronze">
+                    <span>${b.label}</span>
+                    <i class="fa-solid fa-xmark text-[10px] text-taupe"></i>
+                </button>
+            `).join('');
+            window._activeBadgeClearFns = badges.map(b => b.clear);
+
+            // Result Count
+            document.getElementById('shopResultCount').textContent = `Showing ${Math.min(filtered.length, shopState.visibleCount)} of ${filtered.length} product${filtered.length === 1 ? '' : 's'}`;
+
+            // Grid Render
+            const gridEl = document.getElementById('shopProductGrid');
+            if (filtered.length === 0) {
+                gridEl.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl border border-oat p-12 text-center space-y-3">
+                        <p class="font-serif text-2xl text-espresso">No matching resin creations found</p>
+                        <p class="text-xs text-taupe">Try adjusting your price range or clearing active category filters.</p>
+                        <button onclick="resetShopFilters()" class="px-6 py-2.5 rounded-full bg-espresso text-white text-xs font-semibold">Reset All Filters</button>
+                    </div>
+                `;
+            } else {
+                gridEl.innerHTML = filtered.slice(0, shopState.visibleCount).map(p => renderProductCard(p)).join('');
+            }
+
+            // Load More Visibility
+            document.getElementById('loadMoreWrapper').classList.toggle('hidden', filtered.length <= shopState.visibleCount);
+        }
+
+        function clearBadgeFilter(idx) {
+            if (window._activeBadgeClearFns && window._activeBadgeClearFns[idx]) {
+                window._activeBadgeClearFns[idx]();
+            }
+        }
+
+        function selectCategoryFilter(cat) {
+            shopState.category = cat;
+            shopState.visibleCount = 9;
+            renderShopPage();
+        }
+
+        function updatePriceFilter(val) {
+            shopState.maxPrice = Number(val);
+            renderShopPage();
+        }
+
+        function updateProductTypeFilter(val) {
+            shopState.productType = val;
+            renderShopPage();
+        }
+
+        function toggleStockFilter(checked) {
+            shopState.inStockOnly = checked;
+            renderShopPage();
+        }
+
+        function toggleTagFilter(tag, checked) {
+            if (tag === 'bestseller') shopState.bestsellerOnly = checked;
+            if (tag === 'new') shopState.newOnly = checked;
+            renderShopPage();
+        }
+
+        function updateSortOrder(val) {
+            shopState.sortBy = val;
+            renderShopPage();
+        }
+
+        function loadMoreProducts() {
+            shopState.visibleCount += 6;
+            renderShopPage();
+        }
+
+        function resetShopFilters() {
+            shopState = {
+                category: 'All',
+                maxPrice: 4000,
+                productType: 'All',
+                inStockOnly: false,
+                bestsellerOnly: false,
+                newOnly: false,
+                searchQuery: '',
+                sortBy: 'featured',
+                visibleCount: 9
+            };
+            const searchInput = document.getElementById('globalSearchInput');
+            if (searchInput) searchInput.value = '';
+            renderShopPage();
+        }
+
+        /* --------------------------------------------------------------------------
+           7. PRODUCT DETAILS PAGE & IMAGE ZOOM
+        -------------------------------------------------------------------------- */
+        function renderPdQuickSwitcherBar() {
+            const bar = document.getElementById('pdQuickSwitcherBar');
+            if (!bar) return;
+            bar.innerHTML = PRODUCTS.map(p => {
+                const isCurrent = p.id === currentProductId;
+                return `
+                    <button onclick="openProductDetails(${p.id})"
+                            class="flex items-center gap-2.5 p-1.5 pr-3 rounded-xl border transition shrink-0 text-left ${isCurrent ? 'bg-espresso text-ivory border-espresso shadow-xs' : 'bg-ivory border-oat text-espresso hover:border-bronze'}">
+                        <img src="${p.image}" alt="${p.name}" class="w-10 h-10 rounded-lg object-cover shrink-0">
+                        <div class="max-w-[135px]">
+                            <p class="text-xs font-semibold truncate">${p.name}</p>
+                            <p class="text-[10px] ${isCurrent ? 'text-oat/80' : 'text-bronze'} font-medium">₹${p.price.toLocaleString('en-IN')}</p>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function cycleProductDetails(direction) {
+            const currentIndex = PRODUCTS.findIndex(p => p.id === currentProductId);
+            const nextIndex = (currentIndex + direction + PRODUCTS.length) % PRODUCTS.length;
+            openProductDetails(PRODUCTS[nextIndex].id);
+        }
+
+        function openProductDetails(productId) {
+            const product = PRODUCTS.find(p => p.id === productId) || PRODUCTS[0];
+            currentProductId = product.id;
+            pdSelectedVariant = 'Studio Original';
+            pdSelectedQty = 1;
+            resetImageZoom();
+            renderPdQuickSwitcherBar();
+
+            // Breadcrumbs
+            document.getElementById('pdBreadcrumbCategory').textContent = product.category;
+            document.getElementById('pdBreadcrumbCategory').onclick = () => navigateTo('shop', { category: product.category });
+            document.getElementById('pdBreadcrumbName').textContent = product.name;
+
+            // Main Image & Thumbnails
+            document.getElementById('pdMainImage').src = product.gallery[0];
+            const thumbLabels = ['Front View', 'Macro Detail', 'Angled View', 'Warm Light'];
+            document.getElementById('pdThumbnailsRow').innerHTML = product.gallery.map((imgUrl, idx) => `
+                <button onclick="selectPdThumbnail('${imgUrl}', this)"
+                        class="pd-thumb-btn rounded-xl overflow-hidden border-2 ${idx === 0 ? 'border-bronze' : 'border-transparent'} bg-alabaster aspect-square relative group">
+                    <img src="${imgUrl}" alt="${thumbLabels[idx]}" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 inset-x-1 bg-black/55 text-white text-[9px] py-0.5 rounded text-center opacity-0 group-hover:opacity-100 transition">${thumbLabels[idx]}</span>
+                </button>
+            `).join('');
+
+            // Badges & Titles
+            document.getElementById('pdBadge').textContent = !product.inStock ? 'Sold Out' : (product.isBestSeller ? 'Best Seller' : (product.isNew ? 'New Arrival' : 'Handmade'));
+            document.getElementById('pdCategoryLabel').textContent = product.category;
+            document.getElementById('pdTitle').textContent = product.name;
+            document.getElementById('pdRatingText').textContent = product.rating;
+            document.getElementById('pdReviewCountText').textContent = `(${product.reviews} Verified Reviews)`;
+
+            const stockEl = document.getElementById('pdStockBadge');
+            if (product.inStock) {
+                stockEl.className = "text-xs font-semibold text-sage flex items-center gap-1.5";
+                stockEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-sage inline-block"></span> In Stock · Ready to craft`;
+            } else {
+                stockEl.className = "text-xs font-semibold text-terracotta flex items-center gap-1.5";
+                stockEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-terracotta inline-block"></span> Currently Sold Out`;
+            }
+
+            // Pricing
+            const discount = product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+            document.getElementById('pdCurrentPrice').textContent = `₹${product.price.toLocaleString('en-IN')}`;
+            const origEl = document.getElementById('pdOriginalPrice');
+            const discEl = document.getElementById('pdDiscountTag');
+            if (product.originalPrice) {
+                origEl.textContent = `₹${product.originalPrice.toLocaleString('en-IN')}`;
+                origEl.classList.remove('hidden');
+                discEl.textContent = `${discount}% OFF`;
+                discEl.classList.remove('hidden');
+            } else {
+                origEl.classList.add('hidden');
+                discEl.classList.add('hidden');
+            }
+
+            document.getElementById('pdShortDesc').textContent = product.shortDesc;
+            document.getElementById('pdFullDescription').textContent = product.shortDesc;
+
+            // Variations
+            const variants = ['Studio Original', 'Warm Champagne Gold', 'Deep Coastal Pearl'];
+            document.getElementById('pdSelectedVariantLabel').textContent = pdSelectedVariant;
+            document.getElementById('pdVariantButtons').innerHTML = variants.map((v, i) => `
+                <button onclick="selectPdVariant('${v}', ${i}, this)"
+                        class="pd-var-btn px-4 py-2 rounded-full text-xs font-medium border transition ${i === 0 ? 'border-espresso bg-espresso text-ivory' : 'border-oat bg-ivory text-espresso hover:border-bronze'}">
+                    ${v}
+                </button>
+            `).join('');
+
+            // Personalization Box
+            const customInput = document.getElementById('pdCustomInput');
+            customInput.value = '';
+            customInput.placeholder = product.allowPersonalization
+                ? "Enter custom name, initial, or date for this piece..."
+                : "Optional gift note or colour request...";
+
+            // Quantity & Buttons
+            document.getElementById('pdQtyDisplay').textContent = '1';
+            const addBtn = document.getElementById('pdAddToCartBtn');
+            const buyBtn = document.getElementById('pdBuyNowBtn');
+            if (product.inStock) {
+                addBtn.disabled = false;
+                buyBtn.disabled = false;
+                addBtn.className = "flex-1 py-3.5 px-6 rounded-full bg-espresso text-ivory hover:bg-bronze transition text-xs sm:text-sm font-semibold tracking-wide flex items-center justify-center gap-2";
+                addBtn.innerHTML = `<i class="fa-solid fa-bag-shopping"></i><span>Add to Cart</span>`;
+            } else {
+                addBtn.disabled = true;
+                buyBtn.disabled = true;
+                addBtn.className = "flex-1 py-3.5 px-6 rounded-full bg-oat text-taupe cursor-not-allowed text-xs sm:text-sm font-semibold tracking-wide flex items-center justify-center gap-2";
+                addBtn.innerHTML = `<span>Sold Out</span>`;
+            }
+
+            updatePdWishlistIcon();
+
+            // Specifications Table
+            const specsEntries = Object.entries(product.specs);
+            document.getElementById('pdSpecsTable').innerHTML = specsEntries.map(([k, v]) => `
+                <tr>
+                    <td class="py-3 pr-4 font-semibold text-espresso w-1/3">${k}</td>
+                    <td class="py-3 text-taupe">${v}</td>
+                </tr>
+            `).join('');
+
+            switchPdTab('desc');
+
+            // Related Products (4 items)
+            const related = PRODUCTS.filter(p => p.id !== product.id && (p.category === product.category || p.productType === product.productType)).slice(0, 4);
+            document.getElementById('relatedProductsContainer').innerHTML = related.map(p => renderProductCard(p)).join('');
+
+            navigateTo('product');
+        }
+
+        function selectPdThumbnail(imgUrl, btnEl) {
+            document.getElementById('pdMainImage').src = imgUrl;
+            document.querySelectorAll('.pd-thumb-btn').forEach(b => b.classList.replace('border-bronze', 'border-transparent'));
+            btnEl.classList.replace('border-transparent', 'border-bronze');
+            resetImageZoom();
+        }
+
+        function selectPdVariant(variantName, idx, btnEl) {
+            pdSelectedVariant = variantName;
+            document.getElementById('pdSelectedVariantLabel').textContent = variantName;
+            document.querySelectorAll('.pd-var-btn').forEach(b => {
+                b.className = "pd-var-btn px-4 py-2 rounded-full text-xs font-medium border border-oat bg-ivory text-espresso hover:border-bronze transition";
+            });
+            btnEl.className = "pd-var-btn px-4 py-2 rounded-full text-xs font-medium border border-espresso bg-espresso text-ivory transition";
+
+            // Switch preview angle subtly to reflect variation
+            const product = PRODUCTS.find(p => p.id === currentProductId);
+            if (product && product.gallery[idx]) {
+                document.getElementById('pdMainImage').src = product.gallery[idx];
+            }
+        }
+
+        function changePdQty(delta) {
+            pdSelectedQty = Math.max(1, Math.min(10, pdSelectedQty + delta));
+            document.getElementById('pdQtyDisplay').textContent = pdSelectedQty;
+        }
+
+        function handlePdAddToCart(openBagImmediately) {
+            const product = PRODUCTS.find(p => p.id === currentProductId);
+            if (!product || !product.inStock) return;
+
+            const note = document.getElementById('pdCustomInput').value.trim();
+            addItemToCart(product.id, pdSelectedQty, pdSelectedVariant, note);
+
+            if (openBagImmediately) {
+                toggleCartDrawer(true);
+            }
+        }
+
+        function switchPdTab(tabKey) {
+            ['desc', 'specs', 'care', 'shipping', 'reviews'].forEach(k => {
+                const btn = document.getElementById(`pdTab-${k}`);
+                const panel = document.getElementById(`pdPanel-${k}`);
+                if (k === tabKey) {
+                    btn.className = "px-6 py-4 text-xs sm:text-sm font-semibold text-espresso border-b-2 border-bronze whitespace-nowrap";
+                    panel.classList.remove('hidden');
+                } else {
+                    btn.className = "px-6 py-4 text-xs sm:text-sm font-medium text-taupe hover:text-espresso border-b-2 border-transparent whitespace-nowrap";
+                    panel.classList.add('hidden');
+                }
+            });
+        }
+
+        // Image Zoom Interaction
+        function toggleImageZoom(e) {
+            const box = document.getElementById('pdZoomBox');
+            box.classList.toggle('zoomed');
+            if (box.classList.contains('zoomed')) {
+                moveImageZoom(e);
+            } else {
+                resetImageZoom();
+            }
+        }
+
+        function moveImageZoom(e) {
+            const box = document.getElementById('pdZoomBox');
+            if (!box.classList.contains('zoomed')) return;
+            const rect = box.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            const img = document.getElementById('pdMainImage');
+            img.style.transformOrigin = `${x}% ${y}%`;
+        }
+
+        function resetImageZoom() {
+            const box = document.getElementById('pdZoomBox');
+            const img = document.getElementById('pdMainImage');
+            if (box) box.classList.remove('zoomed');
+            if (img) img.style.transformOrigin = 'center center';
+        }
+
+        function checkPincode() {
+            const val = document.getElementById('pincodeInput').value.trim();
+            const res = document.getElementById('pincodeResult');
+            if (/^\d{6}$/.test(val)) {
+                res.textContent = "✓ Standard delivery available (4–6 days)";
+                res.className = "text-[11px] text-sage font-medium";
+            } else {
+                res.textContent = "Please enter a valid 6-digit pincode";
+                res.className = "text-[11px] text-terracotta font-medium";
+            }
+        }
+
+        /* --------------------------------------------------------------------------
+           8. NAVIGATION ROUTER (Strictly 3 Pages: Home, All Products, Product Details)
+        -------------------------------------------------------------------------- */
+        function navigateTo(page, options = {}) {
+            closeAllDrawers();
+            currentPage = page;
+
+            const homeEl = document.getElementById('page-home');
+            const shopEl = document.getElementById('page-shop');
+            const prodEl = document.getElementById('page-product');
+
+            homeEl.classList.add('hidden');
+            shopEl.classList.add('hidden');
+            prodEl.classList.add('hidden');
+
+            // Update Header Active Border
+            const navHome = document.getElementById('nav-home');
+            const navShop = document.getElementById('nav-shop');
+            const navProd = document.getElementById('nav-product');
+
+            [navHome, navShop, navProd].forEach(el => {
+                if (el) el.className = "text-sm font-medium text-taupe hover:text-espresso transition py-7 border-b-2 border-transparent flex items-center gap-1.5";
+            });
+
+            if (page === 'home') {
+                homeEl.classList.remove('hidden');
+                if (navHome) navHome.className = "text-sm font-medium text-espresso transition py-7 border-b-2 border-bronze";
+                renderHomeDynamicSections();
+            } else if (page === 'shop') {
+                if (options.category) {
+                    shopState.category = options.category;
+                    shopState.bestsellerOnly = false;
+                    shopState.newOnly = false;
+                }
+                if (options.filterTag === 'bestseller') {
+                    shopState.category = 'All';
+                    shopState.bestsellerOnly = true;
+                    shopState.newOnly = false;
+                } else if (options.filterTag === 'new') {
+                    shopState.category = 'All';
+                    shopState.newOnly = true;
+                    shopState.bestsellerOnly = false;
+                }
+                renderShopPage();
+                shopEl.classList.remove('hidden');
+                if (navShop) navShop.className = "text-sm font-medium text-espresso transition py-7 border-b-2 border-bronze flex items-center gap-1.5";
+            } else if (page === 'product') {
+                prodEl.classList.remove('hidden');
+                if (navProd) navProd.className = "text-sm font-medium text-espresso transition py-7 border-b-2 border-bronze";
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* --------------------------------------------------------------------------
+           9. CART, WISHLIST, QUICK VIEW & SEARCH INTERACTIONS
+        -------------------------------------------------------------------------- */
+        function quickAddToCart(productId, openDrawer = true) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product || !product.inStock) {
+                showToast('This piece is currently sold out');
+                return;
+            }
+            addItemToCart(productId, 1, 'Studio Original', '');
+            if (openDrawer) {
+                toggleCartDrawer(true);
+            }
+        }
+
+        function addItemToCart(productId, qty, variant, customNote) {
+            const existing = cart.find(item => item.productId === productId && item.variant === variant && item.customNote === customNote);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({ productId, qty, variant, customNote });
+            }
+            renderCartUI();
+            const product = PRODUCTS.find(p => p.id === productId);
+            showToast(`Added "${product.name}" to your bag`);
+        }
+
+        function updateCartQty(idx, delta) {
+            cart[idx].qty += delta;
+            if (cart[idx].qty <= 0) {
+                cart.splice(idx, 1);
+            }
+            renderCartUI();
+        }
+
+        function removeCartItem(idx) {
+            cart.splice(idx, 1);
+            renderCartUI();
+            showToast('Item removed from bag');
+        }
+
+        function clearFullCart() {
+            cart = [];
+            promoDiscountApplied = false;
+            renderCartUI();
+            showToast('Shopping bag cleared');
+        }
+
+        function applyPromoCode() {
+            const input = document.getElementById('cartPromoInput');
+            const code = (input.value || '').trim().toUpperCase();
+            if (code === 'RESIN10' || code === 'WELCOME10') {
+                promoDiscountApplied = true;
+                renderCartUI();
+                showToast('10% Studio Discount applied!');
+            } else {
+                showToast('Try code RESIN10 for 10% off');
+            }
+        }
+
+        function renderCartUI() {
+            const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+            document.getElementById('cartCountBadge').textContent = totalQty;
+            document.getElementById('drawerCountLabel').textContent = `${totalQty} item${totalQty === 1 ? '' : 's'}`;
+
+            const clearBtn = document.getElementById('clearCartBtn');
+            if (clearBtn) clearBtn.classList.toggle('hidden', cart.length === 0);
+
+            let subtotal = 0;
+            const listEl = document.getElementById('cartItemsList');
+
+            if (cart.length === 0) {
+                listEl.innerHTML = `
+                    <div class="text-center py-12 px-4 space-y-4">
+                        <div class="w-16 h-16 rounded-full bg-alabaster text-bronze flex items-center justify-center mx-auto text-2xl">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <p class="font-serif text-2xl text-espresso">Your shopping bag is empty</p>
+                            <p class="text-xs text-taupe max-w-xs mx-auto">Add handcrafted ocean trays, marble coasters, or pressed floral bookmarks to get started.</p>
+                        </div>
+                        <div class="pt-2">
+                            <p class="text-[11px] font-semibold uppercase tracking-widest text-bronze mb-2.5">Popular Studio Picks</p>
+                            <div class="grid grid-cols-2 gap-2.5 text-left">
+                                ${[PRODUCTS[0], PRODUCTS[4]].map(p => `
+                                    <div class="p-2 rounded-xl bg-white border border-oat flex flex-col justify-between">
+                                        <img src="${p.image}" class="w-full h-20 rounded-lg object-cover mb-1.5" alt="${p.name}">
+                                        <p class="text-[11px] font-semibold text-espresso line-clamp-1">${p.name}</p>
+                                        <div class="flex items-center justify-between mt-1">
+                                            <span class="text-[11px] font-bold text-bronze">₹${p.price}</span>
+                                            <button onclick="quickAddToCart(${p.id}, false)" class="text-[10px] px-2 py-0.5 rounded-full bg-espresso text-white">+ Add</button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                listEl.innerHTML = cart.map((item, idx) => {
+                    const p = PRODUCTS.find(prod => prod.id === item.productId);
+                    const lineTotal = p.price * item.qty;
+                    subtotal += lineTotal;
+                    return `
+                        <div class="flex gap-3.5 p-3 rounded-2xl bg-white border border-oat shadow-2xs relative group">
+                            <img onclick="toggleCartDrawer(false); openProductDetails(${p.id})" src="${p.image}" alt="${p.name}"
+                                 class="w-20 h-20 rounded-xl object-cover cursor-pointer bg-alabaster shrink-0 border border-oat/60">
+                            <div class="flex-grow min-w-0 pr-6">
+                                <span class="text-[10px] uppercase tracking-wider text-bronze font-semibold block">${p.category}</span>
+                                <h4 onclick="toggleCartDrawer(false); openProductDetails(${p.id})"
+                                    class="font-serif text-base font-semibold text-espresso truncate cursor-pointer hover:text-bronze">${p.name}</h4>
+                                <p class="text-[11px] text-taupe truncate">${item.variant}${item.customNote ? ` · “${item.customNote}”` : ''}</p>
+                                <div class="flex items-center justify-between mt-2.5">
+                                    <div class="inline-flex items-center border border-oat rounded-full px-2 py-0.5 text-xs bg-ivory">
+                                        <button onclick="updateCartQty(${idx}, -1)" class="w-5 h-5 font-bold text-taupe hover:text-espresso">−</button>
+                                        <span class="px-2 font-semibold text-espresso">${item.qty}</span>
+                                        <button onclick="updateCartQty(${idx}, 1)" class="w-5 h-5 font-bold text-taupe hover:text-espresso">+</button>
+                                    </div>
+                                    <span class="text-xs font-bold text-espresso">₹${lineTotal.toLocaleString('en-IN')}</span>
+                                </div>
+                            </div>
+                            <button onclick="removeCartItem(${idx})" class="absolute top-3 right-3 w-6 h-6 rounded-full hover:bg-alabaster text-taupe hover:text-terracotta flex items-center justify-center transition" title="Remove item">
+                                <i class="fa-regular fa-trash-can text-xs"></i>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Free Shipping Bar (₹999 threshold)
+            const pct = Math.min(100, Math.round((subtotal / 999) * 100));
+            document.getElementById('freeShipBar').style.width = `${pct}%`;
+            document.getElementById('freeShipText').innerHTML = subtotal >= 999
+                ? `<span class="text-sage font-semibold">✓ Complimentary Insured Shipping Unlocked!</span>`
+                : `Add <b>₹${(999 - subtotal).toLocaleString('en-IN')}</b> more for FREE shipping`;
+
+            const discountVal = promoDiscountApplied ? Math.round(subtotal * 0.10) : 0;
+            const discountRow = document.getElementById('cartDiscountRow');
+            if (discountRow) {
+                if (discountVal > 0) {
+                    discountRow.classList.remove('hidden');
+                    discountRow.classList.add('flex');
+                    document.getElementById('cartDiscountAmount').textContent = `−₹${discountVal.toLocaleString('en-IN')}`;
+                } else {
+                    discountRow.classList.add('hidden');
+                    discountRow.classList.remove('flex');
+                }
+            }
+
+            const shippingCost = subtotal === 0 ? 0 : (subtotal >= 999 ? 0 : 99);
+            const finalTotal = Math.max(0, subtotal - discountVal + shippingCost);
+            document.getElementById('cartSubtotalAmount').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('cartShippingAmount').textContent = subtotal === 0 ? '—' : (shippingCost === 0 ? 'FREE' : `₹${shippingCost}`);
+            document.getElementById('cartTotalAmount').textContent = `₹${finalTotal.toLocaleString('en-IN')}`;
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showToast('Add a resin creation to your bag first');
+                return;
+            }
+            const totalText = document.getElementById('cartTotalAmount').textContent;
+            toggleCartDrawer(false);
+
+            const checkoutFormHTML = `
+                <form onsubmit="submitOrderDemo(event)" class="space-y-3 text-xs">
+                    <div class="p-3 rounded-xl bg-alabaster border border-oat flex justify-between items-center">
+                        <span class="font-medium text-espresso">Order Total (${cart.reduce((s,i)=>s+i.qty,0)} items)</span>
+                        <span class="text-base font-bold text-bronze">${totalText}</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <input type="text" required placeholder="Full Name" class="px-3.5 py-2.5 rounded-xl bg-ivory border border-oat focus:outline-none focus:border-bronze">
+                        <input type="tel" required placeholder="10-Digit Mobile Number" class="px-3.5 py-2.5 rounded-xl bg-ivory border border-oat focus:outline-none focus:border-bronze">
+                    </div>
+                    <input type="text" required placeholder="House / Flat No., Street & Landmark" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory border border-oat focus:outline-none focus:border-bronze">
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <input type="text" required placeholder="City" class="px-3.5 py-2.5 rounded-xl bg-ivory border border-oat focus:outline-none focus:border-bronze">
+                        <input type="text" required placeholder="6-Digit Pincode" maxlength="6" class="px-3.5 py-2.5 rounded-xl bg-ivory border border-oat focus:outline-none focus:border-bronze">
+                    </div>
+                    <div class="pt-1">
+                        <p class="font-semibold text-espresso mb-1.5">Payment Method</p>
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="border border-oat rounded-xl p-2 flex items-center gap-1.5 cursor-pointer bg-ivory">
+                                <input type="radio" name="paymode" checked class="accent-bronze"> <span>UPI / QR</span>
+                            </label>
+                            <label class="border border-oat rounded-xl p-2 flex items-center gap-1.5 cursor-pointer bg-ivory">
+                                <input type="radio" name="paymode" class="accent-bronze"> <span>Card</span>
+                            </label>
+                            <label class="border border-oat rounded-xl p-2 flex items-center gap-1.5 cursor-pointer bg-ivory">
+                                <input type="radio" name="paymode" class="accent-bronze"> <span>COD</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 rounded-full bg-espresso text-white font-semibold hover:bg-bronze transition mt-2">
+                        Confirm Studio Order · ${totalText}
+                    </button>
+                </form>
+            `;
+            openInfoModal('Express Studio Checkout', checkoutFormHTML);
+        }
+
+        function submitOrderDemo(e) {
+            e.preventDefault();
+            cart = [];
+            promoDiscountApplied = false;
+            renderCartUI();
+            openInfoModal(
+                'Order Confirmed! 🎉',
+                '<div class="text-center space-y-3 py-2"><div class="w-12 h-12 rounded-full bg-sage/15 text-sage flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-check"></i></div><p class="text-espresso font-semibold text-sm">Thank you for your order with Resinora Studio!</p><p class="text-xs text-taupe">Your order ID is <b>#RSN-84920</b>. Our resin artists have received your customization preferences and will share tracking updates shortly.</p></div>'
+            );
+        }
+
+        // Wishlist Logic
+        function toggleWishlist(productId, event) {
+            if (event) event.stopPropagation();
+            if (wishlist.has(productId)) {
+                wishlist.delete(productId);
+                showToast('Removed from your wishlist');
+            } else {
+                wishlist.add(productId);
+                showToast('Saved to your wishlist');
+            }
+            updateWishlistBadge();
+            if (currentPage === 'home') renderHomeDynamicSections();
+            if (currentPage === 'shop') renderShopPage();
+            if (currentPage === 'product') updatePdWishlistIcon();
+        }
+
+        function toggleWishlistFromPd() {
+            toggleWishlist(currentProductId);
+        }
+
+        function updatePdWishlistIcon() {
+            const btn = document.getElementById('pdWishlistBtn');
+            if (!btn) return;
+            const isWished = wishlist.has(currentProductId);
+            btn.innerHTML = `<i class="${isWished ? 'fa-solid text-terracotta' : 'fa-regular text-espresso'} fa-heart"></i>`;
+        }
+
+        function updateWishlistBadge() {
+            const badge = document.getElementById('wishlistCountBadge');
+            if (wishlist.size > 0) {
+                badge.textContent = wishlist.size;
+                badge.classList.remove('hidden');
+                badge.classList.add('flex');
+            } else {
+                badge.classList.add('hidden');
+                badge.classList.remove('flex');
+            }
+        }
+
+        function openWishlistModal() {
+            const items = Array.from(wishlist).map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+            if (items.length === 0) {
+                openInfoModal('Your Wishlist', 'You have no saved pieces yet. Tap the heart icon on any resin creation to save it for later.');
+                return;
+            }
+            const html = `<div class="space-y-3">` + items.map(p => `
+                <div class="flex items-center justify-between gap-3 p-2.5 rounded-2xl bg-ivory border border-oat">
+                    <div onclick="closeAllDrawers(); openProductDetails(${p.id})" class="flex items-center gap-3 cursor-pointer">
+                        <img src="${p.image}" class="w-14 h-14 rounded-xl object-cover" alt="${p.name}">
+                        <div>
+                            <h4 class="font-serif text-base font-semibold text-espresso">${p.name}</h4>
+                            <span class="text-xs font-bold text-bronze">₹${p.price.toLocaleString('en-IN')}</span>
+                        </div>
+                    </div>
+                    <button onclick="closeAllDrawers(); quickAddToCart(${p.id})" class="px-3.5 py-2 rounded-full bg-espresso text-white text-xs font-semibold hover:bg-bronze transition shrink-0">
+                        Add to Bag
+                    </button>
+                </div>
+            `).join('') + `</div>`;
+            openInfoModal(`Saved Wishlist (${items.length})`, html);
+        }
+
+        // Quick View Modal
+        function openQuickView(productId) {
+            const p = PRODUCTS.find(item => item.id === productId);
+            if (!p) return;
+
+            document.getElementById('qvImage').src = p.image;
+            document.getElementById('qvCategory').textContent = p.category;
+            document.getElementById('qvTitle').textContent = p.name;
+            document.getElementById('qvPrice').textContent = `₹${p.price.toLocaleString('en-IN')}`;
+            document.getElementById('qvOrigPrice').textContent = p.originalPrice ? `₹${p.originalPrice.toLocaleString('en-IN')}` : '';
+            document.getElementById('qvDesc').textContent = p.shortDesc;
+
+            const addBtn = document.getElementById('qvAddBtn');
+            addBtn.onclick = () => { closeAllDrawers(); quickAddToCart(p.id); };
+            addBtn.textContent = p.inStock ? 'Add to Shopping Bag' : 'Currently Sold Out';
+            addBtn.disabled = !p.inStock;
+
+            document.getElementById('qvDetailsBtn').onclick = () => {
+                closeAllDrawers();
+                openProductDetails(p.id);
+            };
+
+            document.getElementById('globalBackdrop').classList.remove('hidden');
+            const modal = document.getElementById('quickViewModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // Search Bar
+        function toggleSearchBar() {
+            const panel = document.getElementById('searchBarPanel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                document.getElementById('globalSearchInput').focus();
+            }
+        }
+
+        function handleSearchInput(val) {
+            shopState.searchQuery = val.trim();
+            if (currentPage === 'shop') {
+                renderShopPage();
+            }
+        }
+
+        function executeSearch() {
+            const val = document.getElementById('globalSearchInput').value.trim();
+            shopState.searchQuery = val;
+            shopState.category = 'All';
+            navigateTo('shop');
+        }
+
+        // Account & Info Modals
+        function openAccountModal() {
+            const formHTML = `
+                <form onsubmit="event.preventDefault(); closeAllDrawers(); showToast('Signed in to demo studio account');" class="space-y-3">
+                    <p class="text-xs text-taupe">Sign in to track your custom resin orders and saved keepsake preferences.</p>
+                    <input type="email" required placeholder="Email address" class="w-full px-4 py-2.5 rounded-xl bg-ivory border border-oat text-xs focus:outline-none focus:border-bronze">
+                    <input type="password" required placeholder="Password" class="w-full px-4 py-2.5 rounded-xl bg-ivory border border-oat text-xs focus:outline-none focus:border-bronze">
+                    <button type="submit" class="w-full py-3 rounded-full bg-espresso text-white text-xs font-semibold hover:bg-bronze transition">Sign In</button>
+                </form>
+            `;
+            openInfoModal('Customer Account', formHTML);
+        }
+
+        function openInfoModal(title, contentHTML) {
+            document.getElementById('infoModalTitle').textContent = title;
+            document.getElementById('infoModalBody').innerHTML = contentHTML;
+            document.getElementById('globalBackdrop').classList.remove('hidden');
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // Drawer Toggles (Lock body scroll when open so background page doesn't scroll)
+        function setBodyScrollLock(locked) {
+            document.body.style.overflow = locked ? 'hidden' : '';
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cartDrawer');
+            const backdrop = document.getElementById('globalBackdrop');
+            setBodyScrollLock(open);
+            if (open) {
+                backdrop.classList.remove('hidden');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        function toggleMobileNav(open) {
+            const drawer = document.getElementById('mobileNavDrawer');
+            const backdrop = document.getElementById('globalBackdrop');
+            setBodyScrollLock(open);
+            if (open) {
+                backdrop.classList.remove('hidden');
+                drawer.classList.remove('-translate-x-full');
+            } else {
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        function toggleMobileFilterDrawer(open) {
+            const drawer = document.getElementById('mobileFilterDrawer');
+            const backdrop = document.getElementById('globalBackdrop');
+            setBodyScrollLock(open);
+            if (open) {
+                backdrop.classList.remove('hidden');
+                drawer.classList.remove('-translate-x-full');
+            } else {
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        function closeAllDrawers() {
+            setBodyScrollLock(false);
+            document.getElementById('globalBackdrop').classList.add('hidden');
+            document.getElementById('cartDrawer').classList.add('translate-x-full');
+            document.getElementById('mobileNavDrawer').classList.add('-translate-x-full');
+            document.getElementById('mobileFilterDrawer').classList.add('-translate-x-full');
+            document.getElementById('quickViewModal').classList.add('hidden');
+            document.getElementById('quickViewModal').classList.remove('flex');
+            document.getElementById('infoModal').classList.add('hidden');
+            document.getElementById('infoModal').classList.remove('flex');
+        }
+
+        function scrollCarousel(id, delta) {
+            const el = document.getElementById(id);
+            if (el) el.scrollBy({ left: delta, behavior: 'smooth' });
+        }
+
+        let toastTimer = null;
+        function showToast(message) {
+            const toast = document.getElementById('toastBar');
+            document.getElementById('toastText').textContent = message;
+            toast.classList.remove('opacity-0', 'translate-y-10');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+            }, 2600);
+        }
+
+        // Initialize Store on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initHeaderAndHome();
+            renderCartUI();
+            updateWishlistBadge();
+        });
+    </script>
+</body>
+</html>
